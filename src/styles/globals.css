@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 :root{
-    /* custom variables */
-    --nav-height: 7rem;
     --main-padding: 7rem;
+    --nav-height: 10rem;
+    --primary-blue: #62e1fb;
+    --primary-green: #90ebbc;
 }
 
 @layer base {
@@ -90,8 +91,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', Helvetica, sans-serif;
     scroll-behavior: smooth;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 ul {
