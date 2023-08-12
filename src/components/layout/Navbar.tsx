@@ -24,6 +24,7 @@ const Navbar = () => {
                     <Image src={logo} height={40} alt='logo' width={40} />
                 </Link>
             </div>
+
             <ul className='flex items-center'>
                 {
                     navlinks.map((link, index) => {

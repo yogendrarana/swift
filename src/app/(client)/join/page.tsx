@@ -6,9 +6,15 @@ import React from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 
 const Join = () => {
     const [variant, setVariant] = React.useState('register');
+
+    const toggleVariant = () => {
+        if (variant === "login") { setVariant('register') }
+        else setVariant('login')
+    }
 
     return (
         <form className='h-[100vh] flex relative'>
@@ -66,8 +72,20 @@ const Join = () => {
                 <Button type="submit" className='w-[40rem] py-[2rem] text-[1.25rem] shadow-lg bg-blue-500 hover:bg-blue-600'>Login</Button>
             </div>
 
-
             <div className={`w-[40%] ml-[auto] bg-blue-400 duration-1000 ${variant === "login" ? "translate-x-[-150%]" : ""}`}>
+                <div className="h-[100%] flex flex-col justify-center items-center duration-1000">
+                    <h1 className='text-[4rem] text-white duration-500'>
+                        {variant === "register" ? "Welcome back!" : "Hello stranger!"}
+                    </h1>
+                    <p className='text-[1.8rem] text-white'>
+                        {variant === "register" ? "Already have an account? Click below to log in." : "New here? Click below to register."}
+                    </p>
+
+                    <button onClick={toggleVariant} type='button' className='h-[4rem] w-[10rem] mt-[2rem] overflow-hidden grid place-items-center text-[1.5rem] border text-white rounded-full relative duration-200'>
+                        <span className={`absolute duration-500 ${variant === 'register' ? "" : "translate-y-[200%]"}`}>Login</span>
+                        <span className={`absolute duration-500 ${variant === 'register' ? "translate-y-[-200%]" : ""}`}>Register</span>
+                    </button>
+                </div>
             </div>
         </form>
     )

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
+:root {
     --main-padding: 7rem;
     --nav-height: 10rem;
     --primary-blue: #62e1fb;
@@ -75,15 +75,6 @@
     }
 }
 
-@layer base {
-    * {
-        @apply border-border;
-    }
-
-    body {
-        @apply bg-background text-foreground;
-    }
-}
 
 /******************** Custom Style ********************/
 
@@ -92,7 +83,7 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS';
 }
 
 ul {
