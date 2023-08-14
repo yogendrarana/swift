@@ -17,8 +17,8 @@ const Join = () => {
     }
 
     return (
-        <form className='h-[100vh] flex relative'>
-            <div className={`h-full w-[60%] px-[5rem] py-[4rem] flex flex-col justify-center gap-[2rem] items-center duration-1000 
+        <section className='h-[100vh] flex relative'>
+            <form className={`h-full w-[60%] px-[5rem] py-[4rem] flex flex-col justify-center gap-[2rem] items-center duration-1000 
                 ${variant === "login" ? "translate-x-[66.66667%] opacity-0 invisible" : "opacity-100 visible"}`}
             >
                 <div className='w-[40rem]'>
@@ -45,10 +45,9 @@ const Join = () => {
                 </Label>
 
                 <Button type="submit" className='w-[40rem] py-[2rem] text-[1.25rem] shadow-lg bg-blue-500 hover:bg-blue-600'>Register</Button>
-            </div>
+            </form>
 
-
-            <div className={`h-full w-[60%] px-[5rem] py-[4rem] flex flex-col justify-center items-center gap-[2rem] duration-1000 absolute top-0 left-0 
+            <form className={`h-full w-[60%] px-[5rem] py-[4rem] flex flex-col justify-center items-center gap-[2rem] duration-1000 absolute top-0 left-0 
                 ${variant === "login" ? "translate-x-[66.66667%] opacity-100 visible" : "invisible opacity-0"}`}
             >
                 <div className='w-[40rem]'>
@@ -70,7 +69,7 @@ const Join = () => {
                 </Label>
 
                 <Button type="submit" className='w-[40rem] py-[2rem] text-[1.25rem] shadow-lg bg-blue-500 hover:bg-blue-600'>Login</Button>
-            </div>
+            </form>
 
             <div className={`w-[40%] ml-[auto] bg-blue-400 duration-1000 ${variant === "login" ? "translate-x-[-150%]" : ""}`}>
                 <div className="h-[100%] flex flex-col justify-center items-center duration-1000">
@@ -87,7 +86,7 @@ const Join = () => {
                     </button>
                 </div>
             </div>
-        </form>
+        </section>
     )
 }
 
