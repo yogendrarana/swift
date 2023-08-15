@@ -1,4 +1,4 @@
-import { boolean, mysqlEnum, mysqlTable, int, text, uniqueIndex, varchar, timestamp } from 'drizzle-orm/mysql-core';
+import { boolean, mysqlEnum, mysqlTable, int, text, varchar, timestamp } from 'drizzle-orm/mysql-core';
 
 // declaring enum in database
 export const userSchema = mysqlTable(
@@ -6,10 +6,10 @@ export const userSchema = mysqlTable(
 
     {
         id: int('id').autoincrement().primaryKey(),
-        name: varchar('name', {length: 100}).notNull(),
+        name: varchar('name', { length: 50 }).notNull(),
         email: varchar('email', { length: 256 }).notNull().unique(),
-        isEmailVerified: boolean('is_email_verified'),
-        password: varchar('password', { length: 256 }).notNull(),
+        isVerified: boolean('is_verified'),
+        password: varchar('password', { length: 50 }).notNull(),
         role: mysqlEnum('role', ['admin', 'user']).notNull().default('user'),
         image: text('image'),
 
