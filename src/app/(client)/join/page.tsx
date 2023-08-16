@@ -1,20 +1,92 @@
 "use client"
 
-import React from 'react'
+
+import axios from 'axios'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
+
 
 // import components
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import Image from 'next/image'
+
 
 const Join = () => {
-    const [variant, setVariant] = React.useState('register');
+    const [variant, setVariant] = useState('register');
+    const [isLoading, setIsLoading] = useState(false);
 
+
+    // form states
+    const [name, setName] = useState('Abc');
+    const [email, setEmail] = useState('abc@gmail.com');
+    const [password, setPassword] = useState('password');
+
+
+    // toggle variant
     const toggleVariant = () => {
         if (variant === "login") { setVariant('register') }
         else setVariant('login')
     }
+
+
+    // submit handler
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        const toastId = toast.loading("Processing...");
+
+        // if (variant === "login") {
+        //     if (!email || !password) {
+        //         setIsLoading(false);
+        //         return toast.error('Please fill in all the required fields.', { id: toastId });
+        //     }
+
+        //     try {
+        //         const { error } = await signIn('credentials', { email, password, redirect: false }); //returns error, status, ok, url
+        //         if (error) toast.error(error, { id: toastId });
+        //         if (!error) {
+        //             toast.success("Logged in successfully.", { id: toastId })
+        //             router.push('/chats');
+        //         };
+        //         setIsLoading(false)
+        //     } catch (err: any) {
+        //         setIsLoading(false)
+        //         return toast.error(err.message, { id: toastId });
+        //     }
+        // }
+
+        if (variant === "register") {
+
+            if (!name || !email || !password) {
+                setIsLoading(false);
+                return toast.error('Please fill in all the required fields.', { id: toastId });
+            }
+
+            try {
+                const { data, status } = await axios.post('/api/auth/register', { name, email, password });
+                if (data.success && status === 201) toast.success(data.message, { id: toastId });
+
+                // next auth
+                // const { error, ok } = await signIn('credentials', { email, password, redirect: false }); //returns error, status, ok, url
+                // if (error) toast.error(error, { id: toastId });
+                // if (ok) {
+                //     toast.success("Logged in successfully.", { id: toastId })
+                //     router.push('/chats');
+                // };
+                setIsLoading(false);
+            } catch (err: any) {
+                setIsLoading(false);
+                if (err.response && err.response.data && err.response.data.message) {
+                    return toast.error(err.response.data.message, { id: toastId });
+                } else {
+                    return toast.error("An error occurred during registration.", { id: toastId });
+                }
+            }
+        }
+    }
+
 
     return (
         <section className='h-[100vh] flex relative'>
@@ -29,22 +101,51 @@ const Join = () => {
                     <p className='mb-[2rem] text-[1.45rem] text-[#767676]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, sed odio!</p>
                 </div>
 
+                <Label htmlFor="name" className='w-[40rem] text-[1.45rem]'>
+                    <p>Name</p>
+                    <Input
+                        type="text"
+                        id="name"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className='mt-[0.75rem] px-[1.25rem] py-[1.85rem] text-[1.25rem] placeholder:text-[1.25rem]'
+                    />
+                </Label>
+
                 <Label htmlFor="email" className='w-[40rem] text-[1.45rem]'>
                     <p>Email</p>
-                    <Input type="text" id="email" placeholder="Enter your email" className='mt-[0.75rem] px-[1.15rem] py-[1.85rem] text-[1.25rem] placeholder:text-[1.25rem]' />
+                    <Input
+                        type="text"
+                        id="email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className='mt-[0.75rem] px-[1.15rem] py-[1.85rem] text-[1.25rem] placeholder:text-[1.25rem]'
+                    />
                 </Label>
 
                 <Label htmlFor="password" className='w-[40rem] text-[1.45rem]'>
-                    <p>Create Password</p>
-                    <Input type="text" id="password" placeholder="Enter password" className='mt-[0.75rem] px-[1.15rem] py-[1.85rem] placeholder:text-[1.25rem]' />
+                    <p>Password</p>
+                    <Input
+                        type="text"
+                        id="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className='mt-[0.75rem] px-[1.15rem] py-[1.85rem] text-[1.25rem] placeholder:text-[1.25rem]'
+                    />
                 </Label>
 
-                <Label htmlFor="c_password" className='w-[40rem] text-[1.45rem]'>
-                    <p>Confirm Password</p>
-                    <Input type="text" id="c_password" placeholder="Confirm password" className='mt-[0.75rem] px-[1.25rem] py-[1.85rem] placeholder:text-[1.25rem]' />
-                </Label>
 
-                <Button type="submit" className='w-[40rem] py-[2rem] text-[1.25rem] shadow-lg bg-blue-500 hover:bg-blue-600'>Register</Button>
+                <Button
+                    onClick={handleSubmit}
+                    type="button"
+                    disabled={isLoading}
+                    className='w-[40rem] py-[2rem] text-[1.25rem] shadow-lg bg-blue-500 hover:bg-blue-600'
+                >
+                    Register
+                </Button>
             </form>
 
             <form className={`h-full w-[60%] px-[5rem] py-[4rem] flex flex-col justify-center items-center gap-[2rem] duration-1000 absolute top-0 left-0 
@@ -60,15 +161,36 @@ const Join = () => {
 
                 <Label htmlFor="email" className='w-[40rem] text-[1.45rem]'>
                     <p>Email</p>
-                    <Input type="text" id="email" placeholder="Enter your email" className='mt-[0.75rem] px-[1.15rem] py-[1.85rem] placeholder:text-[1.25rem]' />
+                    <Input
+                        type="text"
+                        id="email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className='mt-[0.75rem] px-[1.15rem] py-[1.85rem] text-[1.25rem] placeholder:text-[1.25rem]'
+                    />
                 </Label>
 
                 <Label htmlFor="password" className='w-[40rem] text-[1.45rem]'>
                     <p>Password</p>
-                    <Input type="text" id="password" placeholder="Enter password" className='mt-[0.75rem] px-[1.15rem] py-[1.85rem] placeholder:text-[1.25rem]' />
+                    <Input
+                        type="text"
+                        id="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className='mt-[0.75rem] px-[1.15rem] py-[1.85rem] text-[1.25rem] placeholder:text-[1.25rem]'
+                    />
                 </Label>
 
-                <Button type="submit" className='w-[40rem] py-[2rem] text-[1.25rem] shadow-lg bg-blue-500 hover:bg-blue-600'>Login</Button>
+                <Button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                    className='w-[40rem] py-[2rem] text-[1.25rem] shadow-lg bg-blue-500 hover:bg-blue-600'
+                >
+                    Login
+                </Button>
             </form>
 
             <div className={`w-[40%] ml-[auto] bg-blue-400 duration-1000 ${variant === "login" ? "translate-x-[-150%]" : ""}`}>

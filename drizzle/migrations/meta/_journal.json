@@ -15,6 +15,13 @@
       "when": 1692070197694,
       "tag": "0001_nappy_thing",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1692162225794,
+      "tag": "0002_long_sebastian_shaw",
+      "breakpoints": true
     }
   ]
 }

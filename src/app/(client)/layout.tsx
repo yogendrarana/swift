@@ -1,7 +1,13 @@
 import type { Metadata } from 'next'
 
+
 // import css
 import '@/styles/globals.css'
+
+
+// import components
+import { Toaster } from 'react-hot-toast'
+
 
 export const metadata: Metadata = {
     title: 'Swift Chat',
@@ -11,7 +17,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <body>
+                <Toaster />
+                <main>{children}</main>
+            </body>
         </html>
     )
 }
