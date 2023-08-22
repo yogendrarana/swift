@@ -4,6 +4,8 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 
 // import components
@@ -13,6 +15,7 @@ import { Button } from '@/components/ui/button'
 
 
 const Join = () => {
+    const router = useRouter();
     const [variant, setVariant] = useState('register');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -37,25 +40,27 @@ const Join = () => {
 
         const toastId = toast.loading("Processing...");
 
-        // if (variant === "login") {
-        //     if (!email || !password) {
-        //         setIsLoading(false);
-        //         return toast.error('Please fill in all the required fields.', { id: toastId });
-        //     }
+        if (variant === "login") {
+            if (!email || !password) {
+                setIsLoading(false);
+                return toast.error('Please fill in all the required fields.', { id: toastId });
+            }
 
-        //     try {
-        //         const { error } = await signIn('credentials', { email, password, redirect: false }); //returns error, status, ok, url
-        //         if (error) toast.error(error, { id: toastId });
-        //         if (!error) {
-        //             toast.success("Logged in successfully.", { id: toastId })
-        //             router.push('/chats');
-        //         };
-        //         setIsLoading(false)
-        //     } catch (err: any) {
-        //         setIsLoading(false)
-        //         return toast.error(err.message, { id: toastId });
-        //     }
-        // }
+            try {
+                //next auth signIn returns error, ok, status, url
+                const signInRes = await signIn('credentials', { email, password, redirect: false });
+                console.log(signInRes);
+                if (signInRes?.error) toast.error(signInRes.error, { id: toastId });
+                if (!signInRes?.error) {
+                    toast.success("Logged in successfully.", { id: toastId })
+                    // router.push('/');
+                };
+                setIsLoading(false)
+            } catch (err: any) {
+                setIsLoading(false)
+                return toast.error(err.message, { id: toastId });
+            }
+        }
 
         if (variant === "register") {
 
@@ -65,16 +70,16 @@ const Join = () => {
             }
 
             try {
-                const { data, status } = await axios.post('/api/auth/register', { name, email, password });
-                if (data.success && status === 201) toast.success(data.message, { id: toastId });
+                const res = await axios.post('/api/auth/register', { name, email, password });
+                if (res.data.success && res.status === 201) toast.success(res.data.message, { id: toastId });
 
-                // next auth
-                // const { error, ok } = await signIn('credentials', { email, password, redirect: false }); //returns error, status, ok, url
-                // if (error) toast.error(error, { id: toastId });
-                // if (ok) {
-                //     toast.success("Logged in successfully.", { id: toastId })
-                //     router.push('/chats');
-                // };
+                // next auth signIn returns error, ok, status, url
+                const signInRes= await signIn('credentials', { email, password, redirect: false });
+                if (signInRes?.error) toast.error(signInRes?.error, { id: toastId });
+                if (signInRes?.ok) {
+                    toast.success("Logged in successfully.", { id: toastId })
+                    // router.push('/');
+                };
                 setIsLoading(false);
             } catch (err: any) {
                 setIsLoading(false);

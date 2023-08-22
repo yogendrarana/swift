@@ -2,7 +2,7 @@ import bcrypt from "bcrypt"
 import { db } from "@/db/db";
 import { eq } from "drizzle-orm"
 import { NextRequest, NextResponse } from "next/server";
-import { user } from "../../../../../drizzle/schema/user.schema";
+import { userSchema } from "../../../../../drizzle/schema/user.schema";
 
 
 export async function POST(request: NextRequest) {
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
     try {
         // check if user already exists
-        const userData = await db.select().from(user).where(eq(user.email, email));
+        const userData = await db.select().from(userSchema).where(eq(userSchema.email, email));
         if (userData.length) {
             return NextResponse.json({ success: false, message: `${email} is already used.` }, { status: 400 });
         }
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
         const passwordHash = await bcrypt.hash(password, 10);
 
         // insert into user table
-        const response = await db.insert(user).values({ name, email, password: passwordHash });
+        const response = await db.insert(userSchema).values({ name, email, password: passwordHash });
         const insertId = response[0].insertId;
 
         // return success message

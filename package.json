@@ -11,6 +11,7 @@
         "db:deploy": "ts-node ./drizzle/migrator.ts"
     },
     "dependencies": {
+        "@auth/drizzle-adapter": "^0.3.2",
         "@radix-ui/react-label": "^2.0.2",
         "@radix-ui/react-slot": "^1.0.2",
         "@types/bcrypt": "^5.0.0",
