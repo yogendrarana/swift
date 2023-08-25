@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
     return (
         <main>
-            <section className='min-h-[100vh] flex flex-col justify-between'>
+            <div className='flex flex-col justify-between'>
                 <Navbar />
 
-                <div className='h-[100%] flex gap-[5rem] px-[10rem]'>
+                <div className='h-[calc(100vh-var(--nav-height))] flex gap-[5rem] px-[10rem]'>
                     <div className='flex flex-col flex-1 justify-center'>
                         <p className='text-[5rem] leading-none' style={{ background: 'linear-gradient(to right, var(--primary-blue), var(--primary-green))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                             Bring your <br /> conversations to life with Swift
@@ -20,8 +20,11 @@ export default function Home() {
                     </div>
                 </div>
 
+                <section className="h-[80vh] px-[10rem] bg-blue-300">
+                </section>
+
                 <Footer />
-            </section>
+            </div>
         </main>
     )
 }

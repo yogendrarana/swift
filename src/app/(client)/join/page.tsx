@@ -49,11 +49,10 @@ const Join = () => {
             try {
                 //next auth signIn returns error, ok, status, url
                 const signInRes = await signIn('credentials', { email, password, redirect: false });
-                console.log(signInRes);
                 if (signInRes?.error) toast.error(signInRes.error, { id: toastId });
                 if (!signInRes?.error) {
                     toast.success("Logged in successfully.", { id: toastId })
-                    // router.push('/');
+                    router.push('/chats');
                 };
                 setIsLoading(false)
             } catch (err: any) {
@@ -78,7 +77,7 @@ const Join = () => {
                 if (signInRes?.error) toast.error(signInRes?.error, { id: toastId });
                 if (signInRes?.ok) {
                     toast.success("Logged in successfully.", { id: toastId })
-                    // router.push('/');
+                    router.push('/chats');
                 };
                 setIsLoading(false);
             } catch (err: any) {

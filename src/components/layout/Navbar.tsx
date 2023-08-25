@@ -18,7 +18,7 @@ const Navbar = () => {
     const navlinks = useNavlinks();
 
     return (
-        <nav className='h-[var(--nav-height)] w-[100%] flex items-center px-[10rem]'>
+        <nav className='h-[var(--nav-height)] w-[100%] flex items-center px-[10rem] sticky top-0 bg-white'>
             <div className='mr-auto text-[2rem]'>
                 <Link href='/'>
                     <Image src={logo} height={40} alt='logo' width={40} />
