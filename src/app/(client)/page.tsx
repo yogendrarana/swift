@@ -1,10 +1,29 @@
+"use client"
+
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+
 
 // import components
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 
+
 export default function Home() {
+    const router = useRouter();
+    const session = useSession();
+
+
+    useEffect(() => {
+        if (session?.status === 'authenticated') {
+            router.push('/chats')
+        }
+    }, [session?.status, router]);
+
+
     return (
         <main>
             <div className='flex flex-col justify-between'>

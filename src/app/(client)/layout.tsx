@@ -7,6 +7,7 @@ import '@/styles/globals.css'
 
 // import components
 import { Toaster } from 'react-hot-toast'
+import AuthContext from '@/context/authContext'
 
 
 export const metadata: Metadata = {
@@ -17,9 +18,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
+            <head>
+
+            </head>
             <body>
-                <Toaster />
-                <main>{children}</main>
+                <AuthContext>
+                    <Toaster />
+                    <main>{children}</main>
+                </AuthContext>
             </body>
         </html>
     )

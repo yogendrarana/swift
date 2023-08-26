@@ -73,7 +73,7 @@ const Join = () => {
                 if (res.data.success && res.status === 201) toast.success(res.data.message, { id: toastId });
 
                 // next auth signIn returns error, ok, status, url
-                const signInRes= await signIn('credentials', { email, password, redirect: false });
+                const signInRes = await signIn('credentials', { email, password, redirect: false });
                 if (signInRes?.error) toast.error(signInRes?.error, { id: toastId });
                 if (signInRes?.ok) {
                     toast.success("Logged in successfully.", { id: toastId })
@@ -199,16 +199,29 @@ const Join = () => {
 
             <div className={`w-[40%] ml-[auto] bg-blue-400 duration-1000 ${variant === "login" ? "translate-x-[-150%]" : ""}`}>
                 <div className="h-[100%] flex flex-col justify-center items-center duration-1000">
-                    <h1 className='text-[4rem] text-white duration-500'>
-                        {variant === "register" ? "Welcome back!" : "Hello stranger!"}
-                    </h1>
-                    <p className='text-[1.8rem] text-white'>
-                        {variant === "register" ? "Already have an account? Click below to log in." : "New here? Click below to register."}
-                    </p>
+                    <div
+                        className='h-[4rem] w-[100%] overflow-hidden grid place-items-center text-[1.5rem] text-white relative duration-200'
+                    >
+                        <span className={`absolute duration-1000 text-[4rem] text-white ${variant === 'register' ? "" : "translate-y-[200%]"}`}>Welcome back!</span>
+                        <span className={`absolute duration-1000 text-[4rem] text-white ${variant === 'register' ? "translate-y-[-200%]" : ""}`}>Hello Stranger!</span>
+                    </div>
 
-                    <button onClick={toggleVariant} type='button' className='h-[4rem] w-[10rem] mt-[2rem] overflow-hidden grid place-items-center text-[1.5rem] border text-white rounded-full relative duration-200'>
-                        <span className={`absolute duration-500 ${variant === 'register' ? "" : "translate-y-[200%]"}`}>Login</span>
-                        <span className={`absolute duration-500 ${variant === 'register' ? "translate-y-[-200%]" : ""}`}>Register</span>
+
+                    <div
+                        className='h-[4rem] w-[100%] overflow-hidden grid place-items-center text-[1.5rem] text-white relative duration-200'
+                    >
+                        <span className={`absolute duration-1000 text-[1.8rem] text-white ${variant === 'register' ? "" : "translate-y-[200%]"}`}>Already have an account? Click below to log in.</span>
+                        <span className={`absolute duration-1000 text-[1.8rem] text-white ${variant === 'register' ? "translate-y-[-200%]" : ""}`}>New here? Click below to register</span>
+                    </div>
+
+
+                    <button
+                        type='button'
+                        onClick={toggleVariant}
+                        className='h-[4rem] w-[10rem] mt-[2rem] overflow-hidden grid place-items-center text-[1.5rem] border text-white rounded-full relative duration-200'
+                    >
+                        <span className={`absolute duration-1000 ${variant === 'register' ? "" : "translate-y-[200%]"}`}>Login</span>
+                        <span className={`absolute duration-1000 ${variant === 'register' ? "translate-y-[-200%]" : ""}`}>Register</span>
                     </button>
                 </div>
             </div>
