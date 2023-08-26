@@ -8,7 +8,6 @@ const Chats = () => {
 
     return (
         <div>
-            <button onClick={() => signOut({callbackUrl: '/'})}>Click me</button>
         </div>
     )
 }
