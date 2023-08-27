@@ -1,7 +1,7 @@
 export interface SidebarOptionsType {
     name: string,
     href: string,
-    icon: any,
+    icon: string,
     active?: boolean,
     onClick?: () => void
 }

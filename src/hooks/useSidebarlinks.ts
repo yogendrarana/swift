@@ -10,7 +10,7 @@ import Users from '@/assets/icons/users.png'
 import Logout from '@/assets/icons/logout.png'
 
 
-const useRoutes = () => {
+const useSidebarLinks = () => {
     const pathname = usePathname();
 
     const routes = useMemo(() => [
@@ -33,6 +33,12 @@ const useRoutes = () => {
             active: pathname === '/chats/profile'
         },
         {
+            name: 'Settings',
+            href: 'chats/settings',
+            icon: "fa-solid fa-cog",
+            active: pathname === '/chats/settings'
+        },
+        {
             name: 'Logout',
             href: '#',
             icon: "fa-solid fa-arrow-right-from-bracket",
@@ -45,4 +51,4 @@ const useRoutes = () => {
     return routes;
 }
 
-export default useRoutes;
+export default useSidebarLinks;

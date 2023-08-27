@@ -5,8 +5,8 @@
 :root {
     --main-padding: 10rem;
     --nav-height: 10rem;
-    --primary-blue: #62e1fb;
-    --primary-green: #90ebbc;
+    --main-blue: #62e1fb;
+    --main-green: #90ebbc;
 }
 
 @layer base {

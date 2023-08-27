@@ -24,7 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body>
                 <AuthContext>
                     <Toaster />
-                    <main>{children}</main>
+                    <main>
+                        {children}
+                    </main>
                 </AuthContext>
             </body>
         </html>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 
 // import hook
-import useRoutes from '@/hooks/useSidebarlinks';
+import useSidebarLinks from '@/hooks/useSidebarlinks';
 
 
 // import types
@@ -14,7 +14,9 @@ import { SidebarOptionsType } from '@/types/types';
 
 
 const DesktopSidebar = () => {
-    const routes = useRoutes();
+    const sidebarlinks = useSidebarLinks();
+
+    console.log(sidebarlinks)
 
     // handle sidebar option click
     const handleSidebarOptionClick = (option: SidebarOptionsType) => {
@@ -25,18 +27,29 @@ const DesktopSidebar = () => {
 
     return (
         <div className='h-[100vh] flex'>
-            <nav className='h-[100vh] border-r flex flex-col items-center gap-[1.5rem] p-[1.5rem]' >
-                <ul>
+            <nav className='h-[100vh] border-r items-center p-[1.5rem]' >
+                <ul className='h-[100%] flex flex-col'>
                     {
-                        routes.map((option, index) => {
+                        sidebarlinks.map((option, index) => {
                             return (
                                 <li
                                     key={index}
                                     onClick={() => handleSidebarOptionClick(option)}
-                                    className={`mb-[0.5rem] cursor-pointer flex justify-center items-center p-[1rem] rounded-lg duration-200 hover:bg-[#ededed] ${option.active ? 'bg-blue-500' : ''}}`}
+                                    className={` 
+                                        ${option.active && 'bg-[#ededed]'} 
+                                        p-[1rem] 
+                                        cursor-pointer 
+                                        grid
+                                        place-items-center
+                                        rounded-[0.5rem]
+                                        duration-200
+                                        hover:bg-[#ededed]
+                                        last:mt-auto
+                                        last:bg-[#ededed]
+                                    `}
                                 >
                                     <Link href={option.href}>
-                                        <i className={`${option.icon} text-[1.5rem]`}></i>
+                                        <i className={`${option.icon} `}></i>
                                         <span className='ml-[0.5rem] sr-only'>{option.name}</span>
                                     </Link>
                                 </li>
