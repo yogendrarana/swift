@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation"
 
 // import icons
 import Chat from '@/assets/icons/chat.png'
-import Users from '@/assets/icons/users.png'
 import User from '@/assets/icons/user.png'
+import Users from '@/assets/icons/users.png'
 import Logout from '@/assets/icons/logout.png'
 
 
@@ -17,25 +17,25 @@ const useRoutes = () => {
         {
             name: 'Chats',
             href: '/chats',
-            icon: Chat,
+            icon: "fa-solid fa-message",
             active: pathname === '/chats',
         },
         {
             name: 'People',
             href: '/chats/people',
-            icon: Users,
-            active: pathname === '/people'
+            icon: "fa-solid fa-user-group",
+            active: pathname === '/chats/people'
         },
         {
             name: 'Profile',
             href: '/chats/profile',
-            icon: User,
-            active: pathname === '/profile'
+            icon: "fa-solid fa-user",
+            active: pathname === '/chats/profile'
         },
         {
             name: 'Logout',
             href: '#',
-            icon: Logout,
+            icon: "fa-solid fa-arrow-right-from-bracket",
             onClick: () => signOut({
                 callbackUrl: `${window.location.origin}`
             })

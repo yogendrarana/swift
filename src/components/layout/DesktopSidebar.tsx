@@ -3,7 +3,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 
 // import hook
@@ -34,10 +33,10 @@ const DesktopSidebar = () => {
                                 <li
                                     key={index}
                                     onClick={() => handleSidebarOptionClick(option)}
-                                    className="cursor-pointer flex justify-center items-center p-[1rem] rounded-lg duration-200 hover:bg-[#ededed]"
+                                    className={`mb-[0.5rem] cursor-pointer flex justify-center items-center p-[1rem] rounded-lg duration-200 hover:bg-[#ededed] ${option.active ? 'bg-blue-500' : ''}}`}
                                 >
                                     <Link href={option.href}>
-                                        <Image height={20} width={20} src={option.icon} alt={option.name} />
+                                        <i className={`${option.icon} text-[1.5rem]`}></i>
                                         <span className='ml-[0.5rem] sr-only'>{option.name}</span>
                                     </Link>
                                 </li>
