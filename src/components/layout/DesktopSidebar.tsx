@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 
 // import hook
-import useSidebarLinks from '@/hooks/useSidebarlinks';
+import useSidebar from '@/hooks/useSidebar';
 
 
 // import types
@@ -14,9 +14,7 @@ import { SidebarOptionsType } from '@/types/types';
 
 
 const DesktopSidebar = () => {
-    const sidebarlinks = useSidebarLinks();
-
-    console.log(sidebarlinks)
+    const sidebarlinks = useSidebar();
 
     // handle sidebar option click
     const handleSidebarOptionClick = (option: SidebarOptionsType) => {
@@ -36,8 +34,7 @@ const DesktopSidebar = () => {
                                     key={index}
                                     onClick={() => handleSidebarOptionClick(option)}
                                     className={` 
-                                        ${option.active && 'bg-[#ededed]'} 
-                                        p-[1rem] 
+                                        mb-[0.5rem]             
                                         cursor-pointer 
                                         grid
                                         place-items-center
@@ -46,9 +43,10 @@ const DesktopSidebar = () => {
                                         hover:bg-[#ededed]
                                         last:mt-auto
                                         last:bg-[#ededed]
+                                        ${option.active && 'bg-[#ededed]'} 
                                     `}
                                 >
-                                    <Link href={option.href}>
+                                    <Link href={option.href} className='h-full w-full p-[1rem]'>
                                         <i className={`${option.icon} `}></i>
                                         <span className='ml-[0.5rem] sr-only'>{option.name}</span>
                                     </Link>

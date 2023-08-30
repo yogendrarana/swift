@@ -9,13 +9,13 @@ import { usePathname, useRouter } from 'next/navigation'
 import logo from "@/assets/icons/logo.png"
 
 // import hook
-import useNavlinks from '@/hooks/useNavlinks'
+import useNavbar from '@/hooks/useNavbar'
 
 const Navbar = () => {
     const router = useRouter();
     const pathname = usePathname();
     
-    const navlinks = useNavlinks();
+    const navlinks = useNavbar();
 
     return (
         <nav className='h-[var(--nav-height)] w-[100%] flex items-center px-[10rem] sticky top-0'>

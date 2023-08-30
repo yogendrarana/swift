@@ -3,7 +3,10 @@ import React from 'react'
 const People = () => {
   return (
     <div>
-        People
+        <h2>People</h2>
+        <ul>
+            <li>Person 1</li>
+        </ul>
     </div>
   )
 }

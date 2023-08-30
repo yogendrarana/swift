@@ -1,4 +1,4 @@
-const useNavlinks = () => {
+const useNavbar = () => {
     const routes = [
         { 
             label: "Join", 
@@ -9,4 +9,4 @@ const useNavlinks = () => {
     return routes;
 }
 
-export default useNavlinks;
+export default useNavbar;

@@ -4,10 +4,6 @@ import { usePathname } from "next/navigation"
 
 
 // import icons
-import Chat from '@/assets/icons/chat.png'
-import User from '@/assets/icons/user.png'
-import Users from '@/assets/icons/users.png'
-import Logout from '@/assets/icons/logout.png'
 
 
 const useSidebarLinks = () => {
