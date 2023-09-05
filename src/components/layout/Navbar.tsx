@@ -23,7 +23,7 @@ const Navbar = () => {
             
             <div className='mr-auto text-[2rem]'>
                 <Link href='/'>
-                    <Image src={logo} height={40} alt='logo' width={40} />
+                    <Image src={logo} height={40} width={40} alt='logo' />
                 </Link>
             </div>
 

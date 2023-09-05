@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 // import icons
 
 
-const useSidebarLinks = () => {
+const useSidebar = () => {
     const pathname = usePathname();
 
     const routes = useMemo(() => [
@@ -28,23 +28,9 @@ const useSidebarLinks = () => {
             icon: "fa-solid fa-user",
             active: pathname === '/chats/profile'
         },
-        {
-            name: 'Settings',
-            href: 'chats/settings',
-            icon: "fa-solid fa-cog",
-            active: pathname === '/chats/settings'
-        },
-        {
-            name: 'Logout',
-            href: '#',
-            icon: "fa-solid fa-arrow-right-from-bracket",
-            onClick: () => signOut({
-                callbackUrl: `${window.location.origin}`
-            })
-        },
     ], [pathname]);
 
     return routes;
 }
 
-export default useSidebarLinks;
+export default useSidebar;

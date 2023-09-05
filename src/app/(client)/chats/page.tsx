@@ -1,14 +1,11 @@
 import React from 'react'
 
 
-// import icons
-import { ChevronDown } from 'lucide-react';
-
 // import actions
 import getCurrentUser from '@/actions/getCurrentUser';
 
+
 // import components
-import { Button } from '@/components/ui/button';
 import ChatList from '@/components/chat/ChatList';
 import { Avatar, AvatarFallback, AvatarImage, } from "@/components/ui/avatar"
 
@@ -24,11 +21,7 @@ const Chats = async () => {
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
 
-                <p className='ml-[1rem] text-[1.5rem]'>{currentUser?.name}</p>
-
-                <Button variant="outline" size="icon" className='ml-auto border-0 rounded-full'>
-                    <ChevronDown className="h-[1.75rem] w-[1.75rem]" />
-                </Button>
+                <p className='ml-[1rem] text-[1.5rem] capitalize'>{currentUser?.name}</p>
             </div>
 
             <ChatList />
