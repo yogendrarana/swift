@@ -23,7 +23,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </head>
             <body>
                 <AuthContext>
-                    <Toaster />
+                    <Toaster toastOptions={{
+                        className: '',
+                        style: {
+                            padding: '1rem',
+                            fontSize: '1.25rem',
+                            borderRadius: '0.5rem',
+                        },
+                    }} />
                     <main>
                         {children}
                     </main>

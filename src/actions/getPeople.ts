@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { userSchema } from "../../drizzle/schema/user.schema";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-const getOtherUsers = async () => {
+const getPeople = async () => {
     const session = await getServerSession(authOptions);
 
     if(!session?.user?.email){
@@ -21,4 +21,4 @@ const getOtherUsers = async () => {
 }
 
 
-export default getOtherUsers;
+export default getPeople;

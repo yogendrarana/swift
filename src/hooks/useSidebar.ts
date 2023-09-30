@@ -18,15 +18,23 @@ const useSidebar = () => {
         },
         {
             name: 'People',
-            href: '/chats/people',
+            href: '/people',
             icon: "fa-solid fa-user-group",
-            active: pathname === '/chats/people'
+            active: pathname === '/people'
         },
         {
             name: 'Profile',
-            href: '/chats/profile',
+            href: '/profile',
             icon: "fa-solid fa-user",
-            active: pathname === '/chats/profile'
+            active: pathname === '/profile'
+        },
+        {
+            name: 'Logout',
+            href: '#',
+            icon: "fa-solid fa-arrow-right-from-bracket",
+            onClick: () => signOut({
+                callbackUrl: `${window.location.origin}`
+            })
         },
     ], [pathname]);
 

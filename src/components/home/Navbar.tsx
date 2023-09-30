@@ -18,7 +18,7 @@ const Navbar = () => {
     const navlinks = useNavbar();
 
     return (
-        <nav className='h-[var(--nav-height)] w-[100%] flex items-center px-[10rem] sticky top-0'>
+        <nav className='h-[var(--nav-height)] w-[100%] flex items-center sticky top-0'>
             <div className='absolute top-0 left-0 right-0 bottom-0 z-[-10] bg-white opacity-[0.75]'></div>
             
             <div className='mr-auto text-[2rem]'>

@@ -1,9 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image';
 
-const ChatList = () => {
+// import hooks and actions
+import getPeople from '@/actions/getPeople'
+
+// import assets
+import userPic from '@/assets/images/user.jpg'
+
+const PeopleList = async () => {
+    const people = await getPeople();
+
     return (
-        <div className='h-full w-full flex flex-col overflow-y-auto'>
+        <div className='h-full w-full flex flex-col'>
             <input
                 type="text" 
                 placeholder='Search by name...' 
@@ -13,22 +22,23 @@ const ChatList = () => {
 
             <ul className='overflow-y-auto'>
                 {
-                    [1, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, index) => (
+                    people.map((p, index) => (
                         <li key={index} className='group duration-200 pr-[1rem] mb-[2rem] last-child:mb-0 last:mb-0'>
                             <Link href="#" className='flex'>
                                 <div className='h-[4rem] w-[4rem] mr-[1rem] grid place-items-center border-[0.25rem] border-gray-100 group-hover:border-gray-300 relative rounded-full duration-150'>
-                                    <span>JD</span>
+                                    <Image 
+                                        height={30} 
+                                        width={30} 
+                                        src={userPic} 
+                                        alt='user profile pic'
+                                        className='rounded-full'
+                                     />
                                     <span className='absolute h-[1.25rem] w-[1.25rem] right-[-0.2rem] bottom-[-0.2rem] border-[0.25rem] border-white rounded-full bg-[var(--primary-green)]'></span>
                                 </div>
 
                                 <div className='flex flex-col justify-center flex-1'>
                                     <div className='flex justify-between'>
-                                        <div className='text-[1.25rem] font-bold'>John Doe</div>
-                                        <div className='text-gray-400'>4:00 AM</div>
-                                    </div>
-                                    <div className='flex justify-between items-center'>
-                                        <p className='text-gray-500'>This is the messages sent...</p>
-                                        <div className='h-[0.75rem] w-[0.75rem] rounded-full bg-[var(--primary-blue)]'></div>
+                                        <div className='text-[1.25rem] font-bold capitalize'>{p.name}</div>
                                     </div>
                                 </div>
                             </Link>
@@ -40,4 +50,4 @@ const ChatList = () => {
     )
 }
 
-export default ChatList;
+export default PeopleList;

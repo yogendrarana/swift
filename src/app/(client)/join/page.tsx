@@ -93,14 +93,11 @@ const Join = () => {
 
 
     return (
-        <section className='h-[100vh] flex relative'>
+        <section className='h-[100vh] p-[1rem] flex relative'>
             <form className={`h-full w-[60%] px-[5rem] py-[4rem] flex flex-col justify-center gap-[2rem] items-center duration-1000 
                 ${variant === "login" ? "translate-x-[66.66667%] opacity-0 invisible" : "opacity-100 visible"}`}
             >
                 <div className='w-[40rem]'>
-                    <p className='text-[#767676] text-[1.45rem] absolute top-[4rem]'>Have an account?
-                        <Button type='button' variant="secondary" onClick={() => setVariant("login")} className='text-[1.25rem] text-[#767676] ml-[0.75rem] rounded-[5rem] px-[1.25rem]'>Login</Button>
-                    </p>
                     <h1 className='mb-[1.5rem] text-[3rem]'>Welcome to Company Name</h1>
                     <p className='mb-[2rem] text-[1.45rem] text-[#767676]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, sed odio!</p>
                 </div>
@@ -150,15 +147,14 @@ const Join = () => {
                 >
                     Register
                 </Button>
+
+                <Button variant="ghost" type='button' onClick={toggleVariant} className='mt-[1rem] text-[1.25rem] text-[#767676]'>Have an account? <u className='ml-[0.25rem]'>Login</u></Button>
             </form>
 
             <form className={`h-full w-[60%] px-[5rem] py-[4rem] flex flex-col justify-center items-center gap-[2rem] duration-1000 absolute top-0 left-0 
                 ${variant === "login" ? "translate-x-[66.66667%] opacity-100 visible" : "invisible opacity-0"}`}
             >
                 <div className='w-[40rem]'>
-                    <p className='text-[#767676] text-[1.45rem] absolute top-[4rem]'>New here?
-                        <Button type='button' variant="secondary" onClick={() => setVariant("register")} className='text-[1.25rem] text-[#767676] ml-[0.75rem] rounded-[5rem] px-[1.25rem]'>Register</Button>
-                    </p>
                     <h1 className='mb-[1.5rem] text-[3rem]'>Welcome to Company Name</h1>
                     <p className='mb-[2rem] text-[1.45rem] text-[#767676]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, sed odio!</p>
                 </div>
@@ -195,36 +191,12 @@ const Join = () => {
                 >
                     Login
                 </Button>
+
+                <Button variant="ghost" type='button' onClick={toggleVariant} className='mt-[1rem] text-[1.25rem] text-[#767676]'>New here? <u className='ml-[0.25rem]'>Register</u></Button>
             </form>
 
-            <div className={`w-[40%] ml-[auto] bg-blue-400 duration-1000 ${variant === "login" ? "translate-x-[-150%]" : ""}`}>
-                <div className="h-[100%] flex flex-col justify-center items-center duration-1000">
-                    <div
-                        className='h-[4rem] w-[100%] overflow-hidden grid place-items-center text-[1.5rem] text-white relative duration-200'
-                    >
-                        <span className={`absolute duration-1000 text-[4rem] text-white ${variant === 'register' ? "" : "translate-y-[200%]"}`}>Welcome back!</span>
-                        <span className={`absolute duration-1000 text-[4rem] text-white ${variant === 'register' ? "translate-y-[-200%]" : ""}`}>Hello Stranger!</span>
-                    </div>
-
-
-                    <div
-                        className='h-[4rem] w-[100%] overflow-hidden grid place-items-center text-[1.5rem] text-white relative duration-200'
-                    >
-                        <span className={`absolute duration-1000 text-[1.8rem] text-white ${variant === 'register' ? "" : "translate-y-[200%]"}`}>Already have an account? Click below to log in.</span>
-                        <span className={`absolute duration-1000 text-[1.8rem] text-white ${variant === 'register' ? "translate-y-[-200%]" : ""}`}>New here? Click below to register</span>
-                    </div>
-
-
-                    <button
-                        type='button'
-                        onClick={toggleVariant}
-                        className='h-[4rem] w-[10rem] mt-[2rem] overflow-hidden grid place-items-center text-[1.5rem] border text-white rounded-full relative duration-200'
-                    >
-                        <span className={`absolute duration-1000 ${variant === 'register' ? "" : "translate-y-[200%]"}`}>Login</span>
-                        <span className={`absolute duration-1000 ${variant === 'register' ? "translate-y-[-200%]" : ""}`}>Register</span>
-                    </button>
-                </div>
-            </div>
+            {/* sliding component */}
+            <div className={`w-[40%] ml-[auto] bg-blue-400 duration-1000 ${variant === "login" ? "translate-x-[-150%]" : ""}`}></div>
         </section>
     )
 }

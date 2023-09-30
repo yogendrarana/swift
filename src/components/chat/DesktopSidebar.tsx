@@ -4,7 +4,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { toast } from 'react-hot-toast';
 
 
 // import hook
@@ -13,6 +12,7 @@ import useSidebar from '@/hooks/useSidebar';
 
 // import types
 import { SidebarOptionsType } from '@/types/types';
+import { signOut } from 'next-auth/react';
 
 
 // import image
@@ -35,7 +35,7 @@ const DesktopSidebar = () => {
 
     return (
         <div className='h-[100vh] flex flex-col items-center border-r'>
-            <Image src={logo} height={40} width={40} alt='logo' className='m-[1rem] mb-[2rem]' />
+            <Image src={logo} height={35} width={35} alt='logo' className='m-[1.5rem] mb-[2rem]' />
 
             <ul className='flex flex-col w-full'>
                 {
@@ -64,10 +64,13 @@ const DesktopSidebar = () => {
                 }
             </ul>
 
+            {/* profile button */}
             <div className='h-[7.5rem] mt-auto flex items-center text-[2.5rem]'>
                 <Avatar className='h-[3.5rem] w-[3.5rem]' onClick={
                     () => {
-                        toast.success('You clicked on the avatar');
+                        signOut({
+                            callbackUrl: `${window.location.origin}`
+                        })
                     }
                 }>
                     <AvatarImage src="https://github.com/shadcn.png" alt="@user" />

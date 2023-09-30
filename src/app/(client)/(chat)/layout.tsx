@@ -1,7 +1,5 @@
-import React from 'react'
-
 // import components
-import DesktopSidebar from '@/components/layout/DesktopSidebar'
+import DesktopSidebar from '@/components/chat/DesktopSidebar'
 
 const ChatsLayout = ({ children }: { children: React.ReactNode }) => { 
 
