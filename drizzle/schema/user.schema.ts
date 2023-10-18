@@ -1,6 +1,5 @@
 import { boolean, mysqlEnum, mysqlTable, int, text, varchar, timestamp } from 'drizzle-orm/mysql-core';
 
-// declaring enum in database
 export const userSchema = mysqlTable(
     'user',
 

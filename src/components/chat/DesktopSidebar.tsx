@@ -34,7 +34,7 @@ const DesktopSidebar = () => {
     }
 
     return (
-        <div className='h-[100vh] flex flex-col items-center border-r'>
+        <div className='h-[100vh] w-full flex flex-col items-center border-r'>
             <Image src={logo} height={35} width={35} alt='logo' className='m-[1.5rem] mb-[2rem]' />
 
             <ul className='flex flex-col w-full'>

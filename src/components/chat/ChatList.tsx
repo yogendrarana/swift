@@ -8,7 +8,15 @@ const ChatList = () => {
                 type="text" 
                 placeholder='Search by name...' 
                 autoComplete='off' 
-                className='border-none p-[1rem] mb-[2rem] outline-none rounded-[0.5rem] bg-gray-100' 
+                className='
+                    mb-[2rem] p-[1rem] 
+                    border-none
+                    outline-none 
+                    bg-gray-100
+                    rounded-[0.5rem]
+                    text-[1.25rem]
+                    placeholder:text-[1.25rem]
+                '
             />
 
             <ul className='overflow-y-auto'>
