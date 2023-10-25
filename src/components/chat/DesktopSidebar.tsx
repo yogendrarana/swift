@@ -4,6 +4,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { signOut } from 'next-auth/react';
 
 
 // import hook
@@ -11,7 +12,6 @@ import useSidebar from '@/hooks/useSidebar';
 
 
 // import types
-import { signOut } from 'next-auth/react';
 import { SidebarOptionsType } from '@/types/types';
 
 
