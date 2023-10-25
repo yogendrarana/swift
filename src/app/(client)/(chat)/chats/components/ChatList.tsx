@@ -3,11 +3,15 @@ import Link from 'next/link'
 
 const ChatList = () => {
     return (
-        <div className='h-full w-full flex flex-col overflow-y-auto'>
+        <div className='h-full w-[var(--mini-sidebar-width)]  p-[1rem] flex flex-col overflow-y-auto'>
+            <div className='flex items-center text-[2rem]'>Chats</div>
+
+            <hr className='my-[1rem]' />
+
             <input
-                type="text" 
-                placeholder='Search by name...' 
-                autoComplete='off' 
+                type="text"
+                placeholder='Search by name...'
+                autoComplete='off'
                 className='
                     mb-[2rem] p-[1rem] 
                     border-none
@@ -21,7 +25,7 @@ const ChatList = () => {
 
             <ul className='overflow-y-auto'>
                 {
-                    [1, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, index) => (
+                    [1, 2, 3].map((_, index) => (
                         <li key={index} className='group duration-200 pr-[1rem] mb-[2rem] last-child:mb-0 last:mb-0'>
                             <Link href="#" className='flex'>
                                 <div className='h-[4rem] w-[4rem] mr-[1rem] grid place-items-center border-[0.25rem] border-gray-100 group-hover:border-gray-300 relative rounded-full duration-150'>

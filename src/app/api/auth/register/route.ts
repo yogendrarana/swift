@@ -26,8 +26,8 @@ export async function POST(request: NextRequest) {
         const passwordHash = await bcrypt.hash(password, 10);
 
         // insert into user table
-        const response = await db.insert(userSchema).values({ name, email, password: passwordHash });
-        const insertId = response[0].insertId;
+        const [newUser] = await db.insert(userSchema).values({ name, email, password: passwordHash });
+        const insertId = newUser.insertId;
 
         // return success message
         return NextResponse.json({ success: true, message: 'User registered successfully.', userId: insertId }, { status: 201 });

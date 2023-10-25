@@ -1,13 +1,12 @@
 import { db } from '@/db/db';
 import { eq } from 'drizzle-orm';
-import { getServerSession } from 'next-auth';
+import getAuthSession from './getAuthSession';
 import { userSchema } from '../../drizzle/schema/user.schema';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 
 const getCurrentUser = async () => {
     try{
-        const session = await getServerSession(authOptions);
+        const session = await getAuthSession();
 
         if(!session?.user?.email){
             return null;

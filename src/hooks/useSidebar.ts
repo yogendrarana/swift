@@ -4,8 +4,6 @@ import { usePathname } from "next/navigation"
 
 
 // import icons
-
-
 const useSidebar = () => {
     const pathname = usePathname();
 
@@ -17,10 +15,10 @@ const useSidebar = () => {
             active: pathname === '/chats',
         },
         {
-            name: 'People',
-            href: '/people',
+            name: 'Users',
+            href: '/users',
             icon: "fa-solid fa-user-group",
-            active: pathname === '/people'
+            active: pathname === '/users'
         },
         {
             name: 'Profile',

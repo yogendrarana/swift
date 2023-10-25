@@ -8,8 +8,7 @@ import Empty from '@/components/util/Empty'
 // import hooks
 import useChat from '@/hooks/useChat'
 
-
-const ProfilePage = () => {
+const UsersPage = () => {
     const { isChatOpen } = useChat();
 
     return (
@@ -23,4 +22,4 @@ const ProfilePage = () => {
     )
 }
 
-export default ProfilePage
+export default UsersPage;

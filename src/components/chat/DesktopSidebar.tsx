@@ -11,8 +11,8 @@ import useSidebar from '@/hooks/useSidebar';
 
 
 // import types
-import { SidebarOptionsType } from '@/types/types';
 import { signOut } from 'next-auth/react';
+import { SidebarOptionsType } from '@/types/types';
 
 
 // import image
@@ -20,7 +20,7 @@ import logo from "@/assets/icons/logo.png"
 
 
 // import components
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 
 const DesktopSidebar = () => {
@@ -37,7 +37,7 @@ const DesktopSidebar = () => {
         <div className='h-[100vh] w-full flex flex-col items-center border-r'>
             <Image src={logo} height={35} width={35} alt='logo' className='m-[1.5rem] mb-[2rem]' />
 
-            <ul className='flex flex-col w-full'>
+            <ul className='flex flex-col gap-[0.25rem] w-full'>
                 {
                     sidebarlinks.map((option, index) => {
                         return (
@@ -45,17 +45,24 @@ const DesktopSidebar = () => {
                                 key={index}
                                 onClick={() => handleSidebarOptionClick(option)}
                                 className={`
-                                        w-full
-                                        cursor-pointer 
-                                        flex 
-                                        justify-center 
-                                        border-r-[0.25rem]
-                                        border-white
-                                        duration-200
-                                        ${option.active && 'border-[var(--main-green)]'}
-                                `}>
-                                <Link href={option.href} className='w-full py-[1.75rem] grid place-items-center'>
-                                    <i className={`${option.icon} text-[1.25rem] text-[#183D3D]`}></i>
+                                    w-full
+                                    cursor-pointer 
+                                    flex justify-center 
+                                    duration-200
+                                `}
+                            >
+                                <Link 
+                                    href={option.href} 
+                                    className={`
+                                        h-[4.5rem] w-[4.5rem]
+                                        grid place-items-center 
+                                        rounded-[0.75rem]
+                                        hover:bg-gray-200
+                                        text-[1.25rem] text-[#183D3D]
+                                        ${option.active && 'bg-gray-200'}
+                                    `}
+                                >
+                                    <i className={`${option.icon}`}></i>
                                     <span className='sr-only'>{option.name}</span>
                                 </Link>
                             </li>

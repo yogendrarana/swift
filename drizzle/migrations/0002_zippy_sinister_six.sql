@@ -1,0 +1,1 @@
+ALTER TABLE `user_to_chat` ADD `is_group_chat` boolean NOT NULL;

@@ -1,21 +1,25 @@
+"use client"
+
 import React from 'react'
 
-
 // import components
-import ChatList from '@/components/chat/ChatList';
+import Empty from '@/components/util/Empty'
 
+// import hooks
+import useChat from '@/hooks/useChat'
 
-const Chats = async () => {
+const ChatsPage = () => {
+    const { isChatOpen } = useChat();
 
     return (
-        <section className='max-h-[100vh] w-full p-[1rem] flex flex-col overflow-hidden'>
-            <div className='flex items-center text-[2rem]'>Chats</div>
-
-            <hr className='my-[1rem]' />
-
-            <ChatList />
-        </section>
+        <div className={`
+            h-full
+            flex-1
+            ${isChatOpen ? 'hidden' : 'block'}
+        `}>
+            <Empty />
+        </div>
     )
 }
 
-export default Chats
+export default ChatsPage;
