@@ -1,0 +1,1 @@
+ALTER TABLE `chat` ADD `last_message_at` timestamp;

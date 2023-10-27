@@ -1,9 +1,14 @@
 import { db } from "@/src/db/db";
-import { desc, eq, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
+import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
+
+// import action
 import getCurrentUser from "./getCurrentUser"
+
+// import schemas
 import { chatSchema } from "../../drizzle/schema/chat.schema";
 import { userToChat } from "../../drizzle/schema/userToChat.join";
-import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
+
 
 const getChats = async () => {
     const currentUser = await getCurrentUser();
@@ -24,8 +29,6 @@ const getChats = async () => {
         `)
 
         const chats: any[] = result;
-
-        console.log(chats[0]);
 
         return chats[0];
 

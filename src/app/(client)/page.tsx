@@ -7,10 +7,10 @@ import { useSession } from "next-auth/react";
 
 
 // import components
-import Footer from "@/components/home/Footer";
-import Navbar from "@/components/home/Navbar";
-import { Button } from "@/components/ui/button";
-import Features from "@/components/home/Features";
+import Footer from "@/src/components/home/Footer";
+import Navbar from "@/src/components/home/Navbar";
+import { Button } from "@/src/components/ui/button";
+import Features from "@/src/components/home/Features";
 
 
 export default function Home() {

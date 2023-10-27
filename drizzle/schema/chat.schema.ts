@@ -1,5 +1,5 @@
 import { relations, InferModel } from "drizzle-orm";
-import { boolean, int, mysqlTable, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { boolean, int, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 
 // import schemas
@@ -16,7 +16,7 @@ export const chatSchema = mysqlTable(
         isGroupChat: boolean('is_group_chat'),
         name: varchar('name', { length: 50 }),
         adminId: int('admin_id').references(() => userSchema.id),
-        lastMessageAt: timestamp('last_message_at'),
+        lastMessageAt: timestamp('last_message_at'), // I need it to order chats by last message
 
         createdAt: timestamp('created_at').defaultNow().notNull(),
         updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),

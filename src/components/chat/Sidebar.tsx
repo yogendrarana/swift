@@ -1,6 +1,6 @@
 // import components
 
-import DesktopSidebar from "@/components/chat/DesktopSidebar"
+import DesktopSidebar from "@/src/components/chat/DesktopSidebar"
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => { 
 

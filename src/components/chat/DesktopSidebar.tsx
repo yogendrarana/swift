@@ -8,19 +8,19 @@ import { signOut } from 'next-auth/react';
 
 
 // import hook
-import useSidebar from '@/hooks/useSidebar';
+import useSidebar from '@/src/hooks/useSidebar';
 
 
 // import types
-import { SidebarOptionsType } from '@/types/types';
+import { SidebarOptionsType } from '@/src/types/types';
 
 
 // import image
-import logo from "@/assets/icons/logo.png"
+import logo from "@/src/assets/icons/logo.png"
 
 
 // import components
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/src/components/ui/avatar';
 
 
 const DesktopSidebar = () => {

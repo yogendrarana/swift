@@ -3,7 +3,7 @@ import React from 'react'
 
 // import components
 import UserList from './components/UserList';
-import Sidebar from '@/components/chat/Sidebar'
+import Sidebar from '@/src/components/chat/Sidebar'
 
 
 const UserLayout = async ({ children }: { children: React.ReactNode }) => {

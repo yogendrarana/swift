@@ -1,12 +1,12 @@
 // import components
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/src/components/ui/button";
 
 // import assets
-import userPic from '@/assets/images/user.jpg'
+import userPic from '@/src/assets/images/user.jpg'
 
 // import hooks
-import getCurrentUser from "@/actions/getCurrentUser"
+import getCurrentUser from "@/src/actions/getCurrentUser"
 
 const MyProfile = async () => {
     const currentUser = await getCurrentUser();

@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { db } from '@/db/db';
+import { db } from '@/src/db/db';
 import { eq } from 'drizzle-orm';
 import NextAuth, { AuthOptions } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";

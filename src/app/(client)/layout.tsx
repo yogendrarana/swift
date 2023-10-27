@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 
 
 // import css
-import '@/styles/globals.css'
+import '@/src/styles/globals.css'
 
 
 // import components
 import { Toaster } from 'react-hot-toast'
-import AuthContext from '@/context/authContext'
+import AuthContext from '@/src/context/authContext'
 
 
 export const metadata: Metadata = {

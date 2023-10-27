@@ -1,6 +1,6 @@
-import { db } from "@/db/db";
+import { db } from "@/src/db/db";
 import { sql } from "drizzle-orm";
-import getCurrentUser from "@/actions/getCurrentUser";
+import getCurrentUser from "@/src/actions/getCurrentUser";
 import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
 import { NextRequest, NextResponse } from "next/server";
 import { chatSchema } from "../../../../drizzle/schema/chat.schema";

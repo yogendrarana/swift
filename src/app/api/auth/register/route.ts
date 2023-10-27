@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt"
-import { db } from "@/db/db";
+import { db } from "@/src/db/db";
 import { eq } from "drizzle-orm"
 import { NextRequest, NextResponse } from "next/server";
 import { userSchema } from "../../../../../drizzle/schema/user.schema";

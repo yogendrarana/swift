@@ -6,10 +6,10 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 
 // import logo
-import logo from "@/assets/icons/logo.png"
+import logo from "@/src/assets/icons/logo.png"
 
 // import hook
-import useNavbar from '@/hooks/useNavbar'
+import useNavbar from '@/src/hooks/useNavbar'
 
 const Navbar = () => {
     const router = useRouter();

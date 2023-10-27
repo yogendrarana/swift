@@ -9,7 +9,7 @@ import { UserType } from "../../../../../../drizzle/schema/user.schema"
 
 
 // temporary user profile pic
-import userPic from '@/assets/images/user.jpg'
+import userPic from '@/src/assets/images/user.jpg'
 import toast from "react-hot-toast"
 
 

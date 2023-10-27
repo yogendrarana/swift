@@ -1,7 +1,7 @@
 import React from 'react'
 
 // import hooks and actions
-import { getAllUsers } from '@/actions/getAllUsers'
+import { getAllUsers } from '@/src/actions/getAllUsers'
 
 // import components
 import UserBox from './UserBox';

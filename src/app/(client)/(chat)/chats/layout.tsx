@@ -1,7 +1,7 @@
 import React from 'react'
 
 // import components
-import Sidebar from '@/components/chat/Sidebar'
+import Sidebar from '@/src/components/chat/Sidebar'
 import ChatList from './components/ChatList';
 
 const ChatsLayout = async ({ children }: { children: React.ReactNode }) => {

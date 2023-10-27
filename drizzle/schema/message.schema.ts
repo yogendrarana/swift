@@ -15,7 +15,8 @@ export const messageSchema = mysqlTable(
         chatId: int('chat_id').notNull(),
         senderId: int('sender_id').notNull(),
         receiverId: int('receiver_id').notNull(),
-        text: text('text').notNull(),
+        text: text('text'),
+        image: text('image_url'),
 
         createdAt: timestamp('created_at').defaultNow().notNull(),
         updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),

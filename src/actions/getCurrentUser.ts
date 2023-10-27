@@ -1,4 +1,4 @@
-import { db } from '@/db/db';
+import { db } from '@/src/db/db';
 import { eq } from 'drizzle-orm';
 import getAuthSession from './getAuthSession';
 import { userSchema } from '../../drizzle/schema/user.schema';
