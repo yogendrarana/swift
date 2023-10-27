@@ -1,3 +1,9 @@
+import { UserType } from "@/drizzle/schema/user.schema"
+import { ChatType } from "@/drizzle/schema/chat.schema"
+import { MessageType } from "@/drizzle/schema/message.schema"
+
+
+// sidebar types
 export interface SidebarOptionsType {
     name: string,
     href: string,
@@ -5,3 +11,6 @@ export interface SidebarOptionsType {
     active?: boolean,
     onClick?: () => void
 }
+
+
+// chat types

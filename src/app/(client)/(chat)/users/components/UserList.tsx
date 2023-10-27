@@ -10,7 +10,7 @@ const UserList = async () => {
     const users = await getAllUsers();
 
     return (
-        <div className='h-full w-[var(--mini-sidebar-width)] p-[1rem] flex flex-col'>
+        <div className='h-full p-[1rem] flex flex-col'>
             <div className='flex items-center text-[2rem]'>Users</div>
 
             <hr className='my-[1rem]' />

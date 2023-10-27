@@ -9,7 +9,9 @@ const ChatsLayout = async ({ children }: { children: React.ReactNode }) => {
     return (
         <Sidebar>
             <div className='h-full flex'>
-                <ChatList />
+                <div className='w-[var(--mini-sidebar-width)] '>
+                    <ChatList />
+                </div>
                 {children}
             </div>
         </Sidebar>

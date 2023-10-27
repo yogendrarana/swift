@@ -9,12 +9,15 @@ const ProfileLayout = async ({children}: {children: React.ReactNode}) => {
 
     return (
         <div>
-            <Sidebar>
-                <div className='h-full flex'>
+             <Sidebar>
+            <div className='h-full flex'>
+                <div className='w-[var(--mini-sidebar-width)] '>
                     <MyProfile />
-                    {children}
                 </div>
-            </Sidebar>
+                
+                {children}
+            </div>
+        </Sidebar>
         </div>
     )
 }

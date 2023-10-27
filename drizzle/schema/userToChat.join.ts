@@ -12,7 +12,6 @@ export const userToChat = mysqlTable(
     {
         userId: int('user_id').notNull().references(() => userSchema.id),
         chatId: int('chat_id').notNull().references(() => chatSchema.id),
-        isGroupChat: boolean('is_group_chat').notNull(),
     },
 
     (t) => ({

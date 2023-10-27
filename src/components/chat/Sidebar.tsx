@@ -2,7 +2,7 @@
 
 import DesktopSidebar from "@/components/chat/DesktopSidebar"
 
-const ChatsLayout = ({ children }: { children: React.ReactNode }) => { 
+const Sidebar = ({ children }: { children: React.ReactNode }) => { 
 
     return (
         <section className='flex'>
@@ -17,4 +17,4 @@ const ChatsLayout = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-export default ChatsLayout
+export default Sidebar;

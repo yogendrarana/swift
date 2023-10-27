@@ -16,6 +16,7 @@ export const chatSchema = mysqlTable(
         isGroupChat: boolean('is_group_chat'),
         name: varchar('name', { length: 50 }),
         adminId: int('admin_id').references(() => userSchema.id),
+        lastMessageAt: timestamp('last_message_at'),
 
         createdAt: timestamp('created_at').defaultNow().notNull(),
         updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),

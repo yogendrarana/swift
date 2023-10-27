@@ -12,7 +12,7 @@ const MyProfile = async () => {
     const currentUser = await getCurrentUser();
 
     return (
-        <div className='h-full w-[var(--mini-sidebar-width)]  p-[1rem] flex flex-col overflow-y-auto'>
+        <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
             <div className='flex items-center text-[2rem]'>Profile</div>
 
             <hr className='my-[1rem]' />

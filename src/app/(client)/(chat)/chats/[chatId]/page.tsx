@@ -6,10 +6,8 @@ interface IParams {
 
 const ChatID = ({ params }: { params: IParams }) => {
     return (
-        <div className="h-full">
-            <div className="h-full flex flex-col">
-                {params.chatId}
-            </div>
+        <div className="h-full w-full flex flex-col border-4">
+            {params.chatId}
         </div>
     )
 }

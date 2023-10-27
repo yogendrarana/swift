@@ -9,11 +9,14 @@ import Sidebar from '@/components/chat/Sidebar'
 const UserLayout = async ({ children }: { children: React.ReactNode }) => {
     return (
         <Sidebar>
-            <div className='h-full flex'>
+        <div className='h-full flex'>
+            <div className='w-[var(--mini-sidebar-width)] '>
                 <UserList />
-                {children}
             </div>
-        </Sidebar>
+            
+            {children}
+        </div>
+    </Sidebar>
     )
 };
 
