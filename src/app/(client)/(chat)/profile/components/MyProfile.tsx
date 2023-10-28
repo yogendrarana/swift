@@ -13,7 +13,9 @@ const MyProfile = async () => {
 
     return (
         <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
-            <div className='flex items-center text-[2rem]'>Profile</div>
+            <div className=' h-[4rem] flex items-center text-[2rem] font-bold ' >
+                My Profile
+            </div>
 
             <hr className='my-[1rem]' />
 

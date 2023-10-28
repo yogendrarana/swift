@@ -3,6 +3,7 @@
 import axios from "axios"
 import Link from "next/link"
 import Image from "next/image"
+import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import React, { useCallback, useState } from "react"
 import { UserType } from "../../../../../../drizzle/schema/user.schema"
@@ -10,7 +11,6 @@ import { UserType } from "../../../../../../drizzle/schema/user.schema"
 
 // temporary user profile pic
 import userPic from '@/src/assets/images/user.jpg'
-import toast from "react-hot-toast"
 
 
 // user box props

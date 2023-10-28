@@ -11,7 +11,9 @@ const UserList = async () => {
 
     return (
         <div className='h-full p-[1rem] flex flex-col'>
-            <div className='flex items-center text-[2rem]'>Users</div>
+            <div className=' h-[4rem] flex items-center text-[2rem] font-bold ' >
+                Users
+            </div>
 
             <hr className='my-[1rem]' />
 

@@ -10,7 +10,7 @@ import { chatSchema } from "../../drizzle/schema/chat.schema";
 import { userToChat } from "../../drizzle/schema/userToChat.join";
 
 
-const getChats = async () => {
+const getUserChats = async () => {
     const currentUser = await getCurrentUser();
 
     if (!currentUser?.id || !currentUser?.email) {
@@ -37,4 +37,4 @@ const getChats = async () => {
     }
 }
 
-export default getChats;
+export default getUserChats;

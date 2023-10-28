@@ -1,12 +1,15 @@
 import React from 'react'
 import { format } from 'date-fns'
 
+
 // components
 import Link from 'next/link'
+
 
 // import actions
 import getOtherUserOfChat from '@/src/actions/getOtherUserOfChat'
 import getLastMessageOfChat from '@/src/actions/getLastMessageOfChat'
+
 
 // types
 import { ChatType } from '@/drizzle/schema/chat.schema'
