@@ -1,11 +1,6 @@
-import React from 'react'
-
-// import icons
-import { SendHorizonal } from 'lucide-react';
-
 const FeedFooter = () => {
     return (
-        <div className='h-[6rem] pr-[1rem] border-t flex justify-between items-center gap-[1rem]'>
+        <div className='h-[6rem] border-t flex justify-between items-center gap-[1rem]'>
             <button className='h-[3.5rem] w-[3.5rem] text-[1.5rem] rounded-full bg-gray-200 duration-200'>
                 <i className="fa-regular fa-face-smile"></i>
             </button>

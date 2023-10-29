@@ -6,11 +6,11 @@ import Image from "next/image"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import React, { useCallback, useState } from "react"
-import { UserType } from "../../../../../../drizzle/schema/user.schema"
 
 
 // temporary user profile pic
 import userPic from '@/src/assets/images/user.jpg'
+import { UserType } from "@/drizzle/schema/user.schema"
 
 
 // user box props
@@ -61,7 +61,16 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
                         alt='user profile pic'
                         className='rounded-full'
                     />
-                    <span className='absolute h-[1.25rem] w-[1.25rem] right-[-0.2rem] bottom-[-0.2rem] border-[0.25rem] border-white rounded-full bg-[var(--primary-green)]'></span>
+                    <span 
+                        className='
+                            absolute 
+                            h-[1.25rem] w-[1.25rem] 
+                            right-[-0.2rem] bottom-[-0.2rem] 
+                            border-[0.25rem] border-white 
+                            rounded-full 
+                            bg-[var(--primary-green)]
+                        '
+                    ></span>
                 </div>
 
                 <div className='flex flex-col justify-center flex-1'>

@@ -35,7 +35,7 @@ const FeedHeader: React.FC<PropType> = async ({ chat }) => {
     }
 
     return (
-        <div className=' h-[6rem] px-[1rem] border-b flex justify-between items-center gap-[1rem]' >  {/* 6 rem height because the ChatList and other has py also */}
+        <div className=' h-[6rem] border-b flex justify-between items-center gap-[1rem]' >  {/* 6 rem height because the ChatList and other has py also */}
             <Avatar h={50} w={50} />
 
             <div className='mr-auto'>

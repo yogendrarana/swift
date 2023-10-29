@@ -1,3 +1,4 @@
+import React from "react";
 
 // import components
 import FeedBody from "./components/FeedBody";
@@ -17,11 +18,9 @@ const ChatID = async ({ params }: { params: IParams }) => {
     const messages = await getChatMessages(parseInt(params.chatId));
 
     return (
-        <div className=" h-full flex-1 flex flex-col border-l pl-[1rem]" >
+        <div className=" h-full px-[1rem] flex-1 flex flex-col border-l pl-[1rem]" >
             <FeedHeader chat={chat} />
-
-            <FeedBody />
-
+            <FeedBody messages={messages} />
             <FeedFooter />
         </div>
     )
