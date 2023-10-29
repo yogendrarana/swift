@@ -17,7 +17,7 @@ const ChatID = async ({ params }: { params: IParams }) => {
     const messages = await getChatMessages(parseInt(params.chatId));
 
     return (
-        <div className=" h-full flex-1 flex flex-col " >
+        <div className=" h-full flex-1 flex flex-col border-l pl-[1rem]" >
             <FeedHeader chat={chat} />
 
             <FeedBody />

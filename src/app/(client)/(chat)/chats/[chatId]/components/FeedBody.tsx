@@ -2,7 +2,7 @@ import React from 'react'
 
 const FeedBody = () => {
     return (
-        <div className='bg-gray-200 flex-1'>FeedBody</div>
+        <div className='flex-1'>FeedBody</div>
     )
 }
 
