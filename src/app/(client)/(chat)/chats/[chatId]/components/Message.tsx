@@ -17,10 +17,11 @@ const Message: React.FC<PropType> = ({ message, isMyMessage }) => {
         <div className='w-full flex flex-col'>
             <div
                 className={`
-                    p-[1rem] w-[45%]
+                    w-[45%]
+                    p-[1rem] 
                     text-[1.25rem] 
-                    bg-gray-100 
-                    rounded-[0.5rem]
+                    bg-gray-200
+                    rounded-[1rem]
                     ${isMyMessage ? 'ml-auto' : 'mr-auto'}
                 `}
             >

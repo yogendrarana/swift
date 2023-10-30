@@ -38,7 +38,7 @@ const ChatList = async () => {
             <ul className='overflow-y-auto'>
                 {
                     !chat_list.length ? (
-                        <span className='text-[1.25rem]'>
+                        <span className='text-[1.25rem] text-gray-600'>
                             No conversation yet. <br />
                             Please browse the user to stat conversation.
                         </span>
