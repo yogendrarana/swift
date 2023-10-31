@@ -3,15 +3,19 @@ import Image from 'next/image';
 import { format } from 'date-fns';
 
 // import types
-import { MessageType } from '@/drizzle/schema/message.schema';
+import { FullMessageType } from '@/src/types/types';
+
+// import actions
+import getAuthSession from '@/src/actions/getAuthSession';
 
 // define prop types
 type PropType = {
-    message: MessageType;
-    isMyMessage: boolean;
+    message: FullMessageType;
 }
 
-const Message: React.FC<PropType> = ({ message, isMyMessage }) => {
+const Message: React.FC<PropType> = async ({ message }) => {
+    const session = await getAuthSession();
+    const isMyMessage = message.sender.email === session?.user?.email;
 
     return (
         <div className='w-full flex flex-col'>

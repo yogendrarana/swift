@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { CldUploadButton } from "next-cloudinary"
 
 // import hooks
 import useChat from "@/src/hooks/useChat";
@@ -19,6 +20,21 @@ const FeedFooter = () => {
         } catch (error: any) {
             setText('');
             toast.error(error.response.data.message);
+        }
+    }
+
+    // handle upload image
+    const handleUploadImage = async (result: any) => { 
+        try {
+            if (result.event === "success") {
+                await axios.post("/api/message", { 
+                    chatId,
+                    image: result.info.secure_url,
+                    publicId: result.info.public_id 
+                });
+            }
+        } catch(err: any) {
+            toast.error(err.message);
         }
     }
 
@@ -49,9 +65,20 @@ const FeedFooter = () => {
             </div>
 
             <div className='flex gap-[0.5rem]'>
-                <button className='h-[3.5rem] w-[3.5rem] text-[1.5rem] rounded-full hover:bg-gray-200 duration-200'>
+                <CldUploadButton
+                    className='
+                        h-[3.5rem] w-[3.5rem] 
+                        text-[1.5rem] 
+                        rounded-full 
+                        hover:bg-gray-200 
+                        duration-200
+                    '
+                    options={{maxFiles: 1, multiple: false}}
+                    uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+                    onUpload={handleUploadImage}
+                >
                     <i className="fa-regular fa-image"></i>
-                </button>
+                </CldUploadButton>
 
                 <button className='h-[3.5rem] w-[3.5rem] text-[1.5rem] rounded-full hover:bg-gray-200 duration-200'>
                     <i className="fa-solid fa-paperclip"></i>

@@ -16,6 +16,7 @@ export const messageSchema = mysqlTable(
         senderId: int('sender_id').notNull(),
         text: text('text'),
         image: text('image'),
+        publicId: text('public_id'),
 
         createdAt: timestamp('created_at').defaultNow().notNull(),
         updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),

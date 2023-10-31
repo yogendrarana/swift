@@ -3,25 +3,15 @@ import React from 'react'
 // import components
 import Message from './Message';
 
-// import actions
-import getAuthSession from '@/src/actions/getAuthSession';
-
 // import types
-import { UserType } from '@/drizzle/schema/user.schema';
-import { MessageType } from '@/drizzle/schema/message.schema';
+import { FullMessageType } from '@/src/types/types';
 
-// define types
-type FullMessageType = MessageType & {
-    sender: UserType
-}
 
 type PropType = {
     messages: FullMessageType[];
 }
 
 const FeedBody: React.FC<PropType> = async ({ messages }) => {
-    const session = await getAuthSession();
-
     if (messages.length === 0) {
         return (
             <div className='flex-1 grid place-content-center gap-[1rem] py-[1rem]'>
@@ -31,15 +21,9 @@ const FeedBody: React.FC<PropType> = async ({ messages }) => {
     }
 
     return (
-        <div className='flex-1 flex flex-col gap-[1rem] py-[1rem] overflow-y-auto'>
+        <div className='flex-1 flex flex-col gap-[0.5rem] py-[1rem] overflow-y-auto'>
             {
-                messages.map((message: FullMessageType) => {
-                    const isMyMessage = message.sender.email === session?.user?.email;
-
-                    return (
-                        <Message key={message.id} isMyMessage={isMyMessage} message={message} />
-                    )
-                })
+                messages.map((message: FullMessageType) => (<Message key={message.id} message={message} />))
             }
         </div>
     )
