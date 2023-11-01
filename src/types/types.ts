@@ -13,7 +13,14 @@ export interface SidebarOptionsType {
 }
 
 
-// chat types
+// message types
 export type FullMessageType = MessageType & {
     sender: UserType
+}
+
+
+// chat types
+export type FullChatType = ChatType & {
+    admin: UserType | null,
+    members: { user: UserType }[]
 }

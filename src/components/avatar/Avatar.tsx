@@ -3,17 +3,17 @@ import Image from 'next/image'
 // import temporary image
 import userPic from '@/src/assets/images/user.jpg'
 
-const Avatar = ({ h, w }: { h: number, w: number }) => {
+const Avatar = ({ height, width }: { height: number, width: number }) => {
     return (
-        <div className='relative'>
+        <div className={`relative`} style={{ height: `${height}px`, width: `${width}px` }}>
             <Image
-                height={h}
-                width={w}
+                height={height}
+                width={width}
                 src={userPic}
                 alt='avatar-img'
                 className='rounded-full border'
             />
-            <span 
+            <span
                 className='
                     absolute 
                     right-[0.1rem] bottom-[0.1rem] 
