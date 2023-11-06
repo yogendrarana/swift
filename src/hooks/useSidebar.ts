@@ -26,14 +26,6 @@ const useSidebar = () => {
             icon: "fa-solid fa-user",
             active: pathname === '/profile'
         },
-        {
-            name: 'Logout',
-            href: '#',
-            icon: "fa-solid fa-arrow-right-from-bracket",
-            onClick: () => signOut({
-                callbackUrl: `${window.location.origin}`
-            })
-        },
     ], [pathname]);
 
     return routes;
