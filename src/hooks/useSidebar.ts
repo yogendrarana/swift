@@ -20,12 +20,6 @@ const useSidebar = () => {
             icon: "fa-solid fa-user-group",
             active: pathname === '/users'
         },
-        {
-            name: 'Profile',
-            href: '/profile',
-            icon: "fa-solid fa-user",
-            active: pathname === '/profile'
-        },
     ], [pathname]);
 
     return routes;
