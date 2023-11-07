@@ -1,6 +1,5 @@
 "use client"
 
-
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,11 +11,11 @@ import useSidebar from '@/src/hooks/useSidebar';
 import { SidebarOptionsType } from '@/src/types/types';
 
 // import image
-import logo from "@/src/assets/icons/logo.png"
+import Logo from "@/src/assets/icons/logo.png"
 
 // import components
-import MoreOption from './MoreOption';
-
+import Options from './Options';
+import ProfileDialog from '../dialog/ProfileDialog';
 
 const DesktopSidebar = () => {
     const sidebarlinks = useSidebar();
@@ -30,7 +29,7 @@ const DesktopSidebar = () => {
 
     return (
         <div className='h-[100vh] w-full flex flex-col items-center border-r'>
-            <Image src={logo} height={35} width={35} alt='logo' className='m-[1.5rem] mb-[2rem]' />
+            <Image src={Logo} height={35} width={35} alt='logo' className='m-[1.5rem] mb-[2rem]' />
 
             <ul className='flex flex-col gap-[0.25rem] w-full'>
                 {
@@ -66,9 +65,8 @@ const DesktopSidebar = () => {
                 }
             </ul>
 
-            {/* dropdown menu */}
             <div className='mt-auto mb-[1rem]'>
-                <MoreOption />
+                <Options />
             </div>
         </div>
     )
