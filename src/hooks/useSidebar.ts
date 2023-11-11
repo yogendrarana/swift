@@ -1,5 +1,4 @@
 import { useMemo } from "react"
-import { signOut } from "next-auth/react"
 import { usePathname } from "next/navigation"
 
 

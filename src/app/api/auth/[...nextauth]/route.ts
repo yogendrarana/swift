@@ -22,7 +22,7 @@ export const authOptions: AuthOptions = {
 
             async authorize(credentials, req) {
                 if (!credentials?.email || !credentials?.password) throw new Error("Please, enter the required fields.");
-                
+
                 // find the user in the database
                 const [user] = await db.select().from(userSchema).where(eq(userSchema.email, credentials.email));
                 if (!user) throw new Error("Invalid credentials! Please, try again.");
@@ -34,6 +34,18 @@ export const authOptions: AuthOptions = {
             }
         })
     ],
+
+    callbacks: {
+        // Using the `...rest` parameter to be able to narrow down the type based on `trigger`
+        jwt({ token, trigger, session }) {
+            if (trigger === "update" && session?.email) {
+                // Note, that `session` can be any arbitrary object, remember to validate it!
+                token.email = session.email;
+            }
+            
+            return token
+        }
+    },
 
     pages: { signIn: "/join" },
     session: { strategy: 'jwt' },
