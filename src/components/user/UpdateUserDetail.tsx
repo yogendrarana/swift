@@ -114,7 +114,7 @@ const UpdateUserDetail = () => {
                     <div>
                         <label htmlFor="old_password" className="flex text-[1.25rem] text-gray-700 font-bold">
                             <span className='mr-auto'>Old Password</span>
-                            <button className='text-gray-400' onClick={() => setShowPassword(!showPassword)}>
+                            <button className='text-gray-400 text-[1rem]' onClick={() => setShowPassword(!showPassword)}>
                                 {showPassword ? (<i className='fa-solid fa-eye-slash'></i>) : (<i className='fa-solid fa-eye'></i>)}
                             </button>
                         </label>
@@ -130,7 +130,7 @@ const UpdateUserDetail = () => {
                     <div>
                         <label htmlFor="new_password" className="flex text-[1.25rem] text-gray-700 font-bold">
                             <span className='mr-auto'>New Password</span>
-                            <button className='text-gray-400' onClick={() => setShowPassword(!showPassword)}>
+                            <button className='text-gray-400 text-[1rem]' onClick={() => setShowPassword(!showPassword)}>
                                 
                                 {showPassword ? (<i className='fa-solid fa-eye-slash'></i>) : (<i className='fa-solid fa-eye'></i>)}
                             </button>

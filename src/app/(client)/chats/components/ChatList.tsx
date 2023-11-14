@@ -2,6 +2,7 @@ import React from 'react'
 
 // import components
 import ChatBox from './ChatBox'
+import CreateGroupChatDialog from '@/src/components/dialog/CreateGroupChatDialog';
 
 // import actions
 import getUserChats from '@/src/actions/getUserChats'
@@ -14,8 +15,9 @@ const ChatList = async () => {
 
     return (
         <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
-            <div className=' h-[4rem] flex items-center text-[2rem] font-bold' >
-                Chats
+            <div className='h-[4rem] flex justify-between items-center text-[2rem] font-bold' >
+                <span>Chats</span>
+                <CreateGroupChatDialog />
             </div>
 
             <hr className='my-[1rem]' />
