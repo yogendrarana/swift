@@ -9,15 +9,17 @@ import getUserChats from '@/src/actions/getUserChats'
 
 // import types
 import { ChatType } from '@/drizzle/schema/chat.schema';
+import { getAllUsers } from '@/src/actions/getAllUsers';
 
 const ChatList = async () => {
     const chat_list = await getUserChats();
+    const users = await getAllUsers();
 
     return (
         <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
             <div className='h-[4rem] flex justify-between items-center text-[2rem] font-bold' >
                 <span>Chats</span>
-                <CreateGroupChatDialog />
+                <CreateGroupChatDialog users={users} />
             </div>
 
             <hr className='my-[1rem]' />

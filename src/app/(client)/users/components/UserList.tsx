@@ -19,8 +19,8 @@ const UserList = async () => {
 
             <input
                 type="text"
-                placeholder='Search by name...'
                 autoComplete='off'
+                placeholder='Search by name...'
                 className='border-none p-[1rem] mb-[2rem] outline-none rounded-[0.5rem] bg-gray-100'
             />
 

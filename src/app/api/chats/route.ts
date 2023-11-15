@@ -1,15 +1,19 @@
 import { db } from "@/src/db/db";
 import { sql } from "drizzle-orm";
-import getCurrentUser from "@/src/actions/getCurrentUser";
-import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
 import { NextRequest, NextResponse } from "next/server";
-import { chatSchema } from "../../../../drizzle/schema/chat.schema";
-import { userToChat } from "../../../../drizzle/schema/userToChat.join";
+import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
+
+// import actions
+import getCurrentUser from "@/src/actions/getCurrentUser";
+
+// import schemas
+import { chatSchema } from "@/drizzle/schema/chat.schema";
+import { userToChat } from "@/drizzle/schema/userToChat.join";
 
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const { userId, isGroup, members, name } = body;
+    const { otherUserId, isGroupChat, members, name } = body;
 
     const currentUser = await getCurrentUser();
 
@@ -18,17 +22,34 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ success: false, message: "Unauthorized request." }, { status: 400 });
         }
 
-        if (!userId) {
-            return NextResponse.json({ success: false, message: "User ID not provided." }, { status: 400 });
+        if (isGroupChat == false && !otherUserId) {
+            return NextResponse.json({ success: false, message: "Other user ID not provided." }, { status: 400 });
         }
 
-        if (isGroup && (!members || !name)) {
+        if (isGroupChat && (!members || members.length == 0 || !name)) {
             return NextResponse.json({ success: false, message: 'Invalid data' }, { status: 400 });
         }
 
-        if (isGroup) {
+        if (isGroupChat) {
             // create new group chat
+            const newChat = await db.insert(chatSchema).values({ isGroupChat: true, name, adminId: currentUser.id });
+            const insertedChatId = newChat[0].insertId;
+            
             // insert members into userToChat
+            members.forEach(async (member: { value: number; label: string; }) => {
+                await db.insert(userToChat).values({
+                    chatId: insertedChatId,
+                    userId: member.value,
+                })
+            });
+
+            // insert current user into userToChat
+            await db.insert(userToChat).values({
+                chatId: insertedChatId,
+                userId: currentUser.id,
+            })
+            
+            return NextResponse.json({ success: true, message: "Chat created successfully.", chatId: insertedChatId }, { status: 201 });
         }
 
         const query_result: MySqlRawQueryResult = await db.execute(
@@ -37,7 +58,7 @@ export async function POST(req: NextRequest) {
                 FROM ${userToChat} AS UC1
                 JOIN ${userToChat} AS UC2 
                 ON UC1.chat_id = UC2.chat_id
-                WHERE UC1.user_id = ${userId}
+                WHERE UC1.user_id = ${otherUserId}
                 AND UC2.user_id = ${currentUser.id}
                 AND UC1.user_id != UC2.user_id;
             `
@@ -52,7 +73,7 @@ export async function POST(req: NextRequest) {
 
             const insertedChatId = newChat[0].insertId;
 
-            [currentUser.id, userId].forEach(async (id) => {
+            [currentUser.id, otherUserId].forEach(async (id) => {
                 await db.insert(userToChat).values({
                     chatId: insertedChatId,
                     userId: id,

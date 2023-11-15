@@ -1,7 +1,11 @@
 "use client"
 
+
+import axios from "axios";
 import React from "react";
+import toast from "react-hot-toast";
 import ReactSelect from "react-select"
+
 
 // import components
 import {
@@ -12,41 +16,64 @@ import {
     DialogHeader,
     DialogDescription
 } from "@/src/components/ui/dialog"
-import { stat } from "fs";
+
+
+// import types
+import { UserType } from "@/drizzle/schema/user.schema";
+import { set } from "date-fns";
+
 
 // prop type
-interface Option {
-    value: string;
+type PropType = {
+    users: UserType[];
+}
+
+type OptionType = {
+    value: number;
     label: string;
 }
 
-// options
-const options: Option[] = [
-    { label: "One", value: "one" },
-    { label: "Two", value: "two" },
-    { label: "Three", value: "three" },
-];
 
+const CreateGroupChatDialog: React.FC<PropType> = ({ users=[] }) => {
+    const [open, setOpen] = React.useState(false);
+    const [name, setName] = React.useState('');
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [members, setMembers] = React.useState<OptionType[]>([]);
 
-const CreateGroupChatDialog = () => {
-    const [selectedOptions, setSelectedOptions] = React.useState<string[]>([]);
+    // handle create group chat
+    const handleCreateGroupChat = async () => {
+        const toastId = toast.loading('Creating group chat...');
+        setIsLoading(true);
 
-    const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const value = event.target.value;
+        if (members.length === 0) {
+            setIsLoading(false);
+            return toast.error('Please select at least one user.', { id: toastId });
+        }
 
-        // Check if the option is already selected
-        const isSelected = selectedOptions.includes(value);
+        if (!name) {
+            setIsLoading(false);
+            return toast.error('Please enter group name.', { id: toastId });
+        }
 
-        // Update selected options based on the current state
-        setSelectedOptions((prevSelected) =>
-            isSelected
-                ? prevSelected.filter((option) => option !== value)
-                : [...prevSelected, value]
-        );
+        try {
+            const { data, status } = await axios.post('/api/chats', { name, members, isGroupChat: true });
+            if (data.success && status === 201) toast.success(data.message, { id: toastId });
+
+            if (status >= 300) throw new Error();
+            setIsLoading(false);
+            setOpen(false);
+        } catch (err: any) {
+            setIsLoading(false);
+            if (err.response && err.response.data && err.response.data.message) {
+                return toast.error(err.response.data.message, { id: toastId });
+            } else {
+                return toast.error("An error occurred, please try again.", { id: toastId });
+            }
+        }
     };
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger className='h-[3.5rem] w-[3.5rem] rounded-full text-[1rem] hover:bg-gray-100 duration-200'>
                 <i className="fa-solid fa-user-plus"> </i>
             </DialogTrigger>
@@ -62,16 +89,19 @@ const CreateGroupChatDialog = () => {
                 <div className="flex flex-col gap-[0.5rem]">
                     <label className="text-[1.25rem] font-bold">Group Name</label>
                     <input
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         type="text"
                         className="w-full p-[0.75rem] outline-none border rounded-[0.5rem] text-gray-700 text-[1.25rem]"
                     />
                 </div>
 
                 <div className="flex flex-col gap-[0.5rem]">
-                    <label className="text-[1.25rem] font-bold">Select options:</label>
+                    <label className="text-[1.25rem] font-bold">Select members:</label>
                     <ReactSelect
                         isMulti
-                        options={options}
+                        options={users.map((user) => ({ value: user.id, label: user.name }))}
+                        onChange={(value) => setMembers(value as OptionType[])}
                         styles={{
                             control: (provided, state) => ({
                                 ...provided,
@@ -93,6 +123,8 @@ const CreateGroupChatDialog = () => {
 
                 <button
                     type="button"
+                    disabled={isLoading}
+                    onClick={handleCreateGroupChat}
                     className="p-[1rem] bg-black text-white text-[1.25rem] rounded-[0.5rem]"
                 >
                     Create

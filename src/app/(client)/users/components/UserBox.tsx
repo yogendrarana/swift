@@ -28,7 +28,7 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
         setIsLoading(true);
 
         try {
-            const { data, status } = await axios.post('/api/chats', { userId: user.id, isGroup: false });
+            const { data, status } = await axios.post('/api/chats', { otherUserId: user.id, isGroupChat: false });
             if (data.success && status === 201) toast.success(data.message);
 
             if (status >= 300) throw new Error();
