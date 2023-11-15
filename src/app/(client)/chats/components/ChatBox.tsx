@@ -52,10 +52,7 @@ const ChatBox: React.FC<ChatBoxProps> = async ({ chat }) => {
 
                 <div className='flex flex-col justify-center flex-1'>
                     <div className='flex justify-between items-center'>
-                        <div className='text-[1.25rem] font-bold'>
-                            {otherUser?.name}
-                        </div>
-
+                        <div className='text-[1.25rem] font-bold capitalize'>{chat.name || otherUser?.name}</div>
                     </div>
 
                     <div className='flex justify-between items-center'>

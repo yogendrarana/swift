@@ -13,7 +13,7 @@ export const chatSchema = mysqlTable(
 
     {
         id: int('id').autoincrement().primaryKey(),
-        isGroupChat: boolean('is_group_chat'),
+        isGroupChat: boolean('is_group_chat').notNull(),
         name: varchar('name', { length: 50 }),
         adminId: int('admin_id').references(() => userSchema.id),
         lastMessageAt: timestamp('last_message_at'), // I need it to order chats by last message

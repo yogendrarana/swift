@@ -5,6 +5,7 @@ import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
 import ReactSelect from "react-select"
+import { useRouter } from "next/navigation";
 
 
 // import components
@@ -20,7 +21,6 @@ import {
 
 // import types
 import { UserType } from "@/drizzle/schema/user.schema";
-import { set } from "date-fns";
 
 
 // prop type
@@ -35,8 +35,9 @@ type OptionType = {
 
 
 const CreateGroupChatDialog: React.FC<PropType> = ({ users=[] }) => {
-    const [open, setOpen] = React.useState(false);
+    const router = useRouter()
     const [name, setName] = React.useState('');
+    const [open, setOpen] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const [members, setMembers] = React.useState<OptionType[]>([]);
 
@@ -60,6 +61,9 @@ const CreateGroupChatDialog: React.FC<PropType> = ({ users=[] }) => {
             if (data.success && status === 201) toast.success(data.message, { id: toastId });
 
             if (status >= 300) throw new Error();
+            if (status === 201 || status === 200) {
+                router.push(`/chats/${data.chatId}`);
+            }
             setIsLoading(false);
             setOpen(false);
         } catch (err: any) {

@@ -1,5 +1,6 @@
 "use client"
 
+
 import axios from "axios"
 import Link from "next/link"
 import Image from "next/image"
@@ -52,7 +53,7 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
             className='group duration-200 pr-[1rem] mb-[2rem] last-child:mb-0 last:mb-0'
             onClick={handleCreateChatOrNavigate}
         >
-            <Link href="#" className='flex'>
+            <div className='flex'>
                 <div className='h-[4rem] w-[4rem] mr-[1rem] grid place-items-center border-[0.25rem] border-gray-100 group-hover:border-gray-300 relative rounded-full duration-150'>
                     <Image
                         height={30}
@@ -78,7 +79,7 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
                         <div className='text-[1.25rem] font-bold capitalize'>{user.name}</div>
                     </div>
                 </div>
-            </Link>
+            </div>
         </div>
     )
 }
