@@ -24,7 +24,7 @@ const Join = () => {
                 <i className="fa-solid fa-chevron-left"></i>
             </Button>
 
-            <Tabs defaultValue="LOGIN" className='flex flex-col gap-[1rem]'>
+            <Tabs defaultValue="LOGIN" className='flex flex-col gap-[1.5rem]'>
                 <TabsList className="h-[4rem] w-full p-[0.5rem] grid grid-cols-2 rounded-[0.5rem]">
                     <TabsTrigger value="LOGIN" className="h-full text-[1.25rem] rounded-[0.5rem]">Login</TabsTrigger>
                     <TabsTrigger value="REGISTER" className="h-full text-[1.25rem] rounded-[0.5rem]">Register</TabsTrigger>

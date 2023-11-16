@@ -19,7 +19,7 @@ const Login = () => {
 
     const handleLogin = async (e: any) => {
         setIsLoading(true);
-        const toastId = toast.loading("Processing...");
+        const toastId = toast.loading("Logging in...");
 
         try {
             if (!email || !password) {
@@ -53,7 +53,7 @@ const Login = () => {
     return (
         <form className="w-[40rem] flex flex-col gap-[2rem] duration-1000">
             <div className='w-full'>
-                <h1 className='text-[2rem]'>Already have an account?</h1>
+                <h1 className='text-[1.75rem]'>Already have an account?</h1>
                 <p className='text-[1.45rem] text-[#767676]'>Please log in and start sending messages right away.</p>
             </div>
 
