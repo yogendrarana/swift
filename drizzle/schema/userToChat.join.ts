@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { boolean, int, mysqlTable, primaryKey } from "drizzle-orm/mysql-core";
+import { int, mysqlTable, primaryKey } from "drizzle-orm/mysql-core";
 
 // import schemas
 import { userSchema } from "./user.schema";

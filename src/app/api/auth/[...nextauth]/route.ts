@@ -1,3 +1,5 @@
+import { NextRequest } from 'next/server';
+import { UserType } from './../../../../../drizzle/schema/user.schema';
 import bcrypt from 'bcrypt';
 import { db } from '@/src/db/db';
 import { eq } from 'drizzle-orm';
@@ -20,17 +22,22 @@ export const authOptions: AuthOptions = {
                 password: { label: 'password', type: 'password' }
             },
 
-            async authorize(credentials, req) {
-                if (!credentials?.email || !credentials?.password) throw new Error("Please, enter the required fields.");
+            async authorize(credentials) {
+                try {
+                    if (!credentials?.email || !credentials?.password) throw new Error("Please, enter the required fields.");
 
-                // find the user in the database
-                const [user] = await db.select().from(userSchema).where(eq(userSchema.email, credentials.email));
-                if (!user) throw new Error("Invalid credentials! Please, try again.");
+                    const [user] = await db.select().from(userSchema).where(eq(userSchema.email, credentials.email));
+                    if (!user) throw new Error("Invalid credentials! Please, try again.");
 
-                const isCorrectPassword = await bcrypt.compare(credentials.password, user.password);
-                if (!isCorrectPassword) throw new Error("Invalid credentials! Please, try again.");
+                    const isCorrectPassword = await bcrypt.compare(credentials.password, user.password);
+                    if (!isCorrectPassword) throw new Error("Invalid credentials! Please, try again.");
 
-                return user;
+                    return user as any;
+
+                } catch (error: any) {
+                    console.error('Authorization error:', error.message);
+                    return null;
+                }
             }
         })
     ],
@@ -42,9 +49,11 @@ export const authOptions: AuthOptions = {
                 // Note, that `session` can be any arbitrary object, remember to validate it!
                 token.email = session.email;
             }
-            
+
             return token
         }
+
+        // 
     },
 
     pages: { signIn: "/join" },

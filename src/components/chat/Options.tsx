@@ -67,7 +67,7 @@ const Options = () => {
                 </DropdownMenuItem>
 
                 <DropdownMenuItem 
-                    onClick={() => signOut()}
+                    onClick={async () => await signOut({callbackUrl: '/'})}
                     className='p-[1.25rem] text-[1.25rem] flex gap-[1rem] rounded-[1rem] cursor-pointer'>
                     <i className="fa-solid fa-arrow-right-from-bracket"></i>
                     <span>Log Out</span>

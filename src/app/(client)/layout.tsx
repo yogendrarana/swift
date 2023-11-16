@@ -19,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <head>
+                <script type="module" defer src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/dotWave.js"></script>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
             </head>
             <body>
