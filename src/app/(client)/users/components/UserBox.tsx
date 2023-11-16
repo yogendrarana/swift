@@ -2,7 +2,6 @@
 
 
 import axios from "axios"
-import Link from "next/link"
 import Image from "next/image"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
@@ -11,6 +10,13 @@ import React, { useCallback, useState } from "react"
 
 // temporary user profile pic
 import userPic from '@/src/assets/images/user.jpg'
+
+
+// import components
+import DotWave from "@/src/components/loading/DotWave"
+
+
+// import types
 import { UserType } from "@/drizzle/schema/user.schema"
 
 
@@ -23,7 +29,6 @@ interface UserBoxProps {
 const UserBox: React.FC<UserBoxProps> = ({ user }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-
 
     const handleCreateChatOrNavigate = useCallback(async () => {
         setIsLoading(true);
@@ -47,10 +52,11 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
         }
     }, [router, user]);
 
+    if (isLoading) return <DotWave />
 
     return (
         <div
-            className='group duration-200 pr-[1rem] mb-[2rem] last-child:mb-0 last:mb-0'
+            className='cursor-pointer group duration-200 pr-[1rem] mb-[2rem] last-child:mb-0 last:mb-0'
             onClick={handleCreateChatOrNavigate}
         >
             <div className='flex'>

@@ -1,5 +1,5 @@
 import React from 'react'
-import DotWave from '@/src/components/loading/Loading'
+import DotWave from '@/src/components/loading/DotWave'
 
 const Loading = () => {
     return (
