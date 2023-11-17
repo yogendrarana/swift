@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { int, mysqlTable, primaryKey } from "drizzle-orm/mysql-core";
+import { boolean, int, mysqlTable, primaryKey } from "drizzle-orm/mysql-core";
 
 // import schemas
 import { userSchema } from "./user.schema";
@@ -12,6 +12,7 @@ export const userToChat = mysqlTable(
     {
         userId: int('user_id').notNull().references(() => userSchema.id),
         chatId: int('chat_id').notNull().references(() => chatSchema.id),
+        isGroupChat: boolean('is_group_chat').notNull(),
     },
 
     (t) => ({

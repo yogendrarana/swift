@@ -1,5 +1,5 @@
 import { db } from "@/src/db/db";
-import { sql } from "drizzle-orm";
+import { is, sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
 
@@ -34,12 +34,13 @@ export async function POST(req: NextRequest) {
             // create new group chat
             const newChat = await db.insert(chatSchema).values({ isGroupChat: true, name, adminId: currentUser.id });
             const insertedChatId = newChat[0].insertId;
-            
+
             // insert members into userToChat
             members.forEach(async (member: { value: number; label: string; }) => {
                 await db.insert(userToChat).values({
                     chatId: insertedChatId,
                     userId: member.value,
+                    isGroupChat: isGroupChat,
                 })
             });
 
@@ -47,20 +48,21 @@ export async function POST(req: NextRequest) {
             await db.insert(userToChat).values({
                 chatId: insertedChatId,
                 userId: currentUser.id,
+                isGroupChat: isGroupChat,
             })
-            
+
             return NextResponse.json({ success: true, message: "Chat created successfully.", chatId: insertedChatId }, { status: 201 });
         }
 
         const query_result: MySqlRawQueryResult = await db.execute(
             sql` 
                 SELECT UC1.chat_id
-                FROM ${userToChat} AS UC1
-                JOIN ${userToChat} AS UC2 
-                ON UC1.chat_id = UC2.chat_id
+                FROM  ${userToChat} AS UC1
+                JOIN  ${userToChat} AS UC2 ON UC1.chat_id = UC2.chat_id
                 WHERE UC1.user_id = ${otherUserId}
-                AND UC2.user_id = ${currentUser.id}
-                AND UC1.user_id != UC2.user_id;
+                    AND UC2.user_id = ${currentUser.id}
+                    AND UC1.is_group_chat = FALSE
+                    AND UC2.is_group_chat = FALSE;
             `
         );
 
@@ -77,6 +79,7 @@ export async function POST(req: NextRequest) {
                 await db.insert(userToChat).values({
                     chatId: insertedChatId,
                     userId: id,
+                    isGroupChat: isGroupChat,
                 })
             });
 
