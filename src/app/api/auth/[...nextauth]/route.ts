@@ -1,5 +1,4 @@
-import { NextRequest } from 'next/server';
-import { UserType } from './../../../../../drizzle/schema/user.schema';
+import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import { db } from '@/src/db/db';
 import { eq } from 'drizzle-orm';
@@ -34,8 +33,8 @@ export const authOptions: AuthOptions = {
 
                     return user as any;
 
-                } catch (error: any) {
-                    console.error('Authorization error:', error.message);
+                } catch (err: any) {
+                    console.error('Authorization error:', err.message);
                     return null;
                 }
             }

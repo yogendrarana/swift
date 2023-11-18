@@ -1,0 +1,1 @@
+ALTER TABLE `message` RENAME COLUMN `public_id` TO `image_public_id`;

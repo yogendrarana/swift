@@ -6,6 +6,8 @@ import getCurrentUser from "@/src/actions/getCurrentUser";
 
 // import schemas
 import { messageSchema } from "@/drizzle/schema/message.schema";
+import { eq } from "drizzle-orm";
+import { chatSchema } from "@/drizzle/schema/chat.schema";
 
 
 export async function POST (req: NextRequest) {
@@ -28,8 +30,11 @@ export async function POST (req: NextRequest) {
             senderId: currentUser.id,
             text: text,
             image: image,
-            publicId: publicId,
+            imagePublicId: publicId,
         })
+
+        // update the last message at field in the chat
+        await db.update(chatSchema).set({ lastMessageAt: new Date() }).where(eq(chatSchema.id, chatId));
 
         return NextResponse.json({ success: true, message: "Message sent successfully." }, { status: 201 });
     } catch (error: any) {

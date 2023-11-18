@@ -12,11 +12,12 @@ export const messageSchema = mysqlTable(
 
     {
         id: int('id').autoincrement().primaryKey(),
-        chatId: int('chat_id').notNull(),
-        senderId: int('sender_id').notNull(),
         text: text('text'),
         image: text('image'),
-        publicId: text('public_id'),
+        imagePublicId: text('image_public_id'),
+        
+        chatId: int('chat_id').notNull(),
+        senderId: int('sender_id').notNull(),
 
         createdAt: timestamp('created_at').defaultNow().notNull(),
         updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),

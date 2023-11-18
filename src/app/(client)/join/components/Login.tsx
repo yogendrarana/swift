@@ -13,7 +13,7 @@ import { Button } from '@/src/components/ui/button';
 const Login = () => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-    const [email, setEmail] = useState('abc@gmail.com');
+    const [email, setEmail] = useState('yogendrarana@gmail.com');
     const [password, setPassword] = useState('password');
 
 
@@ -21,32 +21,23 @@ const Login = () => {
         setIsLoading(true);
         const toastId = toast.loading("Logging in...");
 
+        if (!email || !password) {
+            setIsLoading(false);
+            return toast.error('Please fill in all the required fields.', { id: toastId });
+        }
+
         try {
-            if (!email || !password) {
-                setIsLoading(false);
-                return toast.error('Please fill in all the required fields.', { id: toastId });
-            }
-
-            try {
-                //next auth signIn returns error, ok, status, url
-                const signInRes = await signIn('credentials', { email, password, redirect: false });
-                if (signInRes?.error) toast.error(signInRes.error, { id: toastId });
-                if (!signInRes?.error) {
-                    toast.success("Logged in successfully.", { id: toastId })
-                    router.push('/chats');
-                };
-                setIsLoading(false)
-            } catch (err: any) {
-                setIsLoading(false);
-                if (err.response && err.response.data && err.response.data.message) {
-                    return toast.error(err.response.data.message, { id: toastId });
-                } else {
-                    return toast.error("An error occurred during registration.", { id: toastId });
-                }
-            }
-
+            //next auth signIn returns error, ok, status, url
+            const res = await signIn('credentials', { email, password, redirect: false });
+            if (res?.error && res.error === "CredentialsSignin") toast.error("Invalid credentials.", { id: toastId });
+            if (!res?.error) {
+                toast.success("Logged in successfully.", { id: toastId })
+                router.push('/chats');
+            };
+            setIsLoading(false)
         } catch (err: any) {
-
+            setIsLoading(false);
+            return toast.error("An error occurred during registration.", { id: toastId });
         }
     }
 
