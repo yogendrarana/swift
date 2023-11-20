@@ -9,8 +9,8 @@ import { CldUploadButton } from "next-cloudinary"
 import useChat from "@/src/hooks/useChat";
 
 const FeedFooter = () => {
-    const [text, setText] = useState('');
     const { chatId } = useChat();
+    const [text, setText] = useState('');
 
     const handleSendText = async () => {
         try {
