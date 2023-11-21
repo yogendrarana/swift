@@ -1,20 +1,32 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 
 // import components
 import ChatBox from './ChatBox'
 import CreateGroupChatDialog from '@/src/components/dialog/CreateGroupChatDialog';
 
-// import actions
-import getUserChats from '@/src/actions/getUserChats'
-
 // import types
 import { ChatType } from '@/drizzle/schema/chat.schema';
-import { getAllUsers } from '@/src/actions/getAllUsers';
+import { UserType } from '@/drizzle/schema/user.schema';
 
-const ChatList = async () => {
-    const chat_list = await getUserChats();
-    const users = await getAllUsers();
+type PropType = {
+    initialChatList: ChatType[],
+    users: UserType[],
+    currentUser: UserType | null
+}
 
+const ChatList:React.FC<PropType> = ({initialChatList, users, currentUser}) => {
+
+    const [chatList, setChatList] = useState<ChatType[]>([]);
+
+    useEffect(() => {
+        if (initialChatList.length) {
+            setChatList(initialChatList)
+        }
+    }, [initialChatList]); 
+
+    
     return (
         <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
             <div className='h-[4rem] flex justify-between items-center text-[2rem] font-bold' >
@@ -41,14 +53,15 @@ const ChatList = async () => {
 
             <ul className='overflow-y-auto'>
                 {
-                    !chat_list.length ? (
+                    !chatList.length ? (
                         <span className='text-[1.25rem] text-gray-600'>
-                            No conversation yet. <br />
+                            No conversation yet. 
+                            <br />
                             Please browse the user to stat conversation.
                         </span>
                     ) : (
-                        chat_list.map((chat: ChatType, index: number) => (
-                            <ChatBox key={index} chat={chat} />
+                        chatList.map((chat: ChatType, index: number) => (
+                            <ChatBox key={index} chat={chat} currentUser={currentUser} />
                         ))
                     )
                 }

@@ -23,7 +23,6 @@ type PropType = {
 
 const FeedBody: React.FC<PropType> = ({ initialMessages = [] }) => {
     const { chatId } = useChat();
-    const bottomRef = useRef<HTMLDivElement>(null);
     const chatFeedRef = useRef<HTMLDivElement>(null);
 
     const [messages, setMessages] = React.useState<FullMessageType[]>(initialMessages)
@@ -66,12 +65,10 @@ const FeedBody: React.FC<PropType> = ({ initialMessages = [] }) => {
     }
 
     return (
-        <div ref={chatFeedRef} className='border-2 flex-1 flex flex-col gap-[0.5rem] py-[1rem] overflow-y-auto'>
+        <div ref={chatFeedRef} className='flex-1 flex flex-col gap-[0.5rem] py-[1rem] overflow-y-auto'>
             {
                 messages.map((message: FullMessageType) => (<Message key={message.id} message={message} />))
             }
-
-            <div ref={bottomRef} className=''></div>
         </div>
     )
 }

@@ -1,28 +1,43 @@
-import React from 'react'
+"use client"
+
+import axios from 'axios'
 import { format } from 'date-fns'
+import React, { useEffect, useState } from 'react'
 
 
 // components
 import Link from 'next/link'
 
 
-// import actions
-import getCurrentUser from '@/src/actions/getCurrentUser'
-import getOtherUserOfChat from '@/src/actions/getOtherUserOfChat'
-import getLastMessageOfChat from '@/src/actions/getLastMessageOfChat'
-
-
 // types
 import { ChatType } from '@/drizzle/schema/chat.schema'
+import { UserType } from '@/drizzle/schema/user.schema'
+
+// prop types
 interface ChatBoxProps {
-    chat: ChatType
+    chat: ChatType,
+    currentUser: UserType | null
 }
 
 
-const ChatBox: React.FC<ChatBoxProps> = async ({ chat }) => {
-    const currentUser = await getCurrentUser();
-    const otherUser = await getOtherUserOfChat(chat.id);
-    const lastMessage = await getLastMessageOfChat(chat.id);
+const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
+    const [otherUser, setOtherUser] = useState<UserType | null>(null);
+    const [lastMessage, setLastMessage] = useState<any>(null);
+
+    useEffect(() => {
+        async function getOtherUserOfChat() {
+            const res = await axios.get(`/api/chats/other-user?chatId=${chat?.id}`);
+            setOtherUser(res.data.user);
+        }
+
+        async function getLastMessageOfChat() {
+            const res = await axios.get(`/api/chats/last-message?chatId=${chat?.id}`);
+            setLastMessage(res.data.message);
+        }
+
+        getLastMessageOfChat()
+        getOtherUserOfChat();
+    }, [chat?.id])
 
     const lastMessageText = () => {
         if (lastMessage?.text !== null && lastMessage?.image === null) {
@@ -45,14 +60,25 @@ const ChatBox: React.FC<ChatBoxProps> = async ({ chat }) => {
     return (
         <div className='group duration-200 pr-[1rem] mb-[1rem] last-child:mb-0 last:mb-0'>
             <Link href={`/chats/${chat.id}`} className='flex'>
-                <div className='h-[4rem] w-[4rem] mr-[1rem] grid place-items-center border-[0.25rem] border-gray-100 group-hover:border-gray-300 relative rounded-full duration-150'>
+                <div 
+                    className='
+                        h-[4rem] w-[4rem] 
+                        mr-[1rem] 
+                        grid place-items-center 
+                        border-[0.25rem] border-gray-100 
+                        group-hover:border-gray-300 
+                        relative 
+                        rounded-full 
+                        duration-150
+                    '
+                >
                     <span>{ }</span>
-                    <span className='absolute h-[1.25rem] w-[1.25rem] right-[-0.2rem] bottom-[-0.2rem] border-[0.25rem] border-white rounded-full bg-[var(--main-green)]'></span>
+                    <span className='absolute h-[1.25rem] w-[1.25rem] right-[-0.2rem] bottom-[-0.2rem] border-[0.25rem] border-white rounded-full bg-[var(--main-green)]' />
                 </div>
 
                 <div className='flex flex-col justify-center flex-1'>
                     <div className='flex justify-between items-center'>
-                        <div className='text-[1.25rem] font-bold capitalize'>{chat.name || otherUser?.name}</div>
+                        <div className='text-[1.25rem] font-bold capitalize'>{chat?.name || otherUser?.name}</div>
                     </div>
 
                     <div className='flex justify-between items-center'>
@@ -71,4 +97,4 @@ const ChatBox: React.FC<ChatBoxProps> = async ({ chat }) => {
     )
 }
 
-export default ChatBox
+export default ChatBox;

@@ -10,9 +10,9 @@ import getCurrentUser from "@/src/actions/getCurrentUser";
 
 // import schemas
 import { chatSchema } from "@/drizzle/schema/chat.schema";
-import { messageSchema } from "@/drizzle/schema/message.schema";
 import { userSchema } from "@/drizzle/schema/user.schema";
 import { userToChat } from "@/drizzle/schema/userToChat.join";
+import { messageSchema } from "@/drizzle/schema/message.schema";
 
 
 export async function POST(req: NextRequest) {
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
         // pusher trigger for chat list
         const members = await db.select({ email: userSchema.email, }).from(userSchema).innerJoin(userToChat, eq(userToChat.userId, userSchema.id)).where(eq(userToChat.chatId, chatId));
         members.forEach((user: any) => {
-            pusherServer.trigger(`chat-${user.email}`, "chat:update", {id: chatId, newMessage});
+            pusherServer.trigger(user.email, "chat:update", {id: chatId, newMessage});
         })
 
         return NextResponse.json({ success: true, message: "Message sent successfully." }, { status: 201 });
