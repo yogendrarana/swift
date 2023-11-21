@@ -20,7 +20,7 @@ const ChatID = async ({ params }: { params: IParams }) => {
     return (
         <div className=" h-[100vh] px-[1rem] flex-1 flex flex-col border-l pl-[1rem]" >
             <FeedHeader chat={chat} />
-            <FeedBody messages={messages} />
+            <FeedBody initialMessages={messages} />
             <FeedFooter />
         </div>
     )

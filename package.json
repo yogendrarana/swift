@@ -34,6 +34,7 @@
         "eslint-config-next": "13.4.12",
         "framer-motion": "^10.16.3",
         "ldrs": "^1.0.1",
+        "lodash": "^4.17.21",
         "lucide-react": "^0.264.0",
         "moment": "^2.29.4",
         "mysql2": "^3.6.0",
@@ -54,6 +55,7 @@
         "zod": "^3.22.4"
     },
     "devDependencies": {
+        "@types/lodash": "^4.14.201",
         "drizzle-kit": "^0.19.12",
         "ts-node": "^10.9.1"
     }

@@ -1,21 +1,21 @@
+"use client"
+
 import React from 'react'
 import Image from 'next/image';
 import { format } from 'date-fns';
+import { useSession } from 'next-auth/react';
 
 // import types
 import { FullMessageType } from '@/src/types/types';
-
-// import actions
-import getAuthSession from '@/src/actions/getAuthSession';
 
 // define prop types
 type PropType = {
     message: FullMessageType;
 }
 
-const Message: React.FC<PropType> = async ({ message }) => {
-    const session = await getAuthSession();
-    const isMyMessage = message.sender.email === session?.user?.email;
+const Message: React.FC<PropType> = ({ message }) => {
+    const session = useSession();
+    const isMyMessage = message.sender.email === session?.data?.user?.email;
 
     return (
         <div className='w-full flex flex-col'>
