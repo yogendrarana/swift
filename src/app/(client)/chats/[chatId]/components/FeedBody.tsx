@@ -15,6 +15,7 @@ import { pusherClient } from '@/src/pusher/pusher';
 
 // import types
 import { FullMessageType } from '@/src/types/types';
+import { char } from 'drizzle-orm/mysql-core';
 
 type PropType = {
     initialMessages: FullMessageType[];
@@ -23,9 +24,17 @@ type PropType = {
 const FeedBody: React.FC<PropType> = ({ initialMessages = [] }) => {
     const { chatId } = useChat();
     const bottomRef = useRef<HTMLDivElement>(null);
+    const chatFeedRef = useRef<HTMLDivElement>(null);
+
     const [messages, setMessages] = React.useState<FullMessageType[]>(initialMessages)
 
-    
+    useEffect(() => {
+        if (chatFeedRef.current) {
+            chatFeedRef.current.scrollTop = chatFeedRef.current.scrollHeight;
+        }
+    }, [messages])
+
+
     useEffect(() => {
         const messageHandler = (message: FullMessageType) => {
             setMessages((currentMessages) => {
@@ -36,11 +45,9 @@ const FeedBody: React.FC<PropType> = ({ initialMessages = [] }) => {
                 return [...currentMessages, message]
             })
 
-            bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
         }
 
         pusherClient.subscribe(chatId).bind('message:new', messageHandler)
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
 
         // clean up
         return () => {
@@ -59,10 +66,12 @@ const FeedBody: React.FC<PropType> = ({ initialMessages = [] }) => {
     }
 
     return (
-        <div className='flex-1 flex flex-col gap-[0.5rem] py-[1rem] overflow-y-auto'>
+        <div ref={chatFeedRef} className='border-2 flex-1 flex flex-col gap-[0.5rem] py-[1rem] overflow-y-auto'>
             {
                 messages.map((message: FullMessageType) => (<Message key={message.id} message={message} />))
             }
+
+            <div ref={bottomRef} className=''></div>
         </div>
     )
 }
