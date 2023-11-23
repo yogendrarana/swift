@@ -1,8 +1,8 @@
 "use client"
 
 import React from 'react'
+import moment from 'moment';
 import Image from 'next/image';
-import { format } from 'date-fns';
 import { useSession } from 'next-auth/react';
 
 // import types
@@ -29,7 +29,9 @@ const Message: React.FC<PropType> = ({ message }) => {
                     ${isMyMessage ? 'ml-auto' : 'mr-auto'}
                 `}
             >
-                <p className='mb-[0.25rem] text-[1rem] text-gray-500'>{format(new Date(message.createdAt), 'h:mm a')}</p>
+                <p className='mb-[0.25rem] text-[1rem] text-gray-500'>
+                    {moment(new Date(message.createdAt)).format('MMM D, YYYY h:mm A')}
+                </p>
 
                 {
                     message.text !== null ? (

@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "e90fdfb6-94ba-4722-8fbc-8e48141d9b1b",
-  "prevId": "605d08fc-f4d6-4c19-989d-e0577efc85e6",
+  "id": "5ffb2fa1-6a06-4f82-86e0-a0036c336655",
+  "prevId": "35dffcfd-1233-4150-90f0-ed6f52708a9c",
   "tables": {
     "chat": {
       "name": "chat",

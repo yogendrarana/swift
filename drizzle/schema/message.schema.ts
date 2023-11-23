@@ -19,7 +19,7 @@ export const messageSchema = mysqlTable(
         chatId: int('chat_id').notNull(),
         senderId: int('sender_id').notNull(),
 
-        createdAt: timestamp('created_at').defaultNow().notNull(),
+        createdAt: timestamp('created_at').notNull().defaultNow(),
         updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
     }
 );

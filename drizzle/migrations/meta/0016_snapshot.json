@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "e90fdfb6-94ba-4722-8fbc-8e48141d9b1b",
-  "prevId": "605d08fc-f4d6-4c19-989d-e0577efc85e6",
+  "id": "35dffcfd-1233-4150-90f0-ed6f52708a9c",
+  "prevId": "e90fdfb6-94ba-4722-8fbc-8e48141d9b1b",
   "tables": {
     "chat": {
       "name": "chat",
@@ -137,7 +137,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "(now())"
         },
         "updated_at": {
           "name": "updated_at",

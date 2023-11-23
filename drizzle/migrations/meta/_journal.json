@@ -106,6 +106,34 @@
       "when": 1700200096754,
       "tag": "0014_easy_bloodaxe",
       "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "5",
+      "when": 1700738663983,
+      "tag": "0015_daffy_master_chief",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "5",
+      "when": 1700738981332,
+      "tag": "0016_many_shadow_king",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "5",
+      "when": 1700739436309,
+      "tag": "0017_magenta_darwin",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "5",
+      "when": 1700739819270,
+      "tag": "0018_steady_silver_samurai",
+      "breakpoints": true
     }
   ]
 }
