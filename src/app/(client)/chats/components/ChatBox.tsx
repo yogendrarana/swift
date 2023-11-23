@@ -2,6 +2,8 @@
 
 import axios from 'axios'
 import { format } from 'date-fns'
+import { useSession } from 'next-auth/react'
+import { pusherClient } from '@/src/pusher/pusher'
 import React, { useEffect, useState } from 'react'
 
 
@@ -21,8 +23,11 @@ interface ChatBoxProps {
 
 
 const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
-    const [otherUser, setOtherUser] = useState<UserType | null>(null);
+    const session = useSession();
+    const email = session?.data?.user?.email;
+
     const [lastMessage, setLastMessage] = useState<any>(null);
+    const [otherUser, setOtherUser] = useState<UserType | null>(null);
 
     useEffect(() => {
         async function getOtherUserOfChat() {
@@ -38,6 +43,26 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
         getLastMessageOfChat()
         getOtherUserOfChat();
     }, [chat?.id])
+    
+    // for pusher subscription
+    useEffect(() => {
+        const chatUpdateHandler = (data: any) => {
+            if (chat?.id === data?.newMessage?.chatId){
+                setLastMessage(data.newMessage);
+            }
+        }
+
+        if (email) {
+            pusherClient.subscribe(email).bind("chat:update", chatUpdateHandler)
+        }
+
+
+        // clean up
+        return () => {
+            pusherClient.unsubscribe(email!)
+            pusherClient.unbind("chat:update", chatUpdateHandler)
+        }
+    }, [email, chat?.id])
 
     const lastMessageText = () => {
         if (lastMessage?.text !== null && lastMessage?.image === null) {

@@ -54,9 +54,9 @@ export async function POST(req: NextRequest) {
         pusherServer.trigger(chatId, "message:new", newMessage);
 
         // pusher trigger for chat list
-        const members = await db.select({ email: userSchema.email, }).from(userSchema).innerJoin(userToChat, eq(userToChat.userId, userSchema.id)).where(eq(userToChat.chatId, chatId));
-        members.forEach((user: any) => {
-            pusherServer.trigger(user.email, "chat:update", {id: chatId, newMessage});
+        const members: { email: string }[] = await db.select({ email: userSchema.email }).from(userSchema).innerJoin(userToChat, eq(userToChat.userId, userSchema.id)).where(eq(userToChat.chatId, chatId));
+        members.forEach((member: { email: string }) => {
+            pusherServer.trigger(member.email, "chat:update", { id: chatId, newMessage });
         })
 
         return NextResponse.json({ success: true, message: "Message sent successfully." }, { status: 201 });
