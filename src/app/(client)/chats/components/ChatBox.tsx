@@ -67,9 +67,9 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
     const lastMessageText = () => {
         if (lastMessage?.text !== null && lastMessage?.image === null) {
             if (lastMessage?.senderId === currentUser?.id) {
-                return `You: ${lastMessage.text.slice(0, 25)}` + '...';
+                return lastMessage.text.length < 15 ? `You: ${lastMessage.text}`  : `You: ${lastMessage.text.slice(0, 15)}` + '...'; 
             } else {
-                return lastMessage.text.slice(0, 25) + '...';
+                return lastMessage.text.length < 15 ? lastMessage.text : lastMessage.text.slice(0, 15) + '...'; 
             }
         } else if (lastMessage?.image !== null && lastMessage?.text === null) {
             if (lastMessage?.senderId === currentUser?.id) {
@@ -78,7 +78,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
                 return 'Sent a photo';
             }
         } else {
-            return 'No messages yet...';
+            return 'No messages yet.';
         }
     }
 
