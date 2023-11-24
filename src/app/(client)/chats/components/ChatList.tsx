@@ -9,6 +9,7 @@ import CreateGroupChatDialog from '@/src/components/dialog/CreateGroupChatDialog
 // import types
 import { ChatType } from '@/drizzle/schema/chat.schema';
 import { UserType } from '@/drizzle/schema/user.schema';
+import { pusherClient } from '@/src/pusher/pusher';
 
 type PropType = {
     initialChatList: ChatType[],
@@ -17,15 +18,39 @@ type PropType = {
 }
 
 const ChatList:React.FC<PropType> = ({initialChatList, users, currentUser}) => {
-
     const [chatList, setChatList] = useState<ChatType[]>([]);
-
+    
     useEffect(() => {
         if (initialChatList.length) {
             setChatList(initialChatList)
         }
     }, [initialChatList]); 
 
+    useEffect(() => {
+        const newChatListOrderHandler = (data: any) => {
+            const chatId = data.chatId;
+            setChatList((prevChatList) => {
+                // put the chat with chatId to the top of the list
+                const chatIndex = prevChatList.findIndex((chat) => chat.id === parseInt(chatId));
+                const chat = prevChatList[chatIndex];
+                prevChatList.splice(chatIndex, 1);
+                prevChatList.unshift(chat);
+                return [...prevChatList];
+            })
+
+            console.log(chatList)
+        }
+
+        if (currentUser?.email) {
+            pusherClient.subscribe(currentUser?.email)
+            pusherClient.bind("chat-list-order:update", newChatListOrderHandler)
+        }
+
+        return () => {
+            pusherClient.unsubscribe(currentUser?.email!);
+            pusherClient.unbind("chat-list-order:update", newChatListOrderHandler)
+        }
+    }, [currentUser?.email, chatList])
     
     return (
         <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
