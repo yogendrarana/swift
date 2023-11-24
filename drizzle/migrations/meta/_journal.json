@@ -134,6 +134,27 @@
       "when": 1700739819270,
       "tag": "0018_steady_silver_samurai",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "5",
+      "when": 1700807350639,
+      "tag": "0019_typical_switch",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "5",
+      "when": 1700809358128,
+      "tag": "0020_nasty_micromacro",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "5",
+      "when": 1700809812801,
+      "tag": "0021_low_hellfire_club",
+      "breakpoints": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { db } from "@/src/db/db";
-import { is, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
 

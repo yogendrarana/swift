@@ -9,8 +9,6 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const chatId = url.searchParams.get("chatId");
 
-    console.log("chat-id", chatId);
-
     const currentUser = await getCurrentUser();
 
     if (!currentUser?.id || !currentUser?.email) {

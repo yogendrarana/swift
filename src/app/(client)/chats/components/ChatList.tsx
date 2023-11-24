@@ -17,14 +17,14 @@ type PropType = {
     currentUser: UserType | null
 }
 
-const ChatList:React.FC<PropType> = ({initialChatList, users, currentUser}) => {
+const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) => {
     const [chatList, setChatList] = useState<ChatType[]>([]);
-    
+
     useEffect(() => {
         if (initialChatList.length) {
             setChatList(initialChatList)
         }
-    }, [initialChatList]); 
+    }, [initialChatList]);
 
     useEffect(() => {
         const newChatListOrderHandler = (data: any) => {
@@ -37,21 +37,29 @@ const ChatList:React.FC<PropType> = ({initialChatList, users, currentUser}) => {
                 prevChatList.unshift(chat);
                 return [...prevChatList];
             })
+        }
 
-            console.log(chatList)
+        const chatDeleteHandler = (data: any) => {
+            setChatList((prevChatList) => {
+                return [...prevChatList.filter((chat) => chat.id !== parseInt(data.chatId))]
+            })
         }
 
         if (currentUser?.email) {
             pusherClient.subscribe(currentUser?.email)
+
+            // bind event
             pusherClient.bind("chat-list-order:update", newChatListOrderHandler)
+            pusherClient.bind("chat:delete", chatDeleteHandler)
         }
 
         return () => {
             pusherClient.unsubscribe(currentUser?.email!);
             pusherClient.unbind("chat-list-order:update", newChatListOrderHandler)
+            pusherClient.unbind("chat:delete", chatDeleteHandler)
         }
     }, [currentUser?.email, chatList])
-    
+
     return (
         <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
             <div className='h-[4rem] flex justify-between items-center text-[2rem] font-bold' >
@@ -80,7 +88,7 @@ const ChatList:React.FC<PropType> = ({initialChatList, users, currentUser}) => {
                 {
                     !chatList.length ? (
                         <span className='text-[1.25rem] text-gray-600'>
-                            No conversation yet. 
+                            No conversation yet.
                             <br />
                             Please browse the user to stat conversation.
                         </span>

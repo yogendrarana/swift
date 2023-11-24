@@ -16,8 +16,8 @@ export const messageSchema = mysqlTable(
         image: text('image'),
         imagePublicId: text('image_public_id'),
         
-        chatId: int('chat_id').notNull(),
-        senderId: int('sender_id').notNull(),
+        chatId: int('chat_id').notNull().references(() => chatSchema.id, {onDelete: 'cascade'}),
+        senderId: int('sender_id').notNull().references(() => userSchema.id, {onDelete: 'cascade'}),
 
         createdAt: timestamp('created_at').notNull().defaultNow(),
         updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
@@ -25,7 +25,7 @@ export const messageSchema = mysqlTable(
 );
 
 
-// relations
+// relations works in application level while foreign keys works in database level 
 export const messageRelations = relations(messageSchema, ({ one }) => ({
     chat: one(chatSchema, {fields: [messageSchema.chatId], references: [chatSchema.id]}),
     sender: one(userSchema, {fields: [messageSchema.senderId], references: [userSchema.id]}),

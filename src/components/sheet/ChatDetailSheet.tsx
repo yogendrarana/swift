@@ -1,5 +1,8 @@
+"use client"
+
 import React from 'react'
-import { format } from 'date-fns'
+import axios from 'axios'
+import moment from 'moment'
 import toast from 'react-hot-toast'
 
 // import components
@@ -11,6 +14,8 @@ import useOtherUser from '@/src/hooks/useOtherUser'
 
 // import types
 import { FullChatType } from '@/src/types/types'
+import { useRouter } from 'next/navigation'
+import ConfirmDeleteChat from '../dialog/ConfirmDeleteChat'
 
 // prop type
 type PropType = {
@@ -20,10 +25,22 @@ type PropType = {
 
 const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
 
+    const router = useRouter();
     const otherUser = useOtherUser(chat);
 
-    const handleChatDelete = () => {
-        toast.success("Chat deletion to be added later");
+    const handleDeleteChat = async () => {
+        const toastId = toast.loading('Deleting chat...');
+        try {
+            const { data, status } = await axios.delete(`/api/chats/${chat?.id}`);
+
+            if (status === 200) {
+                toast.success(data.message, { id: toastId });
+                router.push("/chats")
+                return;
+            }
+        } catch (err: any) {
+            toast.error(err.response.data.message, { id: toastId });
+        }
     }
 
     return (
@@ -39,7 +56,7 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
 
                 {!chat?.isGroupChat && <div className="flex flex-col gap-[0.5rem]">
                     <h2 className="text-[1.5rem] font-bold"> Email </h2>
-                    <div className="p-[0.5rem] border rounded-[0.5rem] text-[1.25rem] text-gray-500">
+                    <div className="p-[1rem] border rounded-[0.5rem] text-[1.25rem] text-gray-500">
                         {otherUser && otherUser?.user.email}
                     </div>
                 </div>}
@@ -50,7 +67,7 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
                     <ul className="rounded-[0.5rem] text-[1.25rem] text-gray-500">
                         {
                             chat.members.map((member, index) => (
-                                <li key={index} className="mb-[1rem] capitalize">{index+1}. {member.user.name}</li>
+                                <li key={index} className="mb-[1rem] capitalize">{index + 1}. {member.user.name}</li>
                             ))
                         }
                     </ul>
@@ -58,17 +75,16 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
 
                 <div className="flex flex-col gap-[0.5rem]">
                     <h2 className="text-[1.5rem] font-bold"> Joined At </h2>
-                    <div className="p-[0.5rem] border rounded-[0.5rem] text-[1.25rem] text-gray-500">
-                        {chat && format(new Date(chat.createdAt), 'h:mm a')}
+                    <div className="p-[1rem] border rounded-[0.5rem] text-[1.25rem] text-gray-500">
+                        {chat && moment(chat.createdAt).format('MMMM Do YYYY h:mm a')}
                     </div>
                 </div>
 
                 <div className="flex flex-col gap-[0.5rem]">
-                    <h2 className="text-[1.5rem] font-bold text-red-500"> Delete Chat </h2>
-                    <button onClick={handleChatDelete} className="p-[0.5rem] text-red-500 border rounded-[0.5rem] text-[1.25rem]">
-                        <i className="fa-solid fa-trash"></i>
-                        <span className='ml-[0.75rem]'>Delete</span>
-                    </button>
+                    <h2 className="text-[1.5rem] font-bold"> Delete Chat </h2>
+
+                    {/* confirm delete chat */}
+                    <ConfirmDeleteChat handleDeleteChat={handleDeleteChat} />
                 </div>
             </SheetContent>
         </Sheet>
