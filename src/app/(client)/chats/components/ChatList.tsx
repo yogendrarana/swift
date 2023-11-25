@@ -10,6 +10,7 @@ import CreateGroupChatDialog from '@/src/components/dialog/CreateGroupChatDialog
 import { ChatType } from '@/drizzle/schema/chat.schema';
 import { UserType } from '@/drizzle/schema/user.schema';
 import { pusherClient } from '@/src/pusher/pusher';
+import { useRouter } from 'next/navigation';
 
 type PropType = {
     initialChatList: ChatType[],
@@ -18,6 +19,7 @@ type PropType = {
 }
 
 const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) => {
+    const router = useRouter();
     const [chatList, setChatList] = useState<ChatType[]>([]);
 
     useEffect(() => {
@@ -27,36 +29,56 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
     }, [initialChatList]);
 
     useEffect(() => {
-        const newChatListOrderHandler = (data: any) => {
-            const chatId = data.chatId;
-            setChatList((prevChatList) => {
-                // put the chat with chatId to the top of the list
-                const chatIndex = prevChatList.findIndex((chat) => chat.id === parseInt(chatId));
-                const chat = prevChatList[chatIndex];
-                prevChatList.splice(chatIndex, 1);
-                prevChatList.unshift(chat);
-                return [...prevChatList];
-            })
+        const newChatHandler = (data: any) => {
+            if (chatList.length) {
+                setChatList((prevChatList) => {
+                    return [data.chat, ...prevChatList]
+                })
+            }else {
+                setChatList(data.chat)
+            }
         }
 
         const chatDeleteHandler = (data: any) => {
             setChatList((prevChatList) => {
                 return [...prevChatList.filter((chat) => chat.id !== parseInt(data.chatId))]
             })
+
+            router.push('/chats');
+        }
+
+        const newChatListHandler = (data: any) => {
+            const chatId = data.chatId;
+
+            if (chatList.length) {
+                setChatList((prevChatList) => {
+                    
+                    // put the chat with chatId to the top of the list
+                    const chatIndex = prevChatList.findIndex((chat) => chat.id === parseInt(chatId));
+                    const chat = prevChatList[chatIndex];
+                    prevChatList.splice(chatIndex, 1);
+                    prevChatList.unshift(chat);
+                    return [...prevChatList];
+                })
+            }
         }
 
         if (currentUser?.email) {
             pusherClient.subscribe(currentUser?.email)
 
             // bind event
-            pusherClient.bind("chat-list-order:update", newChatListOrderHandler)
+            pusherClient.bind("chat:create", newChatHandler)
             pusherClient.bind("chat:delete", chatDeleteHandler)
+            pusherClient.bind("chat-list:update", newChatListHandler)
         }
 
         return () => {
             pusherClient.unsubscribe(currentUser?.email!);
-            pusherClient.unbind("chat-list-order:update", newChatListOrderHandler)
+
+            // unbind event
+            pusherClient.unbind("chat:create", newChatHandler)
             pusherClient.unbind("chat:delete", chatDeleteHandler)
+            pusherClient.unbind("chat-list:update", newChatListHandler)
         }
     }, [currentUser?.email, chatList])
 

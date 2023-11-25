@@ -55,7 +55,7 @@ const Register = () => {
         <form className="w-[40rem] flex flex-col gap-[2rem] duration-1000">
             <div className='w-full'>
                 <h1 className='text-[1.75rem]'>Don&apos;t have an account?</h1>
-                <p className='text-[1.45rem] text-[#767676]'>Create an account to get started with our platform.</p>
+                <p className='text-[1.25rem] text-[#767676]'>Create an account to get started with our platform.</p>
             </div>
 
             <Label htmlFor="name" className='w-full text-[1.45rem]'>

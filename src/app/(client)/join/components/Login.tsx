@@ -45,7 +45,7 @@ const Login = () => {
         <form className="w-[40rem] flex flex-col gap-[2rem] duration-1000">
             <div className='w-full'>
                 <h1 className='text-[1.75rem]'>Already have an account?</h1>
-                <p className='text-[1.45rem] text-[#767676]'>Please log in and start sending messages right away.</p>
+                <p className='text-[1.25rem] text-[#767676]'>Please log in and start sending messages right away.</p>
             </div>
 
             <Label htmlFor="email" className='w-full text-[1.45rem]'>

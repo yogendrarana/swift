@@ -14,6 +14,7 @@ import Link from 'next/link'
 // types
 import { ChatType } from '@/drizzle/schema/chat.schema'
 import { UserType } from '@/drizzle/schema/user.schema'
+import { set } from 'lodash'
 
 // prop types
 interface ChatBoxProps {
@@ -26,8 +27,10 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
     const session = useSession();
     const email = session?.data?.user?.email;
 
+
     const [lastMessage, setLastMessage] = useState<any>(null);
     const [otherUser, setOtherUser] = useState<UserType | null>(null);
+    const [lastMessageText, setLastMessageText] = useState<string>('');
 
     useEffect(() => {
         async function getOtherUserOfChat() {
@@ -44,47 +47,55 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
         getOtherUserOfChat();
     }, [chat?.id])
     
+
     // for pusher subscription
     useEffect(() => {
-        const chatUpdateHandler = (data: any) => {
+        const newMessageHandler = (data: any) => {
             if (chat?.id === data?.newMessage?.chatId){
                 setLastMessage(data.newMessage);
             }
         }
 
         if (email) {
-            pusherClient.subscribe(email).bind("chat:update", chatUpdateHandler)
+            pusherClient.subscribe(email)
         }
-
+        
+        pusherClient.bind("message:create", newMessageHandler)
 
         // clean up
         return () => {
             pusherClient.unsubscribe(email!)
-            pusherClient.unbind("chat:update", chatUpdateHandler)
+            pusherClient.unbind("message:create", newMessageHandler)
         }
-    }, [email, chat?.id])
+    }, [email, chat?.id]);
 
-    const lastMessageText = () => {
-        if (lastMessage?.text !== null && lastMessage?.image === null) {
-            if (lastMessage?.senderId === currentUser?.id) {
-                return lastMessage.text.length < 15 ? `You: ${lastMessage.text}`  : `You: ${lastMessage.text.slice(0, 15)}` + '...'; 
+    // for last message text
+    useEffect(() => {
+        const getLastMessage = () => {
+            if (lastMessage?.text !== null && lastMessage?.image === null) {
+                if (lastMessage?.senderId === currentUser?.id) {
+                    return lastMessage.text.length < 15 ? `You: ${lastMessage.text}`  : `You: ${lastMessage.text.slice(0, 15)}` + '...'; 
+                } else {
+                    return lastMessage.text.length < 15 ? lastMessage.text : lastMessage.text.slice(0, 15) + '...'; 
+                }
+            } else if (lastMessage?.image !== null && lastMessage?.text === null) {
+                if (lastMessage?.senderId === currentUser?.id) {
+                    return 'You sent a photo';
+                } else {
+                    return 'Sent a photo';
+                }
             } else {
-                return lastMessage.text.length < 15 ? lastMessage.text : lastMessage.text.slice(0, 15) + '...'; 
+                return 'No messages yet.';
             }
-        } else if (lastMessage?.image !== null && lastMessage?.text === null) {
-            if (lastMessage?.senderId === currentUser?.id) {
-                return 'You sent a photo';
-            } else {
-                return 'Sent a photo';
-            }
-        } else {
-            return 'No messages yet.';
         }
-    }
+
+        setLastMessageText(getLastMessage());
+    }, [lastMessage, currentUser?.id])
+
 
     return (
         <div className='group duration-200 pr-[1rem] mb-[1rem] last-child:mb-0 last:mb-0'>
-            <Link href={`/chats/${chat.id}`} className='flex'>
+            <Link href={`/chats/${chat?.id}`} className='flex'>
                 <div 
                     className='
                         h-[4rem] w-[4rem] 
@@ -108,7 +119,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
 
                     <div className='flex justify-between items-center'>
                         <p className='text-gray-400 text-[1.25rem]'>
-                            {lastMessageText()}
+                            {lastMessageText}
                         </p>
                         <div className='text-gray-400 text-[1.25rem]'>
                             {

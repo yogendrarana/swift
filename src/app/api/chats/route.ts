@@ -1,5 +1,6 @@
 import { db } from "@/src/db/db";
-import { sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
+import { pusherServer } from "@/src/pusher/pusher";
 import { NextRequest, NextResponse } from "next/server";
 import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
 
@@ -9,6 +10,14 @@ import getCurrentUser from "@/src/actions/getCurrentUser";
 // import schemas
 import { chatSchema } from "@/drizzle/schema/chat.schema";
 import { userToChat } from "@/drizzle/schema/userToChat.join";
+
+
+// define type
+type MemberType = {
+    value: number;
+    label: string;
+    email: string;
+};
 
 
 export async function POST(req: NextRequest) {
@@ -32,11 +41,11 @@ export async function POST(req: NextRequest) {
 
         if (isGroupChat) {
             // create new group chat
-            const newChat = await db.insert(chatSchema).values({ isGroupChat: true, name, adminId: currentUser.id });
-            const insertedChatId = newChat[0].insertId;
+            const newChatResult = await db.insert(chatSchema).values({ isGroupChat: true, name, adminId: currentUser.id });
+            const insertedChatId = newChatResult[0].insertId;
 
             // insert members into userToChat
-            members.forEach(async (member: { value: number; label: string; }) => {
+            members.forEach(async (member: MemberType) => {
                 await db.insert(userToChat).values({
                     chatId: insertedChatId,
                     userId: member.value,
@@ -50,6 +59,16 @@ export async function POST(req: NextRequest) {
                 userId: currentUser.id,
                 isGroupChat: isGroupChat,
             })
+
+            // new chat
+            const newChat = await db.query.chatSchema.findFirst({
+                where: eq(chatSchema.id, insertedChatId),
+            });
+
+            // pusher server
+            members.forEach((member: MemberType) => {
+                pusherServer.trigger(member.email, "chat:create", newChat );
+            });
 
             return NextResponse.json({ success: true, message: "Chat created successfully.", chatId: insertedChatId }, { status: 201 });
         }
@@ -72,7 +91,6 @@ export async function POST(req: NextRequest) {
         if (query_result_array[0].length === 0) {
             // create new chat 
             const newChat = await db.insert(chatSchema).values({ isGroupChat: false });
-
             const insertedChatId = newChat[0].insertId;
 
             [currentUser.id, otherUserId].forEach(async (id) => {

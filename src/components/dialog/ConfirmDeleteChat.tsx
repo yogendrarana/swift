@@ -4,14 +4,15 @@ import { Dialog, DialogClose, DialogContent, DialogTrigger } from '../ui/dialog'
 
 // prop type
 type PropType = {
-    handleDeleteChat: () => void
+    handleDeleteChat: () => void;
+    isLoading: boolean;
 }
 
-const ConfirmDeleteChat: React.FC<PropType> = ({ handleDeleteChat }) => {
+const ConfirmDeleteChat: React.FC<PropType> = ({ handleDeleteChat, isLoading }) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant='outline' className='p-[1.75rem] text-[1.25rem]'>
+                <Button disabled={isLoading} variant='outline' className='p-[1.75rem] text-[1.25rem]'>
                     <i className="fa-solid fa-trash"></i>
                     <span className='ml-[0.75rem]'>Delete</span>
                 </Button>

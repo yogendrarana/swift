@@ -35,7 +35,7 @@ const FeedBody: React.FC<PropType> = ({ initialMessages = [] }) => {
 
 
     useEffect(() => {
-        const messageHandler = (message: FullMessageType) => {
+        const newMessageHandler = (message: FullMessageType) => {
             setMessages((currentMessages) => {
                 if (find(currentMessages, { id: message.id })) {
                     return currentMessages
@@ -45,12 +45,12 @@ const FeedBody: React.FC<PropType> = ({ initialMessages = [] }) => {
             })
         }
 
-        pusherClient.subscribe(chatId).bind('message:new', messageHandler)
+        pusherClient.subscribe(chatId).bind('message:create', newMessageHandler)
 
         // clean up
         return () => {
             pusherClient.unsubscribe(chatId)
-            pusherClient.unbind('message:new', messageHandler)
+            pusherClient.unbind('message:create', newMessageHandler)
         }
 
     }, [chatId])

@@ -31,6 +31,7 @@ type PropType = {
 type OptionType = {
     value: number;
     label: string;
+    email: string;
 }
 
 
@@ -43,8 +44,8 @@ const CreateGroupChatDialog: React.FC<PropType> = ({ users=[] }) => {
 
     // handle create group chat
     const handleCreateGroupChat = async () => {
-        const toastId = toast.loading('Creating group chat...');
         setIsLoading(true);
+        const toastId = toast.loading('Creating group chat...');
 
         if (members.length === 0) {
             setIsLoading(false);
@@ -104,7 +105,7 @@ const CreateGroupChatDialog: React.FC<PropType> = ({ users=[] }) => {
                     <label className="text-[1.25rem] font-bold">Select members:</label>
                     <ReactSelect
                         isMulti
-                        options={users.map((user) => ({ value: user.id, label: user.name }))}
+                        options={users.map((user) => ({ value: user.id, label: user.name, email: user.email }))}
                         onChange={(value) => setMembers(value as OptionType[])}
                         styles={{
                             control: (provided, state) => ({

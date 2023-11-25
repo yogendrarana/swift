@@ -27,8 +27,10 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
 
     const router = useRouter();
     const otherUser = useOtherUser(chat);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     const handleDeleteChat = async () => {
+        setIsLoading(true);
         const toastId = toast.loading('Deleting chat...');
         try {
             const { data, status } = await axios.delete(`/api/chats/${chat?.id}`);
@@ -36,9 +38,11 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
             if (status === 200) {
                 toast.success(data.message, { id: toastId });
                 router.push("/chats")
+                setIsLoading(false);
                 return;
             }
         } catch (err: any) {
+            setIsLoading(false);
             toast.error(err.response.data.message, { id: toastId });
         }
     }
@@ -84,7 +88,7 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
                     <h2 className="text-[1.5rem] font-bold"> Delete Chat </h2>
 
                     {/* confirm delete chat */}
-                    <ConfirmDeleteChat handleDeleteChat={handleDeleteChat} />
+                    <ConfirmDeleteChat handleDeleteChat={handleDeleteChat} isLoading={isLoading} />
                 </div>
             </SheetContent>
         </Sheet>
