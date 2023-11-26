@@ -27,7 +27,6 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
     const session = useSession();
     const email = session?.data?.user?.email;
 
-
     const [lastMessage, setLastMessage] = useState<any>(null);
     const [otherUser, setOtherUser] = useState<UserType | null>(null);
     const [lastMessageText, setLastMessageText] = useState<string>('');

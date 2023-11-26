@@ -11,6 +11,7 @@ import { ChatType } from '@/drizzle/schema/chat.schema';
 import { UserType } from '@/drizzle/schema/user.schema';
 import { pusherClient } from '@/src/pusher/pusher';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/src/lib/utils';
 
 type PropType = {
     initialChatList: ChatType[],
@@ -30,13 +31,19 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
 
     useEffect(() => {
         const newChatHandler = (data: any) => {
-            if (chatList.length) {
-                setChatList((prevChatList) => {
-                    return [data.chat, ...prevChatList]
-                })
-            }else {
-                setChatList(data.chat)
+            const { newChat } = data;
+
+            console.log('data', data);
+
+            if (!chatList.length) {
+                setChatList([newChat])
+                return;
             }
+
+            setChatList((prevChatList) => {
+                return [newChat, ...prevChatList]
+            })
+
         }
 
         const chatDeleteHandler = (data: any) => {
@@ -48,16 +55,15 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
         }
 
         const newChatListHandler = (data: any) => {
-            const chatId = data.chatId;
+            const { chatId } = data;
 
             if (chatList.length) {
                 setChatList((prevChatList) => {
-                    
+
                     // put the chat with chatId to the top of the list
                     const chatIndex = prevChatList.findIndex((chat) => chat.id === parseInt(chatId));
-                    const chat = prevChatList[chatIndex];
-                    prevChatList.splice(chatIndex, 1);
-                    prevChatList.unshift(chat);
+                    const removedChat = prevChatList.splice(chatIndex, 1)[0];
+                    prevChatList.unshift(removedChat);
                     return [...prevChatList];
                 })
             }
@@ -80,7 +86,7 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
             pusherClient.unbind("chat:delete", chatDeleteHandler)
             pusherClient.unbind("chat-list:update", newChatListHandler)
         }
-    }, [currentUser?.email, chatList])
+    }, [currentUser?.email, chatList, router])
 
     return (
         <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
