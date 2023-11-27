@@ -33,8 +33,6 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
         const newChatHandler = (data: any) => {
             const { newChat } = data;
 
-            console.log('data', data);
-
             if (!chatList.length) {
                 setChatList([newChat])
                 return;

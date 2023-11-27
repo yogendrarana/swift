@@ -14,7 +14,7 @@ import Link from 'next/link'
 // types
 import { ChatType } from '@/drizzle/schema/chat.schema'
 import { UserType } from '@/drizzle/schema/user.schema'
-import { set } from 'lodash'
+import Avatar from '@/src/components/avatar/Avatar'
 
 // prop types
 interface ChatBoxProps {
@@ -95,20 +95,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
     return (
         <div className='group duration-200 pr-[1rem] mb-[1rem] last-child:mb-0 last:mb-0'>
             <Link href={`/chats/${chat?.id}`} className='flex'>
-                <div 
-                    className='
-                        h-[4rem] w-[4rem] 
-                        mr-[1rem] 
-                        grid place-items-center 
-                        border-[0.25rem] border-gray-100 
-                        group-hover:border-gray-300 
-                        relative 
-                        rounded-full 
-                        duration-150
-                    '
-                >
-                    <span>{ }</span>
-                    <span className='absolute h-[1.25rem] w-[1.25rem] right-[-0.2rem] bottom-[-0.2rem] border-[0.25rem] border-white rounded-full bg-[var(--main-green)]' />
+                <div className='mr-[1rem]'>
+                    <Avatar height={45} width={45} user={otherUser} />
                 </div>
 
                 <div className='flex flex-col justify-center flex-1'>

@@ -1,9 +1,22 @@
+"use client";
+
 import Image from 'next/image'
 
 // import temporary image
 import userPic from '@/src/assets/images/user.jpg'
+import useActiveUsers from '@/src/hooks/useActiveUsers'
+import { useSession } from 'next-auth/react';
+import { UserType } from '@/drizzle/schema/user.schema';
 
-const Avatar = ({ height, width }: { height: number, width: number }) => {
+const Avatar = ({ height, width, user }: { height: number, width: number, user: UserType | null }) => {
+    const session = useSession();
+
+    const { members } = useActiveUsers();
+    const isActive = members.indexOf(user?.email!) !== -1;
+    
+
+    console.log('members', members);
+
     return (
         <div className={`relative`} style={{ height: `${height}px`, width: `${width}px` }}>
             <Image
@@ -13,15 +26,16 @@ const Avatar = ({ height, width }: { height: number, width: number }) => {
                 alt='avatar-img'
                 className='rounded-full border'
             />
+
             <span
-                className='
+                className={`
                     absolute 
                     right-[0.1rem] bottom-[0.1rem] 
                     h-[1.25rem] w-[1.25rem]
                     border-[0.25rem] border-white 
                     rounded-full 
-                    bg-[var(--main-green)]
-                '
+                    ${isActive ? 'bg-[var(--main-green)]' : 'hidden'}
+                `}
             >
             </span>
         </div>
