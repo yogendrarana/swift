@@ -1,23 +1,28 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { pusherClient } from '@/src/pusher/pusher';
+
 
 // import components
 import ChatBox from './ChatBox'
 import CreateGroupChatDialog from '@/src/components/dialog/CreateGroupChatDialog';
 
+
 // import types
 import { ChatType } from '@/drizzle/schema/chat.schema';
 import { UserType } from '@/drizzle/schema/user.schema';
-import { pusherClient } from '@/src/pusher/pusher';
-import { useRouter } from 'next/navigation';
-import { cn } from '@/src/lib/utils';
 
+
+// define prop types
 type PropType = {
     initialChatList: ChatType[],
     users: UserType[],
     currentUser: UserType | null
 }
+
 
 const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) => {
     const router = useRouter();
@@ -95,7 +100,7 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
 
             <hr className='my-[1rem]' />
 
-            <input
+            {/* <input
                 type="text"
                 placeholder='Search by name...'
                 autoComplete='off'
@@ -108,9 +113,14 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
                     text-[1.25rem]
                     placeholder:text-[1.25rem]
                 '
-            />
+            /> */}
 
-            <ul className='overflow-y-auto'>
+            <ul 
+                className='
+                    overflow-y-auto 
+                    flex flex-col gap-[1rem] 
+                '
+            >
                 {
                     !chatList.length ? (
                         <span className='text-[1.25rem] text-gray-600'>

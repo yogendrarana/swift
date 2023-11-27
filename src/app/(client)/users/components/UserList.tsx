@@ -1,13 +1,24 @@
-import React from 'react'
+"use client"
 
-// import hooks and actions
-import { getAllUsers } from '@/src/actions/getAllUsers'
+
+import React, { useEffect, useState } from 'react'
+
 
 // import components
 import UserBox from './UserBox';
 
-const UserList = async () => {
-    const users = await getAllUsers();
+
+// import types
+import { UserType } from '@/drizzle/schema/user.schema';
+
+
+// define prop types
+type PropType = {
+    initialUserList: UserType[]
+}
+
+
+const UserList: React.FC<PropType> = ({ initialUserList }) => {
 
     return (
         <div className='h-full p-[1rem] flex flex-col'>
@@ -17,18 +28,38 @@ const UserList = async () => {
 
             <hr className='my-[1rem]' />
 
-            <input
+            {/* <input
                 type="text"
                 autoComplete='off'
                 placeholder='Search by name...'
-                className='border-none p-[1rem] mb-[2rem] outline-none rounded-[0.5rem] bg-gray-100'
-            />
+                className='
+                    mb-[2rem] p-[1rem] 
+                    border-none
+                    outline-none 
+                    bg-gray-100
+                    rounded-[0.5rem]
+                    text-[1.25rem]
+                    placeholder:text-[1.25rem]
+                '
+            /> */}
 
-            <ul className='overflow-y-auto'>
+            <ul 
+                className='
+                    h-full
+                    overflow-y-auto 
+                    flex flex-col gap-[1rem] 
+                '
+            >
                 {
-                    users.map((u, index) => (
-                        <UserBox key={index} user={u} />
-                    ))
+                    !initialUserList.length ? (
+                        <span className='text-[1.25rem] text-gray-600'>
+                            No users yet.
+                        </span>
+                    ) : (
+                        initialUserList.map((user: UserType, index: number) => (
+                            <UserBox key={index} user={user} />
+                        ))
+                    )
                 }
             </ul>
         </div>

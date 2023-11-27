@@ -13,6 +13,7 @@ import { FullChatType } from '@/src/types/types'
 
 // import hooks
 import useOtherUser from '@/src/hooks/useOtherUser'
+import useActiveUsers from '@/src/hooks/useActiveUsers'
 
 
 // prop type
@@ -25,19 +26,27 @@ const FeedHeader: React.FC<PropType> = ({ chat }) => {
     
     const otherUser = useOtherUser(chat);
 
+    const { members } = useActiveUsers();
+
     const getStatusText = () => {
         if (chat?.isGroupChat) {
             const count = chat.members.length;
             return `${count} ${count === 1 ? 'member' : 'members'}`;
         }
 
-        return "Online"
+        const isActive = members.indexOf(otherUser?.user?.email!) !== -1;
+
+        if (isActive) {
+            return 'Online';
+        }
+
+        return 'Offline';
     }
 
     return (
         <>
             <div className='h-[6rem] border-b flex justify-between items-center gap-[1rem]' >  {/* 6 rem height because the ChatList and other has py also */}
-                <Avatar height={50} width={50} />
+                <Avatar height={50} width={50} user={otherUser?.user!} />
 
                 <div className='mr-auto'>
                     <p className='text-[1.45rem]'>{chat && chat.name || otherUser?.user.name}</p>

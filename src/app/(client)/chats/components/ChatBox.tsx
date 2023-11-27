@@ -93,7 +93,12 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
 
 
     return (
-        <div className='group duration-200 pr-[1rem] mb-[1rem] last-child:mb-0 last:mb-0'>
+        <div 
+            className='
+                group 
+                duration-200 
+            '
+        >
             <Link href={`/chats/${chat?.id}`} className='flex'>
                 <div className='mr-[1rem]'>
                     <Avatar height={45} width={45} user={otherUser} />

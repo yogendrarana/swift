@@ -9,13 +9,9 @@ import { useSession } from 'next-auth/react';
 import { UserType } from '@/drizzle/schema/user.schema';
 
 const Avatar = ({ height, width, user }: { height: number, width: number, user: UserType | null }) => {
-    const session = useSession();
 
     const { members } = useActiveUsers();
     const isActive = members.indexOf(user?.email!) !== -1;
-    
-
-    console.log('members', members);
 
     return (
         <div className={`relative`} style={{ height: `${height}px`, width: `${width}px` }}>

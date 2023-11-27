@@ -18,6 +18,7 @@ import DotWave from "@/src/components/loading/DotWave"
 
 // import types
 import { UserType } from "@/drizzle/schema/user.schema"
+import Avatar from "@/src/components/avatar/Avatar"
 
 
 // user box props
@@ -55,34 +56,20 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
 
     return (
         <div
-            className='cursor-pointer group duration-200 pr-[1rem] mb-[2rem] last-child:mb-0 last:mb-0'
             onClick={handleCreateChatOrNavigate}
+            className='
+                flex
+                cursor-pointer 
+                group duration-200 
+            '
         >
-            <div className='flex'>
-                <div className='h-[4rem] w-[4rem] mr-[1rem] grid place-items-center border-[0.25rem] border-gray-100 group-hover:border-gray-300 relative rounded-full duration-150'>
-                    <Image
-                        height={30}
-                        width={30}
-                        src={userPic}
-                        alt='user profile pic'
-                        className='rounded-full'
-                    />
-                    <span 
-                        className='
-                            absolute 
-                            h-[1.25rem] w-[1.25rem] 
-                            right-[-0.2rem] bottom-[-0.2rem] 
-                            border-[0.25rem] border-white 
-                            rounded-full 
-                            bg-[var(--primary-green)]
-                        '
-                    ></span>
-                </div>
+            <div className="mr-[1rem]">
+                <Avatar height={45} width={45} user={user} />
+            </div>
 
-                <div className='flex flex-col justify-center flex-1'>
-                    <div className='flex justify-between'>
-                        <div className='text-[1.25rem] font-bold capitalize'>{user.name}</div>
-                    </div>
+            <div className='flex flex-col justify-center flex-1'>
+                <div className='flex justify-between'>
+                    <div className='text-[1.25rem] font-bold capitalize'>{user.name}</div>
                 </div>
             </div>
         </div>
