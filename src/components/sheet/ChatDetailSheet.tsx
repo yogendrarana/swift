@@ -3,7 +3,6 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
-import toast from 'react-hot-toast'
 
 // import components
 import Avatar from '@/src/components/avatar/Avatar'
@@ -14,7 +13,6 @@ import useOtherUser from '@/src/hooks/useOtherUser'
 
 // import types
 import { FullChatType } from '@/src/types/types'
-import { useRouter } from 'next/navigation'
 import ConfirmDeleteChat from '../dialog/ConfirmDeleteChat'
 
 // prop type
@@ -25,28 +23,8 @@ type PropType = {
 
 const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
 
-    const router = useRouter();
     const otherUser = useOtherUser(chat);
-    const [isLoading, setIsLoading] = React.useState(false);
-
-    const handleDeleteChat = async () => {
-        setIsLoading(true);
-        const toastId = toast.loading('Deleting chat...');
-        try {
-            const { data, status } = await axios.delete(`/api/chats/${chat?.id}`);
-
-            if (status === 200) {
-                toast.success(data.message, { id: toastId });
-                router.push("/chats")
-                setIsLoading(false);
-                return;
-            }
-        } catch (err: any) {
-            setIsLoading(false);
-            toast.error(err.response.data.message, { id: toastId });
-        }
-    }
-
+   
     return (
         <Sheet>
             <SheetTrigger className='text-[1.25rem] h-[3.5rem] w-[3.5rem] hover:bg-gray-200 rounded-full duration-200'>
@@ -54,8 +32,7 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
             </SheetTrigger>
             <SheetContent side="right" className='min-w-[40rem] py-[5rem] flex flex-col gap-[2rem]'>
                 <div className='flex gap-[0.5rem] flex-col items-center'>
-                    <Avatar height={50} width={50} />
-                    <p className='text-[1.25rem] text-gray-500'>{statusText}</p>
+                    <Avatar height={75} width={75} user={null} />
                 </div>
 
                 {!chat?.isGroupChat && <div className="flex flex-col gap-[0.5rem]">
@@ -88,7 +65,7 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
                     <h2 className="text-[1.5rem] font-bold"> Delete Chat </h2>
 
                     {/* confirm delete chat */}
-                    <ConfirmDeleteChat handleDeleteChat={handleDeleteChat} isLoading={isLoading} />
+                    <ConfirmDeleteChat chat={chat} />
                 </div>
             </SheetContent>
         </Sheet>
