@@ -1,28 +1,25 @@
 "use client"
 
-import React from 'react';
+
+import React from 'react'
 import Link from 'next/link';
-import Image from 'next/image';
 
 
 // import components
 import Options from './Options';
 
 
-// import image
-import Logo from "@/src/assets/icons/logo.png"
-
-
-// import hook
-import useSidebar from '@/src/hooks/useSidebar';
+// import hooks
+import useSidebar from '@/src/hooks/useSidebar'
 
 
 // import types
 import { SidebarOptionsType } from '@/src/types/types';
 
 
-const DesktopSidebar = () => {
+const MobileFooter = () => {
     const sidebar = useSidebar();
+
 
     // handle sidebar option click
     const handleSidebarOptionClick = (option: SidebarOptionsType) => {
@@ -31,11 +28,20 @@ const DesktopSidebar = () => {
         }
     }
 
-    return (
-        <div className='h-[100vh] w-full flex flex-col items-center border-r'>
-            <Image src={Logo} height={35} width={35} alt='logo' className='m-[1.5rem] mb-[2rem]' />
 
-            <ul className='h-full w-full flex flex-col items-center gap-[0.25rem]'>
+    return (
+        <div
+            className='
+                    hidden 
+                    md:w-full 
+                    md:z-40 
+                    md:bg-white 
+                    md:fixed md:bottom-0 
+                    md:flex md:justify-between md:items-center 
+                    md:border-t-[0.1rem] 
+                '
+        >
+            <ul className='h-full w-full p-[1rem] flex justify-around items-center gap-[0.25rem]'>
                 {
                     sidebar.map((option, index) => {
                         return (
@@ -43,7 +49,6 @@ const DesktopSidebar = () => {
                                 key={index}
                                 onClick={() => handleSidebarOptionClick(option)}
                                 className={`
-                                    w-full
                                     cursor-pointer 
                                     flex justify-center 
                                     duration-200
@@ -68,7 +73,7 @@ const DesktopSidebar = () => {
                     })
                 }
 
-                <li className='mt-auto mb-[1rem]'>
+                <li className=''>
                     <Options />
                 </li>
             </ul>
@@ -76,4 +81,4 @@ const DesktopSidebar = () => {
     )
 }
 
-export default DesktopSidebar; 
+export default MobileFooter;
