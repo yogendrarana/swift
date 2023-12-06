@@ -11,7 +11,7 @@ const useSidebar = () => {
             name: 'Chats',
             href: '/chats',
             icon: "fa-solid fa-message",
-            active: pathname.startsWith('/chats'),
+            active: pathname === '/chats' || pathname?.startsWith('/chats/'),
         },
         {
             name: 'Users',

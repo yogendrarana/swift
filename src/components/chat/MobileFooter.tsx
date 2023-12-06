@@ -33,6 +33,7 @@ const MobileFooter = () => {
         <div
             className='
                     hidden 
+                    md:h-[7rem]
                     md:w-full 
                     md:z-40 
                     md:bg-white 

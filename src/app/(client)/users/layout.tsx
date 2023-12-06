@@ -16,9 +16,7 @@ const UserLayout = async ({ children }: { children: React.ReactNode }) => {
     return (
         <Sidebar>
             <div className='h-full flex'>
-                <div className='w-[var(--mini-sidebar-width)] '>
-                    <UserList initialUserList={initialUserList} />
-                </div>
+                <UserList initialUserList={initialUserList} />
 
                 <div className='flex-1'>
                     {children}

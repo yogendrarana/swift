@@ -11,6 +11,10 @@ import ChatBox from './ChatBox'
 import CreateGroupChatDialog from '@/src/components/dialog/CreateGroupChatDialog';
 
 
+// import hooks
+import useChat from '@/src/hooks/useChat';
+
+
 // import types
 import { ChatType } from '@/drizzle/schema/chat.schema';
 import { UserType } from '@/drizzle/schema/user.schema';
@@ -26,6 +30,9 @@ type PropType = {
 
 const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) => {
     const router = useRouter();
+    const { isChatOpen } = useChat();
+
+    // local state
     const [chatList, setChatList] = useState<ChatType[]>([]);
 
     useEffect(() => {
@@ -92,7 +99,19 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
     }, [currentUser?.email, chatList, router])
 
     return (
-        <div className='h-full w-full p-[1rem] flex flex-col overflow-y-auto'>
+        <div
+            className={`
+                h-full w-[var(--mini-sidebar-width)] p-[1rem] 
+                bg-white
+                flex flex-col
+                overflow-y-auto
+                md:fixed
+                md:w-full
+                md:inset-y-0 
+                md:z-[10]
+                ${isChatOpen ? 'md:hidden' : ''}
+            `}
+        >
             <div className='h-[4rem] flex justify-between items-center text-[2rem] font-bold' >
                 <span>Chats</span>
                 <CreateGroupChatDialog users={users} />
@@ -115,7 +134,7 @@ const ChatList: React.FC<PropType> = ({ initialChatList, users, currentUser }) =
                 '
             /> */}
 
-            <ul 
+            <ul
                 className='
                     overflow-y-auto 
                     flex flex-col gap-[1rem] 

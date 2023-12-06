@@ -14,6 +14,7 @@ import { FullChatType } from '@/src/types/types'
 // import hooks
 import useOtherUser from '@/src/hooks/useOtherUser'
 import useActiveUsers from '@/src/hooks/useActiveUsers'
+import { Button } from '@/src/components/ui/button'
 
 
 // prop type
@@ -46,7 +47,14 @@ const FeedHeader: React.FC<PropType> = ({ chat }) => {
     return (
         <>
             <div className='h-[6rem] border-b flex justify-between items-center gap-[1rem]' >  {/* 6 rem height because the ChatList and other has py also */}
-                <Avatar height={50} width={50} user={otherUser?.user!} />
+                <button 
+                    onClick={() => history.back()}
+                    className='h-[4rem] w-[4rem] text-[1.25rem] rounded-full hidden md:flex items-center justify-center hover:bg-gray-200 duration-200'
+                >
+                    <i className="fa-solid fa-chevron-left"></i>
+                </button>
+                
+                <Avatar height={40} width={40} user={otherUser?.user!} />
 
                 <div className='mr-auto'>
                     <p className='text-[1.45rem]'>{chat && chat.name || otherUser?.user.name}</p>

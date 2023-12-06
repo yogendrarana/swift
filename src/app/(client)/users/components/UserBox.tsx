@@ -69,7 +69,7 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
 
             <div className='flex flex-col justify-center flex-1'>
                 <div className='flex justify-between'>
-                    <div className='text-[1.25rem] font-bold capitalize'>{user.name}</div>
+                    <div className='text-[1.25rem] font-bold capitalize sm:text-[1.5rem]'>{user.name}</div>
                 </div>
             </div>
         </div>

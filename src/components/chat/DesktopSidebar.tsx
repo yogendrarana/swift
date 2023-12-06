@@ -32,7 +32,7 @@ const DesktopSidebar = () => {
     }
 
     return (
-        <div className='h-[100vh] w-full flex flex-col items-center border-r'>
+        <div className='h-[100vh] w-[8rem] flex flex-col items-center border-r md:hidden'>
             <Image src={Logo} height={35} width={35} alt='logo' className='m-[1.5rem] mb-[2rem]' />
 
             <ul className='h-full w-full flex flex-col items-center gap-[0.25rem]'>

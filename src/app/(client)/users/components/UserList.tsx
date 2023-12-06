@@ -21,27 +21,23 @@ type PropType = {
 const UserList: React.FC<PropType> = ({ initialUserList }) => {
 
     return (
-        <div className='h-full p-[1rem] flex flex-col'>
+        <aside 
+            className='
+                h-full w-[var(--mini-sidebar-width)] p-[1rem] 
+                bg-white
+                flex flex-col
+                overflow-y-auto
+                md:fixed
+                md:w-full
+                md:inset-y-0 
+                md:z-[10]
+            '
+        >
             <div className=' h-[4rem] flex items-center text-[2rem] font-bold ' >
                 Users
             </div>
 
             <hr className='my-[1rem]' />
-
-            {/* <input
-                type="text"
-                autoComplete='off'
-                placeholder='Search by name...'
-                className='
-                    mb-[2rem] p-[1rem] 
-                    border-none
-                    outline-none 
-                    bg-gray-100
-                    rounded-[0.5rem]
-                    text-[1.25rem]
-                    placeholder:text-[1.25rem]
-                '
-            /> */}
 
             <ul 
                 className='
@@ -62,7 +58,7 @@ const UserList: React.FC<PropType> = ({ initialUserList }) => {
                     )
                 }
             </ul>
-        </div>
+        </aside>
     )
 }
 
