@@ -40,6 +40,7 @@ const MobileFooter = () => {
                     md:fixed md:bottom-0 
                     md:flex md:justify-between md:items-center 
                     md:border-t-[0.1rem] 
+                    dark:bg-[var(--dmode-black-primary)]
                 '
         >
             <ul className='h-full w-full p-[1rem] flex justify-around items-center gap-[0.25rem]'>
@@ -63,7 +64,10 @@ const MobileFooter = () => {
                                         rounded-[0.75rem]
                                         hover:bg-gray-200
                                         text-[1.25rem] text-[#183D3D]
-                                        ${option.active && 'bg-gray-200'}
+                                        ${option.active && 'bg-gray-200 dark:bg-[var(--dmode-black-secondary)]'}
+                                        
+                                        dark:text-[var(--dmode-white)]
+                                        dark:hover:bg-[var(--dmode-black-secondary)]
                                     `}
                                 >
                                     <i className={`${option.icon}`}></i>

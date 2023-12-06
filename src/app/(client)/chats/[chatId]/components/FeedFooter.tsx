@@ -5,8 +5,10 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { CldUploadButton } from "next-cloudinary"
 
+
 // import hooks
 import useChat from "@/src/hooks/useChat";
+
 
 const FeedFooter = () => {
     const { chatId } = useChat();
@@ -80,11 +82,11 @@ const FeedFooter = () => {
                     <i className="fa-regular fa-image"></i>
                 </CldUploadButton>
 
-                <button className='h-[3.5rem] w-[3.5rem] text-[1.5rem] rounded-full hover:bg-gray-200 duration-200'>
+                <button onClick={() => toast("To be added later")} className='h-[3.5rem] w-[3.5rem] text-[1.5rem] rounded-full hover:bg-gray-200 duration-200'>
                     <i className="fa-solid fa-paperclip"></i>
                 </button>
 
-                <button className='h-[3.5rem] w-[3.5rem] text-[1.5rem] rounded-full hover:bg-gray-200 duration-200'>
+                <button onClick={() => toast("To be added later")} className='h-[3.5rem] w-[3.5rem] text-[1.5rem] rounded-full hover:bg-gray-200 duration-200'>
                     <i className="fa-solid fa-microphone-lines"></i>
                 </button>
 

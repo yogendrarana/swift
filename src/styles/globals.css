@@ -10,6 +10,11 @@
 
     /* width */
     --mini-sidebar-width: 35rem;
+
+    /* dark mode */
+    --dmode-black-primary: #1e293b;
+    --dmode-black-secondary: #293548;
+    --dmode-white: #f5f5f5;
 }
 
 @layer base {

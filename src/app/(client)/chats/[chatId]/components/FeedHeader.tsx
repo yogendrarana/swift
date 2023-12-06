@@ -1,6 +1,8 @@
 "use client"
 
 import React from 'react'
+import toast from 'react-hot-toast'
+
 
 // import components
 import Avatar from '@/src/components/avatar/Avatar'
@@ -14,7 +16,6 @@ import { FullChatType } from '@/src/types/types'
 // import hooks
 import useOtherUser from '@/src/hooks/useOtherUser'
 import useActiveUsers from '@/src/hooks/useActiveUsers'
-import { Button } from '@/src/components/ui/button'
 
 
 // prop type
@@ -62,11 +63,11 @@ const FeedHeader: React.FC<PropType> = ({ chat }) => {
                 </div>
 
                 <div className='flex gap-[0.5rem]'>
-                    <button className='text-[1.25rem] h-[3.5rem] w-[3.5rem] hover:bg-gray-200 rounded-full duration-200'>
+                    <button onClick={() => toast("To be added later")} className='text-[1.25rem] h-[3.5rem] w-[3.5rem] hover:bg-gray-200 rounded-full duration-200'>
                         <i className="fa-solid fa-phone"></i>
                     </button>
 
-                    <button className='text-[1.25rem] h-[3.5rem] w-[3.5rem] hover:bg-gray-200 rounded-full duration-200'>
+                    <button onClick={() => toast("To be added later")} className='text-[1.25rem] h-[3.5rem] w-[3.5rem] hover:bg-gray-200 rounded-full duration-200'>
                         <i className="fa-solid fa-video"></i>
                     </button>
 

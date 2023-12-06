@@ -17,9 +17,12 @@ import toast from "react-hot-toast";
 
 const Options = () => {
 
+    // local state
+    const [user, setUser] = useState(null);
+    const [theme, setTheme] = useState<'light' | 'dark'>('light')
+
     const session = useSession();
     const email = session?.data?.user?.email;
-    const [user, setUser] = useState(null);
 
     const fetchProfileData = useCallback(async () => {
         try {
@@ -32,6 +35,28 @@ const Options = () => {
             toast.error(err.message);
         }
     }, [email]);
+
+    const handleToggleMode = () => {
+        const html = document.querySelector('html');
+        if (html) {
+            if (theme === 'light') {
+                html.classList.add('dark');
+                setTheme('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.classList.remove('dark');
+                setTheme('light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+    }
+
+    useEffect(() => {
+        const theme = localStorage.getItem('theme') as 'light' | 'dark';
+        if (theme) {
+            setTheme(theme);
+        }
+    }, []);
 
     useEffect(() => {
         if (email) {
@@ -48,12 +73,23 @@ const Options = () => {
                     rounded-[0.75rem]
                     text-[#183D3D]
                     hover:bg-gray-200
+                    
+                    dark:text-[var(--dmode-white)]
+                    dark:border-[var(--dmode-black-secondary)]
+                    dark:bg-[var(--dmode-black-secondary)]
                 '
             >
                 <i className="fa-solid fa-bars"></i>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className='w-[25rem] ml-[1.75rem] mb-[0.5rem] p-[1.5rem] rounded-[1rem]'>
+            <DropdownMenuContent 
+                className='
+                    w-[25rem] ml-[1.75rem] mb-[0.5rem] p-[1.5rem] rounded-[1rem]
+                    dark:bg-[var(--dmode-black-secondary)]
+                    dark:border-[var(--dmode-black-secondary)]
+
+                '
+            >
                 <DropdownMenuLabel className='p-[1.25rem] text-[1.75rem]'>More Options</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
@@ -61,13 +97,13 @@ const Options = () => {
                 {/* dialog as dropdown menu */}
                 {user && <ProfileDialog user={user} />}
 
-                <DropdownMenuItem className='p-[1.25rem] text-[1.25rem] flex gap-[1rem] rounded-[1rem] cursor-pointer'>
-                    <i className="fa-solid fa-moon"></i>
+                <DropdownMenuItem onClick={handleToggleMode} className='p-[1.25rem] text-[1.25rem] flex gap-[1rem] rounded-[1rem] cursor-pointer'>
+                    {theme === 'dark' ? <i className="fa-solid fa-moon"></i> : <i className="fa-solid fa-sun"></i>}
                     <span>Toggle Mode</span>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem 
-                    onClick={async () => await signOut({callbackUrl: '/'})}
+                <DropdownMenuItem
+                    onClick={async () => await signOut({ callbackUrl: '/' })}
                     className='p-[1.25rem] text-[1.25rem] flex gap-[1rem] rounded-[1rem] cursor-pointer'>
                     <i className="fa-solid fa-arrow-right-from-bracket"></i>
                     <span>Log Out</span>

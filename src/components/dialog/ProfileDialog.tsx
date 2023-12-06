@@ -3,13 +3,14 @@
 import React from "react";
 
 // import components
-import UserDetail from "../user/UserDetail";
+import UserDetail from "@/src/components/user/UserDetail";
+import UpdateUserDetail from "@/src/components/user/UpdateUserDetail";
+import { DropdownMenuItem } from "@/src/components/ui/dropdown-menu";
 import { Dialog, DialogTrigger, DialogContent } from "@/src/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
 
 // import types
 import { UserType } from "@/drizzle/schema/user.schema";
-import UpdateUserDetail from "../user/UpdateUserDetail";
 
 // prop type
 type ProfileDialogPropsType = {
@@ -24,9 +25,11 @@ const ProfileDialog: React.FC<ProfileDialogPropsType> = ({ user }) => {
 
     return (
         <Dialog>
-            <DialogTrigger className="w-full p-[1.25rem] text-[1.25rem] flex items-center gap-[1rem] rounded-[1rem] hover:bg-gray-100">
-                <i className="fa-solid fa-user"></i>
-                <span>Profile</span>
+            <DialogTrigger className="w-full">
+                <DropdownMenuItem className='p-[1.25rem] text-[1.25rem] flex gap-[1rem] rounded-[1rem] cursor-pointer'>
+                    <i className="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </DropdownMenuItem>
             </DialogTrigger>
 
             <DialogContent className="min-w-[40rem] p-[3rem]">
