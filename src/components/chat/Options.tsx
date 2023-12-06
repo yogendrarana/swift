@@ -94,7 +94,6 @@ const Options = () => {
 
                 <DropdownMenuSeparator />
 
-                {/* dialog as dropdown menu */}
                 {user && <ProfileDialog user={user} />}
 
                 <DropdownMenuItem onClick={handleToggleMode} className='p-[1.25rem] text-[1.25rem] flex gap-[1rem] rounded-[1rem] cursor-pointer'>

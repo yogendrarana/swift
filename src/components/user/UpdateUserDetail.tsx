@@ -33,6 +33,10 @@ const UpdateUserDetail = () => {
         const toastId = toast.loading("Updating user data...");
 
         try {
+            if (!updateObject.newName && !updateObject.newEmail) {
+                setIsLoading(false);
+                return toast.error("Please enter new name or new email.", { id: toastId });
+            }
             const res = await axios.patch(`/api/profile?email=${email}`, { ...updateObject })
             if (res.status >= 300) throw Error(res.data.message);
             toast.success(res.data.message, { id: toastId });
@@ -58,6 +62,10 @@ const UpdateUserDetail = () => {
         const updatePasswordObject = { newPassword, oldPassword }
 
         try {
+            if (!newPassword || !oldPassword) {
+                setIsLoading(false);
+                return toast.error("Please enter old and new password.", { id: toastId });
+            }  
             const res = await axios.put(`/api/auth/password?email=${email}`, {...updatePasswordObject})
             if (res.status >= 300) throw Error(res.data.message);
             toast.success(res.data.message, { id: toastId });
@@ -78,7 +86,7 @@ const UpdateUserDetail = () => {
             <div className="w-full flex flex-col gap-[4rem]">
                 <div className="w-full flex flex-col gap-[1rem]">
                     <div>
-                        <label htmlFor="name" className="text-[1.25rem] block text-gray-700 font-bold mb-2">New Name</label>
+                        <label htmlFor="name" className="text-[1.25rem] block text-gray-700 font-bold mb-2 dark:text-[var(--dmode-white)]">New Name</label>
                         <input
                             type="text"
                             id="newName"
@@ -89,7 +97,7 @@ const UpdateUserDetail = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="email" className="text-[1.25rem] block text-gray-700 font-bold mb-2">New Email</label>
+                        <label htmlFor="email" className="text-[1.25rem] block text-gray-700 font-bold mb-2 dark:text-[var(--dmode-white)]">New Email</label>
                         <input
                             type="email"
                             id="newEmail"
@@ -103,7 +111,11 @@ const UpdateUserDetail = () => {
                         onClick={handleUpdateUserData}
                         type="button"
                         disabled={isLoading}
-                        className={`flex-1 p-[0.75rem] rounded-[0.5rem] bg-gray-200 text-[1.25rem] duration-200 ${isLoading && "opacity-50 cursor-not-allowed"}`}
+                        className={`
+                            flex-1 p-[0.75rem] rounded-[0.5rem] bg-gray-200 text-[1.25rem] duration-200 
+                            ${isLoading && "opacity-50 cursor-not-allowed"}
+                            dark:bg-[var(--dmode-black-secondary)] dark:text-[var(--dmode-white)]
+                        `}
                     >
                         Save
                     </button>
@@ -113,7 +125,7 @@ const UpdateUserDetail = () => {
                 <div className="w-full flex flex-col gap-[1rem]">
                     <div>
                         <label htmlFor="old_password" className="flex text-[1.25rem] text-gray-700 font-bold">
-                            <span className='mr-auto'>Old Password</span>
+                            <span className='mr-auto dark:text-[var(--dmode-white)]'>Old Password</span>
                             <button className='text-gray-400 text-[1rem]' onClick={() => setShowPassword(!showPassword)}>
                                 {showPassword ? (<i className='fa-solid fa-eye-slash'></i>) : (<i className='fa-solid fa-eye'></i>)}
                             </button>
@@ -129,7 +141,7 @@ const UpdateUserDetail = () => {
                     </div>
                     <div>
                         <label htmlFor="new_password" className="flex text-[1.25rem] text-gray-700 font-bold">
-                            <span className='mr-auto'>New Password</span>
+                            <span className='mr-auto dark:text-[var(--dmode-white)]'>New Password</span>
                             <button className='text-gray-400 text-[1rem]' onClick={() => setShowPassword(!showPassword)}>
                                 
                                 {showPassword ? (<i className='fa-solid fa-eye-slash'></i>) : (<i className='fa-solid fa-eye'></i>)}
@@ -149,7 +161,11 @@ const UpdateUserDetail = () => {
                         type="button"
                         disabled={isLoading}
                         onClick={handleChangePassword}
-                        className={`flex-1 p-[0.75rem] rounded-[0.5rem] bg-gray-200 text-[1.25rem] duration-200 ${isLoading && "opacity-50 cursor-not-allowed"}`}
+                        className={`
+                            flex-1 p-[0.75rem] rounded-[0.5rem] bg-gray-200 text-[1.25rem] duration-200 
+                            ${isLoading && "opacity-50 cursor-not-allowed"}
+                            dark:bg-[var(--dmode-black-secondary)] dark:text-[var(--dmode-white)]
+                        `}
                     >
                         Change Password
                     </button>

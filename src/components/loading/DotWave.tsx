@@ -4,7 +4,7 @@ import type {} from 'ldrs'
 const DotWave = () => {
     return (
         <div className='
-            bg-black/20
+            bg-white
             z-[100]
             grid
             place-items-center

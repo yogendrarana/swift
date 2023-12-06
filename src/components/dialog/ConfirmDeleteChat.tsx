@@ -45,15 +45,15 @@ const ConfirmDeleteChat: React.FC<PropType> = ({ chat }) => {
                     <span className='ml-[0.75rem]'>Delete</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className='min-w-[40rem]'>
+            <DialogContent className='min-w-[40rem] dark:bg-[var(--dmode-black-primary)] dark:border-[var(--dmode-black-primary)]'>
                 <div className="flex flex-col gap-[1rem]">
-                    <h2 className="text-[1.75rem] font-bold">Delete Chat</h2>
-                    <p className="text-[1.25rem] text-gray-500">Are you sure you want to delete this chat? This action cannot be undone.</p>
+                    <h2 className="text-[1.75rem] font-bold dark:text-[var(--dmode-white)]">Delete Chat</h2>
+                    <p className="text-[1.25rem] text-gray-500 dark:text-[var(--dmode-white)]">Are you sure you want to delete this chat? This action cannot be undone.</p>
                     <Button variant='destructive' disabled={isLoading} onClick={handleDeleteChat} className='py-[1.75rem] text-[1.25rem]'>
                         Delete
                     </Button>
                     <DialogClose asChild>
-                        <Button variant='outline' className='py-[1.75rem] text-[1.25rem]'>Cancel</Button>
+                        <Button variant='outline' className='py-[1.75rem] text-[1.25rem] dark:bg-[var(--dmode-black-secondary)] dark:text-[var(--dmode-white)]'>Cancel</Button>
                     </DialogClose>
                 </div>
             </DialogContent>
