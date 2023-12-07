@@ -16,7 +16,7 @@ const Features = () => {
                 <Image src={LiveChat} alt='' height={60} width={60} />
                 <motion.h2 
                     className='text-[3rem] text-center'
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "150%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }} 
                     transition={{ duration: 0.3 }}
                 >
@@ -24,7 +24,7 @@ const Features = () => {
                 </motion.h2>
                 <motion.p 
                     className='text-[1.75rem] text-center'
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "150%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }} 
                     transition={{ duration: 0.5 }}
                 >
@@ -38,7 +38,7 @@ const Features = () => {
                 <Image src={ChatBox} alt='' height={60} width={60} />
                 <motion.h2 
                     className='text-[3rem] text-center'
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "150%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }} 
                     transition={{ duration: 0.3 }}
                 >
@@ -46,7 +46,7 @@ const Features = () => {
                 </motion.h2>
                 <motion.p 
                     className='text-[1.75rem] text-center'
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "150%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }} 
                     transition={{ duration: 0.5 }}
                 >
@@ -60,7 +60,7 @@ const Features = () => {
                 <Image src={Chat} alt='' height={60} width={60} />
                 <motion.h2 
                     className='text-[3rem] text-center'
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "150%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }} 
                     transition={{ duration: 0.3 }}
                 >
@@ -68,7 +68,7 @@ const Features = () => {
                 </motion.h2>
                 <motion.p 
                     className='text-[1.75rem] text-center'
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "150%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }} 
                     transition={{ duration: 0.5 }}
                 >
@@ -82,7 +82,7 @@ const Features = () => {
                 <Image src={Conversation} alt='' height={60} width={60} />
                 <motion.h2 
                     className='text-[3rem] text-center'
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "150%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }} 
                     transition={{ duration: 0.3 }}
                 >
@@ -90,7 +90,7 @@ const Features = () => {
                 </motion.h2>
                 <motion.p 
                     className='text-[1.75rem] text-center'
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "150%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }} 
                     transition={{ duration: 0.5 }}
                 >

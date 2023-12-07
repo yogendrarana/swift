@@ -7,47 +7,30 @@ import Preview2 from '@/src/assets/images/preview-2.png'
 
 const Preview = () => {
     return (
-        <div className="">
-            <h2 className="mb-[2rem] text-[5rem] font-bold text-center text-gray-600" >
-                Preview
-            </h2>
+        <div>
+            <h2 className="mb-[2rem] text-[5rem] font-bold text-center text-gray-600" > Preview </h2>
 
-            <div className="flex gap-[1rem] sm:flex-col">
+            <div className="relative flex gap-[1rem] sm:flex-col rounded-[1rem] shadow-lg">
                 <motion.div
-                    className="relative border rounded-[1rem] overflow-hidden"
-                    initial={{ y: "20%", opacity: 0 }}
+                    className="p-[1rem] relative border rounded-[1rem] overflow-hidden bg-white"
+                    initial={{ y: "30%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }}
                     transition={{ duration: 0.3 }}
                 >
+                    {/* preview 1 */}
                     <Image src={Preview1} alt="chat image" />
-                    <div
-                        className="
-                            absolute inset-0 
-                            opacity-[0.25] 
-                            z-[5]
-                            bg-gradient-to-b from-gray-200 to-gray-500
-                        "
-                    >
-                    </div>
                 </motion.div>
 
+                {/* preview 2 */}
                 <motion.div
-                    className="relative border rounded-[1rem] overflow-hidden"
-                    initial={{ y: "20%", opacity: 0 }}
+                    className="h-[42rem] w-[28rem] p-[1rem] bg-white absolute bottom-[-2rem] left-[-2rem] border-2 border-gray-400 rounded-[1rem] overflow-auto shadow-lg"
+                    initial={{ y: "30%", opacity: 0 }}
                     whileInView={{ y: "0%", opacity: 1 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <Image src={Preview2} alt="chat image" />
-                    <div
-                        className="
-                            absolute inset-0 
-                            opacity-[0.25] 
-                            z-[5]
-                            bg-gradient-to-b from-gray-200 to-gray-500
-                        "
-                    >
-                    </div>
+                    <Image src={Preview2} alt="chat image" className="h-full w-full" />
                 </motion.div>
+
             </div>
         </div>
     )

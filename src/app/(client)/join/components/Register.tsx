@@ -59,6 +59,19 @@ const Register = () => {
             </div>
 
             <Label htmlFor="name" className='w-full text-[1.45rem]'>
+                <p>Pick your avatar</p>
+                <Input
+                    type="text"
+                    id="name"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className='mt-[0.75rem] px-[1.25rem] py-[1.85rem] text-[1.25rem] placeholder:text-[1.25rem]'
+                />
+            </Label>
+
+
+            <Label htmlFor="name" className='w-full text-[1.45rem]'>
                 <p>Name</p>
                 <Input
                     type="text"
