@@ -31,7 +31,7 @@ const Banner = () => {
             </div>
 
             {/* absolute */}
-            <Image
+            {/* <Image
                 src={Chat}
                 height={50}
                 width={50}
@@ -44,7 +44,7 @@ const Banner = () => {
                 width={50}
                 alt="chat icon"
                 className="absolute bottom-[20rem] right-[15%] rotate-12"
-            />
+            /> */}
         </div>
     )
 }
