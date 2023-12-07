@@ -12,6 +12,7 @@ import { userToChat } from "../../drizzle/schema/userToChat.join";
 // import relations
 import { userRelations } from "../../drizzle/schema/user.schema";
 import { chatRelations } from "../../drizzle/schema/chat.schema";
+import { avatarSchema } from './../../drizzle/schema/avatar.schema';
 import { messageRelations } from "../../drizzle/schema/message.schema";
 import { userToChatRelations } from "../../drizzle/schema/userToChat.join";
 
@@ -33,4 +34,5 @@ export const db = drizzle(pool, {mode: "default", schema: {
     messageRelations,
     userToChat,
     userToChatRelations,
+    avatarSchema
 }});

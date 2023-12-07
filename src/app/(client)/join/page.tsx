@@ -1,7 +1,9 @@
 "use client"
 
 
+import axios from 'axios';
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 
 // import components
@@ -10,9 +12,26 @@ import Register from './components/Register'
 import { Button } from '@/src/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
 
+import { AvatarType } from '@/drizzle/schema/avatar.schema';
+
 
 const Join = () => {
     const router = useRouter();
+    const [avatars, setAvatars] = useState([])
+
+    useEffect(() => {
+        const getAvatars = async () => {
+            try {
+                const { data, status } = await axios.get('/api/avatars');
+                if (status >= 300) throw Error(data);
+                setAvatars(data?.avatars);
+            } catch (err: any) {
+                console.log("err", err)
+            }
+        }
+
+        getAvatars()
+    }, []);
 
     return (
         <section className='h-[100vh] grid place-items-center relative'>
@@ -35,7 +54,7 @@ const Join = () => {
                 </TabsContent>
 
                 <TabsContent value="REGISTER">
-                    <Register />
+                    <Register avatars={avatars} />
                 </TabsContent>
             </Tabs>
         </section>

@@ -2,21 +2,31 @@
 
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import React, { useState } from 'react'
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
 
 // import components
+import Image from 'next/image';
 import { Input } from '@/src/components/ui/input';
 import { Label } from '@/src/components/ui/label';
 import { Button } from '@/src/components/ui/button';
 
-const Register = () => {
+// import type
+import { AvatarType } from '@/drizzle/schema/avatar.schema';
+
+// define prop type
+type PropType = {
+    avatars: AvatarType[]
+}
+
+const Register = ({avatars}: PropType) => {
     const router = useRouter();
-    const [name, setName] = useState('Abc');
-    const [isLoading, setIsLoading] = useState(false);
-    const [email, setEmail] = useState('abc@gmail.com');
-    const [password, setPassword] = useState('password');
+    const [name, setName] = useState<string>('');
+    const [isLoading, setIsLoading] = useState<boolean>();
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [selectedAvatar, setSelectedAvatar] = useState<AvatarType>(avatars && avatars[0]);
 
 
     const handleRegister = async () => {
@@ -30,7 +40,7 @@ const Register = () => {
         }
 
         try {
-            const res = await axios.post('/api/auth/register', { name, email, password });
+            const res = await axios.post('/api/auth/register', { name, email, password, avatar: selectedAvatar.url });
             if (res.data.success && res.status === 201) toast.success(res.data.message, { id: toastId });
 
             // next auth signIn returns error, ok, status, url
@@ -58,16 +68,30 @@ const Register = () => {
                 <p className='text-[1.25rem] text-[#767676]'>Create an account to get started with our platform.</p>
             </div>
 
-            <Label htmlFor="name" className='w-full text-[1.45rem]'>
+            <Label className='w-full text-[1.45rem]'>
                 <p>Pick your avatar</p>
-                <Input
-                    type="text"
-                    id="name"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className='mt-[0.75rem] px-[1.25rem] py-[1.85rem] text-[1.25rem] placeholder:text-[1.25rem]'
-                />
+                <div className='mt-[0.5rem] flex gap-[1rem]'>
+                    {
+                        avatars && avatars.length && avatars.map((avatar) => (
+                            <div key={avatar.id} className='relative'>
+                                <Image 
+                                    src={avatar.url} 
+                                    alt="avatar" 
+                                    height={75} 
+                                    width={75} 
+                                    className={`p-[1rem] cursor-pointer border rounded-[1rem] duration-200 ${avatar.id === selectedAvatar.id ? "" : ""}`} 
+                                    onClick={() => setSelectedAvatar(avatar)}
+                                />
+
+                                <div 
+                                    className={`absolute right-[0.25rem] bottom-[0.25rem] text-[1.25rem] text-green-500 ${avatar.id === selectedAvatar.id ? "" : "hidden"}`}
+                                >
+                                    <i className="fa-regular fa-circle-check"></i>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
             </Label>
 
 

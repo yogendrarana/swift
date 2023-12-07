@@ -17,7 +17,7 @@ export const userSchema = mysqlTable(
         isVerified: boolean('is_verified'),
         password: varchar('password', { length: 255 }).notNull(),
         role: mysqlEnum('role', ['admin', 'user']).notNull().default('user'),
-        image: text('image'),
+        avatar: text('avatar'),
 
         createdAt: timestamp('created_at').defaultNow().notNull(),
         updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),

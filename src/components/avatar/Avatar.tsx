@@ -5,7 +5,8 @@ import Image from 'next/image'
 // import temporary image
 import userPic from '@/src/assets/images/user.jpg'
 import useActiveUsers from '@/src/hooks/useActiveUsers'
-import { useSession } from 'next-auth/react';
+
+// import type
 import { UserType } from '@/drizzle/schema/user.schema';
 
 const Avatar = ({ height, width, user }: { height: number, width: number, user: UserType | null }) => {
@@ -18,7 +19,7 @@ const Avatar = ({ height, width, user }: { height: number, width: number, user: 
             <Image
                 height={height}
                 width={width}
-                src={userPic}
+                src={user?.avatar || userPic}
                 alt='avatar-img'
                 className='rounded-full border'
             />

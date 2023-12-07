@@ -7,7 +7,7 @@ import { userSchema } from "@/drizzle/schema/user.schema"
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
-    const { name, email, password } = body;
+    const { name, email, password, avatar } = body;
 
 
     // check if all the fields are filled
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
         const passwordHash = await bcrypt.hash(password, 10);
 
         // insert into user table
-        const [newUser] = await db.insert(userSchema).values({ name, email, password: passwordHash });
+        const [newUser] = await db.insert(userSchema).values({ name, email, password: passwordHash, avatar });
         const insertId = newUser.insertId;
 
         // return success message

@@ -155,6 +155,20 @@
       "when": 1700809812801,
       "tag": "0021_low_hellfire_club",
       "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "5",
+      "when": 1701947916337,
+      "tag": "0022_acoustic_dragon_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "5",
+      "when": 1701962359774,
+      "tag": "0023_magenta_the_fallen",
+      "breakpoints": true
     }
   ]
 }

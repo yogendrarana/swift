@@ -8,7 +8,7 @@
         "start": "next start",
         "lint": "next lint",
         "db:generate": "drizzle-kit generate:mysql",
-        "db:deploy": "ts-node ./drizzle/migrator.ts"
+        "db:migrate": "ts-node ./drizzle/migrator.ts"
     },
     "dependencies": {
         "@auth/drizzle-adapter": "^0.3.2",

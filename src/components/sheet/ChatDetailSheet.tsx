@@ -38,7 +38,7 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
                 '
             >
                 <div className='flex gap-[0.5rem] flex-col items-center'>
-                    <Avatar height={75} width={75} user={null} />
+                    <Avatar height={75} width={75} user={otherUser?.user || null} />
                 </div>
 
                 {!chat?.isGroupChat && <div className="flex flex-col gap-[0.5rem]">
