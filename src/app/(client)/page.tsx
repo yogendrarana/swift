@@ -7,9 +7,10 @@ import { useSession } from "next-auth/react";
 
 
 // import components
+import Preview from "@/src/components/home/Preview";
+import Banner from "@/src/components/home/Banner";
 import Footer from "@/src/components/home/Footer";
 import Navbar from "@/src/components/home/Navbar";
-import { Button } from "@/src/components/ui/button";
 import Features from "@/src/components/home/Features";
 
 
@@ -27,20 +28,11 @@ export default function Home() {
 
     return (
         <main>
-            <div className='px-[10rem] flex flex-col justify-between'>
+            <div className='px-[10rem] flex flex-col gap-[1rem] lg:px-[8rem] md:px-[5rem] sm:px-[2rem]'>
                 <Navbar />
-
-                <div className='h-[calc(100vh-var(--nav-height))] flex gap-[5rem]'>
-                    <div className='flex flex-col flex-1 justify-center items-center'>
-                        <p className='text-[5rem] leading-none text-center' style={{ background: 'linear-gradient(to right, var(--main-blue), var(--main-green))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                            Bring your <br /> conversations to life with Swift
-                        </p>
-                        <p className='my-[3rem] text-[2rem]'>A simple app that lets you text, video call, and stay close to people you care about. </p>
-                        <Button className='w-[20rem] px-[1.75rem] py-[2.5rem] text-[1.5rem] text-black hover:bg-[var(--main-blue)] rounded-[5rem] bg-[var(--main-green)]'>Download For Mobile</Button>
-                    </div>
-                </div>
-
+                <Banner />
                 <Features />
+                <Preview />
                 <Footer />
             </div>
         </main>

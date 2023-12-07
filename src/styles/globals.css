@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-    --main-padding: 10rem;
     --nav-height: 10rem;
+    --main-padding: 10rem;
     --main-blue: #62e1fb;
     --main-green: #90ebbc;
 

@@ -1,25 +1,34 @@
 "use client"
 
+
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 
-// import logo
-import logo from "@/src/assets/icons/logo.png"
 
 // import hook
 import useNavbar from '@/src/hooks/useNavbar'
 
+
+// import logo
+import logo from "@/src/assets/icons/logo.png"
+
+
 const Navbar = () => {
     const router = useRouter();
-    const pathname = usePathname();
-    
     const navlinks = useNavbar();
+    const pathname = usePathname();
 
     return (
-        <nav className='h-[var(--nav-height)] w-[100%] flex items-center sticky top-0'>
-            <div className='absolute top-0 left-0 right-0 bottom-0 z-[-10] bg-white opacity-[0.75]'></div>
+        <nav 
+            className='
+                h-[var(--nav-height)] w-[100%] 
+                flex items-center
+                top-0 z-[10] 
+                bg-white
+            '
+        >
             
             <div className='mr-auto text-[2rem]'>
                 <Link href='/'>
@@ -30,7 +39,7 @@ const Navbar = () => {
             <ul className='flex items-center'>
                 {
                     navlinks.map((link, index) => {
-                        const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                        const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href));
 
                         return (
                             <li onClick={() => router.push(link.href)} key={index} className='ml-[3rem] py-[0.75rem] text-[1.6rem] cursor-pointer last:bg-[var(--main-blue)] last:px-[2.5rem] last:rounded-[5rem]'>
