@@ -8,9 +8,7 @@ import Preview2 from '@/src/assets/images/preview-2.png'
 const Preview = () => {
     return (
         <div className="">
-            <h2
-                className="mb-[2rem] text-[5rem] font-bold text-center"
-            >
+            <h2 className="mb-[2rem] text-[5rem] font-bold text-center text-gray-600" >
                 Preview
             </h2>
 
