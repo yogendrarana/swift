@@ -2,9 +2,9 @@
 
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import React, { useState } from 'react'
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
 
 // import components
 import Image from 'next/image';
@@ -70,7 +70,7 @@ const Register = ({avatars}: PropType) => {
 
             <Label className='w-full text-[1.45rem]'>
                 <p>Pick your avatar</p>
-                <div className='mt-[0.5rem] flex gap-[1rem]'>
+                <div className='mt-[0.5rem] flex gap-[0.5rem]'>
                     {
                         avatars && avatars.length && avatars.map((avatar) => (
                             <div key={avatar.id} className='relative'>
@@ -79,12 +79,12 @@ const Register = ({avatars}: PropType) => {
                                     alt="avatar" 
                                     height={75} 
                                     width={75} 
-                                    className={`p-[1rem] cursor-pointer border rounded-[1rem] duration-200 ${avatar.id === selectedAvatar.id ? "" : ""}`} 
+                                    className={`p-[0.25rem] cursor-pointer border rounded-[1rem] duration-200 ${avatar.id === selectedAvatar.id ? "" : ""}`} 
                                     onClick={() => setSelectedAvatar(avatar)}
                                 />
 
                                 <div 
-                                    className={`absolute right-[0.25rem] bottom-[0.25rem] text-[1.25rem] text-green-500 ${avatar.id === selectedAvatar.id ? "" : "hidden"}`}
+                                    className={`absolute right-[-0.25rem] bottom-[-0.25rem] text-[1rem] text-green-500 ${avatar.id === selectedAvatar.id ? "" : "hidden"}`}
                                 >
                                     <i className="fa-regular fa-circle-check"></i>
                                 </div>
