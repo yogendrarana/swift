@@ -12,8 +12,6 @@ import Register from './components/Register'
 import { Button } from '@/src/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
 
-import { AvatarType } from '@/drizzle/schema/avatar.schema';
-
 
 const Join = () => {
     const router = useRouter();

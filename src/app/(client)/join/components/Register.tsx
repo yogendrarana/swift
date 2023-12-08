@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -20,13 +20,13 @@ type PropType = {
     avatars: AvatarType[]
 }
 
-const Register = ({avatars}: PropType) => {
+const Register = ({ avatars }: PropType) => {
     const router = useRouter();
     const [name, setName] = useState<string>('');
-    const [isLoading, setIsLoading] = useState<boolean>();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [selectedAvatar, setSelectedAvatar] = useState<AvatarType>(avatars && avatars[0]);
+    const [isLoading, setIsLoading] = useState<boolean>();
+    const [selectedAvatar, setSelectedAvatar] = useState<AvatarType | null>(null);
 
 
     const handleRegister = async () => {
@@ -40,7 +40,7 @@ const Register = ({avatars}: PropType) => {
         }
 
         try {
-            const res = await axios.post('/api/auth/register', { name, email, password, avatar: selectedAvatar.url });
+            const res = await axios.post('/api/auth/register', { name, email, password, avatar: selectedAvatar?.url });
             if (res.data.success && res.status === 201) toast.success(res.data.message, { id: toastId });
 
             // next auth signIn returns error, ok, status, url
@@ -74,17 +74,17 @@ const Register = ({avatars}: PropType) => {
                     {
                         avatars && avatars.length && avatars.map((avatar) => (
                             <div key={avatar.id} className='relative'>
-                                <Image 
-                                    src={avatar.url} 
-                                    alt="avatar" 
-                                    height={75} 
-                                    width={75} 
-                                    className={`p-[0.25rem] cursor-pointer border rounded-[1rem] duration-200 ${avatar.id === selectedAvatar.id ? "" : ""}`} 
+                                <Image
+                                    src={avatar.url}
+                                    alt="avatar"
+                                    height={75}
+                                    width={75}
+                                    className={`p-[0.25rem] cursor-pointer border rounded-[1rem] duration-200 ${avatar.id === selectedAvatar?.id ? "" : ""}`}
                                     onClick={() => setSelectedAvatar(avatar)}
                                 />
 
-                                <div 
-                                    className={`absolute right-[-0.25rem] bottom-[-0.25rem] text-[1rem] text-green-500 ${avatar.id === selectedAvatar.id ? "" : "hidden"}`}
+                                <div
+                                    className={`absolute right-[-0.25rem] bottom-[-0.25rem] text-[1rem] text-green-500 ${avatar.id === selectedAvatar?.id ? "" : "hidden"}`}
                                 >
                                     <i className="fa-regular fa-circle-check"></i>
                                 </div>
