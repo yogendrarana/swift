@@ -1,18 +1,18 @@
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 // pusher
-import { pusherServer } from "@/src/pusher/pusher";
+import { pusherServer } from "@/pusher/pusher";
 
 // import actions
-import getCurrentUser from "@/src/actions/getCurrentUser";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 // import schemas
-import { chatSchema } from "@/drizzle/schema/chat.schema";
-import { userSchema } from "@/drizzle/schema/user.schema";
-import { userToChat } from "@/drizzle/schema/userToChat.join";
-import { messageSchema } from "@/drizzle/schema/message.schema";
+import { chatSchema } from "@/db/drizzle/schema/chat.schema";
+import { userSchema } from "@/db/drizzle/schema/user.schema";
+import { userToChat } from "@/db/drizzle/schema/userToChat.join";
+import { messageSchema } from "@/db/drizzle/schema/message.schema";
 
 
 export async function POST(req: NextRequest) {

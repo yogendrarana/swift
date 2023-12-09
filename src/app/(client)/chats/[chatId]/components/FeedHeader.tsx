@@ -5,17 +5,17 @@ import toast from 'react-hot-toast'
 
 
 // import components
-import Avatar from '@/src/components/avatar/Avatar'
-import ChatDetailSheet from '@/src/components/sheet/ChatDetailSheet'
+import Avatar from '@/components/avatar/Avatar'
+import ChatDetailSheet from '@/components/sheet/ChatDetailSheet'
 
 
 // import types
-import { FullChatType } from '@/src/types/types'
+import { FullChatType } from '@/types/types'
 
 
 // import hooks
-import useOtherUser from '@/src/hooks/useOtherUser'
-import useActiveUsers from '@/src/hooks/useActiveUsers'
+import useOtherUser from '@/hooks/useOtherUser'
+import useActiveUsers from '@/hooks/useActiveUsers'
 
 
 // prop type

@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt"
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import { eq } from "drizzle-orm"
 import { NextRequest, NextResponse } from "next/server";
-import { userSchema } from "@/drizzle/schema/user.schema"
+import { userSchema } from "@/db/drizzle/schema/user.schema"
 
 
 export async function POST(request: NextRequest) {

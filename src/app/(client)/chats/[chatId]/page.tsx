@@ -1,15 +1,14 @@
 import React from "react";
 
 // import components
-import Empty from '@/src/components/util/Empty'
 import FeedBody from "./components/FeedBody";
 import FeedFooter from "./components/FeedFooter";
 import FeedHeader from "./components/FeedHeader";
 
 
 // import actions
-import getChatById from "@/src/actions/getChatById";
-import getChatMessages from "@/src/actions/getChatMessages";
+import getChatById from "@/actions/getChatById";
+import getChatMessages from "@/actions/getChatMessages";
 
 interface IParams {
     chatId: string;

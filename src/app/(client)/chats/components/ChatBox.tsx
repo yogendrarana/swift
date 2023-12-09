@@ -3,18 +3,18 @@
 import axios from 'axios'
 import { format } from 'date-fns'
 import { useSession } from 'next-auth/react'
-import { pusherClient } from '@/src/pusher/pusher'
+import { pusherClient } from '@/pusher/pusher'
 import React, { useEffect, useState } from 'react'
 
 
 // components
 import Link from 'next/link'
+import Avatar from '@/components/avatar/Avatar'
 
 
 // types
-import { ChatType } from '@/drizzle/schema/chat.schema'
-import { UserType } from '@/drizzle/schema/user.schema'
-import Avatar from '@/src/components/avatar/Avatar'
+import { ChatType } from '@/db/drizzle/schema/chat.schema'
+import { UserType } from '@/db/drizzle/schema/user.schema'
 
 // prop types
 interface ChatBoxProps {

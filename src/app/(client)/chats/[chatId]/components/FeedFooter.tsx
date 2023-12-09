@@ -11,7 +11,7 @@ import { CldUploadButton } from "next-cloudinary"
 
 
 // import hooks
-import useChat from "@/src/hooks/useChat";
+import useChat from "@/hooks/useChat";
 
 
 const FeedFooter = () => {

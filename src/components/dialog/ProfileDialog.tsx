@@ -3,14 +3,13 @@
 import React from "react";
 
 // import components
-import UserDetail from "@/src/components/user/UserDetail";
-import { DropdownMenuItem } from "@/src/components/ui/dropdown-menu";
-import UpdateUserDetail from "@/src/components/user/UpdateUserDetail";
-import { Dialog, DialogTrigger, DialogContent } from "@/src/components/ui/dialog"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
+import UserDetail from "@/components/user/UserDetail";
+import UpdateUserDetail from "@/components/user/UpdateUserDetail";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 // import types
-import { UserType } from "@/drizzle/schema/user.schema";
+import { UserType } from "@/db/drizzle/schema/user.schema";
 
 // prop type
 type ProfileDialogPropsType = {

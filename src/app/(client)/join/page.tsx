@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react'
 // import components
 import Login from './components/Login'
 import Register from './components/Register'
-import { Button } from '@/src/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 
 const Join = () => {

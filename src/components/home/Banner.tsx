@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { Button } from '../ui/button'
 
 // import image
-import Chat from '@/src/assets/images/chat.png'
-import ChatBox from '@/src/assets/images/chat-box.png'
+import Chat from '@/assets/images/chat.png'
+import ChatBox from '@/assets/images/chat-box.png'
 
 const Banner = () => {
     return (
@@ -31,7 +31,7 @@ const Banner = () => {
             </div>
 
             {/* absolute */}
-            {/* <Image
+            <Image
                 src={Chat}
                 height={50}
                 width={50}
@@ -44,7 +44,7 @@ const Banner = () => {
                 width={50}
                 alt="chat icon"
                 className="absolute bottom-[20rem] right-[15%] rotate-12"
-            /> */}
+            />
         </div>
     )
 }

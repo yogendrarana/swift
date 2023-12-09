@@ -3,10 +3,10 @@
 import React from 'react'
 
 // import components
-import Empty from '@/src/components/util/Empty'
+import Empty from '@/components/util/Empty'
 
 // import hooks
-import useChat from '@/src/hooks/useChat'
+import useChat from '@/hooks/useChat'
 
 const UsersPage = () => {
     const { isChatOpen } = useChat();

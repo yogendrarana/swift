@@ -1,7 +1,9 @@
-import { messageSchema } from "@/drizzle/schema/message.schema";
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import { desc, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
+
+// import schemas
+import { messageSchema } from "@/db/drizzle/schema/message.schema";
 
 export async function GET(req: NextRequest) {
     const url = new URL(req.url);

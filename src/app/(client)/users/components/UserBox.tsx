@@ -2,23 +2,18 @@
 
 
 import axios from "axios"
-import Image from "next/image"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import React, { useCallback, useState } from "react"
 
 
-// temporary user profile pic
-import userPic from '@/src/assets/images/user.jpg'
-
-
 // import components
-import DotWave from "@/src/components/loading/DotWave"
+import DotWave from "@/components/loading/DotWave"
 
 
 // import types
-import { UserType } from "@/drizzle/schema/user.schema"
-import Avatar from "@/src/components/avatar/Avatar"
+import { UserType } from "@/db/drizzle/schema/user.schema"
+import Avatar from "@/components/avatar/Avatar"
 
 
 // user box props

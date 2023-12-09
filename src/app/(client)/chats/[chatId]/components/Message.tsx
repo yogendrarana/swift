@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 
 // import types
-import { FullMessageType } from '@/src/types/types';
+import { FullMessageType } from '@/types/types';
 
 // define prop types
 type PropType = {

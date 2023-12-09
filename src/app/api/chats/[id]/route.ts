@@ -1,12 +1,12 @@
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import { eq } from "drizzle-orm";
-import { pusherServer } from "@/src/pusher/pusher";
+import { pusherServer } from "@/pusher/pusher";
 import { NextRequest, NextResponse } from "next/server";
 
 // import schema
-import { chatSchema } from "@/drizzle/schema/chat.schema";
-import { userSchema } from "@/drizzle/schema/user.schema";
-import { userToChat } from "@/drizzle/schema/userToChat.join";
+import { chatSchema } from "@/db/drizzle/schema/chat.schema";
+import { userSchema } from "@/db/drizzle/schema/user.schema";
+import { userToChat } from "@/db/drizzle/schema/userToChat.join";
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
 

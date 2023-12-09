@@ -10,15 +10,15 @@ import Options from './Options';
 
 
 // import image
-import Logo from "@/src/assets/icons/logo.png"
+import Logo from "@/assets/icons/logo.png"
 
 
 // import hook
-import useSidebar from '@/src/hooks/useSidebar';
+import useSidebar from '@/hooks/useSidebar';
 
 
 // import types
-import { SidebarOptionsType } from '@/src/types/types';
+import { SidebarOptionsType } from '@/types/types';
 
 
 const DesktopSidebar = () => {

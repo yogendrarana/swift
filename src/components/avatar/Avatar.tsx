@@ -3,11 +3,11 @@
 import Image from 'next/image'
 
 // import temporary image
-import userPic from '@/src/assets/images/user.jpg'
-import useActiveUsers from '@/src/hooks/useActiveUsers'
+import userPic from '@/assets/images/user.jpg'
+import useActiveUsers from '@/hooks/useActiveUsers'
 
 // import type
-import { UserType } from '@/drizzle/schema/user.schema';
+import { UserType } from '@/db/drizzle/schema/user.schema';
 
 const Avatar = ({ height, width, user }: { height: number, width: number, user: UserType | null }) => {
 

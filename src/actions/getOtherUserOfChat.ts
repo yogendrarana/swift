@@ -1,8 +1,8 @@
 import { db } from "../db/db"
 import { and, eq, not } from "drizzle-orm"
 import getCurrentUser from "./getCurrentUser";
-import { userSchema } from "@/drizzle/schema/user.schema";
-import { userToChat } from "@/drizzle/schema/userToChat.join"
+import { userSchema } from "@/db/drizzle/schema/user.schema";
+import { userToChat } from "@/db/drizzle/schema/userToChat.join"
 
 const getOtherUserOfChat = async (chatId: number) => {
     const currentUser = await getCurrentUser();

@@ -2,12 +2,12 @@ import React from 'react'
 
 // import components
 import ChatList from './components/ChatList';
-import Sidebar from '@/src/components/chat/Sidebar'
+import Sidebar from '@/components/chat/Sidebar'
 
 // import actions
-import getUserChats from '@/src/actions/getUserChats';
-import { getAllUsers } from '@/src/actions/getAllUsers';
-import getCurrentUser from '@/src/actions/getCurrentUser';
+import getUserChats from '@/actions/getUserChats';
+import { getAllUsers } from '@/actions/getAllUsers';
+import getCurrentUser from '@/actions/getCurrentUser';
 
 const ChatsLayout = async ({ children }: { children: React.ReactNode }) => {
     const users = await getAllUsers();

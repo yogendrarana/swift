@@ -1,6 +1,6 @@
-import { UserType } from "@/drizzle/schema/user.schema"
-import { ChatType } from "@/drizzle/schema/chat.schema"
-import { MessageType } from "@/drizzle/schema/message.schema"
+import { UserType } from "@/db/drizzle/schema/user.schema"
+import { ChatType } from "@/db/drizzle/schema/chat.schema"
+import { MessageType } from "@/db/drizzle/schema/message.schema"
 
 
 // sidebar types

@@ -2,7 +2,7 @@ import { db } from "../db/db"
 import { asc, eq } from "drizzle-orm"
 
 // import schemas
-import { messageSchema } from "@/drizzle/schema/message.schema"
+import { messageSchema } from "@/db/drizzle/schema/message.schema"
 
 const getChatMessages = async (chatId: number) => {
     const result = await db.query.messageSchema.findMany({

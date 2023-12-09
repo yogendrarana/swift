@@ -3,10 +3,10 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 // import image
-import Chat from '@/src/assets/images/chat.png'
-import ChatBox from '@/src/assets/images/chat-box.png'
-import LiveChat from '@/src/assets/images/live-chat.png'
-import Conversation from '@/src/assets/images/conversation.png'
+import Chat from '@/assets/images/chat.png'
+import ChatBox from '@/assets/images/chat-box.png'
+import LiveChat from '@/assets/images/live-chat.png'
+import Conversation from '@/assets/images/conversation.png'
 
 const Features = () => {
     return (

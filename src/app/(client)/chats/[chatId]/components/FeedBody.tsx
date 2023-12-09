@@ -2,20 +2,18 @@
 
 import { find } from 'lodash';
 import React, { useEffect, useRef } from 'react'
-import Pusher from 'pusher-js';
 
 // import components
 import Message from './Message';
 
 // hooks
-import useChat from '@/src/hooks/useChat';
+import useChat from '@/hooks/useChat';
 
 // pusher
-import { pusherClient } from '@/src/pusher/pusher';
+import { pusherClient } from '@/pusher/pusher';
 
 // import types
-import { FullMessageType } from '@/src/types/types';
-import { char } from 'drizzle-orm/mysql-core';
+import { FullMessageType } from '@/types/types';
 
 type PropType = {
     initialMessages: FullMessageType[];

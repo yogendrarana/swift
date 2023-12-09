@@ -5,8 +5,8 @@ import { drizzle } from "drizzle-orm/mysql2";
 // import schemas
 import { userSchema } from "./drizzle/schema/user.schema";
 import { chatSchema } from "./drizzle/schema/chat.schema";
-import { messageSchema } from "./drizzle/schema/message.schema";
 import { userToChat } from "./drizzle/schema/userToChat.join";
+import { messageSchema } from "./drizzle/schema/message.schema";
 
 
 // import relations

@@ -2,7 +2,7 @@ import { db } from "../db/db"
 import { eq } from "drizzle-orm"
 
 // import schemas
-import { chatSchema } from "@/drizzle/schema/chat.schema"
+import { chatSchema } from "@/db/drizzle/schema/chat.schema"
 
 // import action
 import getCurrentUser from "./getCurrentUser";

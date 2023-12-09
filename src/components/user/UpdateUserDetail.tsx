@@ -2,10 +2,9 @@
 
 
 import axios from 'axios';
-import { set } from 'date-fns';
-import { useSession } from 'next-auth/react';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
 
 
 const UpdateUserDetail = () => {

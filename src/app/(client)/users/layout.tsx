@@ -3,11 +3,11 @@ import React from 'react'
 
 // import components
 import UserList from './components/UserList';
-import Sidebar from '@/src/components/chat/Sidebar'
+import Sidebar from '@/components/chat/Sidebar'
 
 
 // import actions
-import { getAllUsers } from '@/src/actions/getAllUsers';
+import { getAllUsers } from '@/actions/getAllUsers';
 
 
 const UserLayout = async ({ children }: { children: React.ReactNode }) => {

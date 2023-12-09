@@ -1,7 +1,7 @@
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import { desc, ne } from "drizzle-orm";
 import getAuthSession from "./getAuthSession";
-import { userSchema } from "../../drizzle/schema/user.schema";
+import { userSchema } from "@/db/drizzle/schema/user.schema";
 
 
 export const getAllUsers = async () => {

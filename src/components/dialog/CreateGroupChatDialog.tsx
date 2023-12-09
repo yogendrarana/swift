@@ -16,11 +16,11 @@ import {
     DialogContent,
     DialogHeader,
     DialogDescription
-} from "@/src/components/ui/dialog"
+} from "@/components/ui/dialog"
 
 
 // import types
-import { UserType } from "@/drizzle/schema/user.schema";
+import { UserType } from "@/db/drizzle/schema/user.schema";
 
 
 // prop type

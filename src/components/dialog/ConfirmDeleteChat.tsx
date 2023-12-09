@@ -8,7 +8,7 @@ import { Button } from '../ui/button'
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '../ui/dialog'
 
 // import ty[es]
-import { FullChatType } from '@/src/types/types'
+import { FullChatType } from '@/types/types'
 
 // prop type
 type PropType = {
@@ -53,7 +53,7 @@ const ConfirmDeleteChat: React.FC<PropType> = ({ chat }) => {
                         Delete
                     </Button>
                     <DialogClose asChild>
-                        <Button variant='outline' className='py-[1.75rem] text-[1.25rem] dark:bg-[var(--dmode-black-secondary)] dark:text-[var(--dmode-white)]'>Cancel</Button>
+                        <Button variant='outline' disabled={isLoading} className='py-[1.75rem] text-[1.25rem] dark:bg-[var(--dmode-black-secondary)] dark:text-[var(--dmode-white)]'>Cancel</Button>
                     </DialogClose>
                 </div>
             </DialogContent>

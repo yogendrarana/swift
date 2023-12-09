@@ -1,9 +1,13 @@
-import { userSchema } from "@/drizzle/schema/user.schema";
-import { userToChat } from "@/drizzle/schema/userToChat.join";
-import getCurrentUser from "@/src/actions/getCurrentUser";
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import { and, eq, not } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
+
+// import actions
+import getCurrentUser from "@/actions/getCurrentUser";
+
+// import schemas
+import { userSchema } from "@/db/drizzle/schema/user.schema";
+import { userToChat } from "@/db/drizzle/schema/userToChat.join";
 
 export async function GET(req: NextRequest) {
     const url = new URL(req.url);

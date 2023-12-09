@@ -1,7 +1,7 @@
-import { db } from "@/src/db/db"
+import { db } from "@/db/db"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
-import { UserType, userSchema } from "@/drizzle/schema/user.schema"
+import { UserType, userSchema } from "@/db/drizzle/schema/user.schema"
 
 
 // Path: /api/profile/route.ts

@@ -3,21 +3,21 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { pusherClient } from '@/src/pusher/pusher';
+import { pusherClient } from '@/pusher/pusher';
 
 
 // import components
 import ChatBox from './ChatBox'
-import CreateGroupChatDialog from '@/src/components/dialog/CreateGroupChatDialog';
+import CreateGroupChatDialog from '@/components/dialog/CreateGroupChatDialog';
 
 
 // import hooks
-import useChat from '@/src/hooks/useChat';
+import useChat from '@/hooks/useChat';
 
 
 // import types
-import { ChatType } from '@/drizzle/schema/chat.schema';
-import { UserType } from '@/drizzle/schema/user.schema';
+import { ChatType } from '@/db/drizzle/schema/chat.schema';
+import { UserType } from '@/db/drizzle/schema/user.schema';
 
 
 // define prop types

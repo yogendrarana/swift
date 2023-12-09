@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 
 // import types
-import { UserType } from '@/drizzle/schema/user.schema'
+import { UserType } from '@/db/drizzle/schema/user.schema'
 
 
 // prop type

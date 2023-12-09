@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import { db } from '@/src/db/db';
+import { db } from '@/db/db';
 import { eq } from 'drizzle-orm';
 import NextAuth, { AuthOptions } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { userSchema } from '@/drizzle/schema/user.schema';
+import { userSchema } from '@/db/drizzle/schema/user.schema';
 import CredentialProvider from "next-auth/providers/credentials";
 
 

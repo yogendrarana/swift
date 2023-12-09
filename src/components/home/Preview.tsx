@@ -2,8 +2,8 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 
 // import image
-import Preview1 from '@/src/assets/images/preview-1.png'
-import Preview2 from '@/src/assets/images/preview-2.png'
+import Preview1 from '@/assets/images/preview-1.png'
+import Preview2 from '@/assets/images/preview-2.png'
 
 const Preview = () => {
     return (

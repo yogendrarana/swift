@@ -1,4 +1,4 @@
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import { sql } from "drizzle-orm";
 import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
 
@@ -6,8 +6,8 @@ import { MySqlRawQueryResult } from "drizzle-orm/mysql2";
 import getCurrentUser from "./getCurrentUser";
 
 // import schemas
-import { chatSchema } from "../../drizzle/schema/chat.schema";
-import { userToChat } from "../../drizzle/schema/userToChat.join";
+import { chatSchema } from "@/db/drizzle/schema/chat.schema";
+import { userToChat } from "@/db/drizzle/schema/userToChat.join";
 
 const getUserChats = async () => {
     const currentUser = await getCurrentUser();

@@ -10,11 +10,11 @@ import Options from './Options';
 
 
 // import hooks
-import useSidebar from '@/src/hooks/useSidebar'
+import useSidebar from '@/hooks/useSidebar'
 
 
 // import types
-import { SidebarOptionsType } from '@/src/types/types';
+import { SidebarOptionsType } from '@/types/types';
 
 
 const MobileFooter = () => {

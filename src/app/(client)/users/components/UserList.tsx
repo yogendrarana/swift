@@ -1,7 +1,7 @@
 "use client"
 
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 
 // import components
@@ -9,7 +9,7 @@ import UserBox from './UserBox';
 
 
 // import types
-import { UserType } from '@/drizzle/schema/user.schema';
+import { UserType } from '@/db/drizzle/schema/user.schema';
 
 
 // define prop types

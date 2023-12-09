@@ -8,12 +8,12 @@ import { useRouter } from 'next/navigation';
 
 // import components
 import Image from 'next/image';
-import { Input } from '@/src/components/ui/input';
-import { Label } from '@/src/components/ui/label';
-import { Button } from '@/src/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 // import type
-import { AvatarType } from '@/drizzle/schema/avatar.schema';
+import { AvatarType } from '@/db/drizzle/schema/avatar.schema';
 
 // define prop type
 type PropType = {

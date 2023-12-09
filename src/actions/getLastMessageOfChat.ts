@@ -2,7 +2,7 @@ import { db } from "../db/db"
 import { desc, eq } from "drizzle-orm"
 
 // import schema
-import { messageSchema } from "@/drizzle/schema/message.schema"
+import { messageSchema } from "@/db/drizzle/schema/message.schema"
 
 const getLastMessageOfChat = async (chatId: number) => {
     const result = await db.select()

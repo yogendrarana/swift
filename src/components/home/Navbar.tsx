@@ -8,11 +8,11 @@ import { usePathname, useRouter } from 'next/navigation'
 
 
 // import hook
-import useNavbar from '@/src/hooks/useNavbar'
+import useNavbar from '@/hooks/useNavbar'
 
 
 // import logo
-import logo from "@/src/assets/icons/logo.png"
+import Logo from "@/assets/icons/logo.png"
 
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
             
             <div className='mr-auto text-[2rem]'>
                 <Link href='/'>
-                    <Image src={logo} height={40} width={40} alt='logo' />
+                    <Image src={Logo} height={40} width={40} alt='logo' />
                 </Link>
             </div>
 
@@ -53,4 +53,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Navbar;
