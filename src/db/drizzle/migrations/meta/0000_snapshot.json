@@ -1,9 +1,39 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "5b389626-f03d-473e-a417-9ca894fe0449",
+  "id": "fc86bb5f-7a02-4b51-aaea-8b72b5a7611c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "avatar": {
+      "name": "avatar",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "avatar_id": {
+          "name": "avatar_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
     "chat": {
       "name": "chat",
       "columns": {
@@ -14,8 +44,8 @@
           "notNull": true,
           "autoincrement": true
         },
-        "is_group": {
-          "name": "is_group",
+        "is_group_chat": {
+          "name": "is_group_chat",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
@@ -25,12 +55,19 @@
           "name": "name",
           "type": "varchar(50)",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "admin_id": {
           "name": "admin_id",
           "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "last_message_at": {
+          "name": "last_message_at",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -54,7 +91,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "chat_admin_id_user_id_fk": {
+          "name": "chat_admin_id_user_id_fk",
+          "tableFrom": "chat",
+          "tableTo": "user",
+          "columnsFrom": [
+            "admin_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {
         "chat_id": {
           "name": "chat_id",
@@ -75,6 +126,27 @@
           "notNull": true,
           "autoincrement": true
         },
+        "text": {
+          "name": "text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "image_public_id": {
+          "name": "image_public_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "chat_id": {
           "name": "chat_id",
           "type": "int",
@@ -85,20 +157,6 @@
         "sender_id": {
           "name": "sender_id",
           "type": "int",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "receiver_id": {
-          "name": "receiver_id",
-          "type": "int",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "text": {
-          "name": "text",
-          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -122,7 +180,34 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "message_chat_id_chat_id_fk": {
+          "name": "message_chat_id_chat_id_fk",
+          "tableFrom": "message",
+          "tableTo": "chat",
+          "columnsFrom": [
+            "chat_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "message_sender_id_user_id_fk": {
+          "name": "message_sender_id_user_id_fk",
+          "tableFrom": "message",
+          "tableTo": "user",
+          "columnsFrom": [
+            "sender_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {
         "message_id": {
           "name": "message_id",
@@ -179,8 +264,8 @@
           "autoincrement": false,
           "default": "'user'"
         },
-        "image": {
-          "name": "image",
+        "avatar": {
+          "name": "avatar",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -236,6 +321,13 @@
         "chat_id": {
           "name": "chat_id",
           "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "is_group_chat": {
+          "name": "is_group_chat",
+          "type": "boolean",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false

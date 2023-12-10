@@ -7,35 +7,16 @@ import { useRouter } from 'next/navigation'
 import { Button } from '../ui/button'
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '../ui/dialog'
 
-// import ty[es]
-import { FullChatType } from '@/types/types'
 
 // prop type
 type PropType = {
-    chat: FullChatType | null | undefined,
+    func: () => void;
 }
 
-const ConfirmDeleteChat: React.FC<PropType> = ({ chat }) => {
+const ConfirmAccountDelete: React.FC<PropType> = ({ func }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleDeleteChat = async () => {
-        setIsLoading(true);
-        const toastId = toast.loading('Deleting chat...');
-        try {
-            const { data, status } = await axios.delete(`/api/chats/${chat?.id}`);
-
-            if (status === 200) {
-                toast.success(data.message, { id: toastId });
-                router.push("/chats")
-                setIsLoading(false);
-                return;
-            }
-        } catch (err: any) {
-            setIsLoading(false);
-            toast.error(err.response.data.message, { id: toastId });
-        }
-    }
 
     return (
         <Dialog>
@@ -49,7 +30,7 @@ const ConfirmDeleteChat: React.FC<PropType> = ({ chat }) => {
                 <div className="flex flex-col gap-[1rem]">
                     <h2 className="text-[1.75rem] font-bold dark:text-[var(--dmode-white)]">Delete Chat</h2>
                     <p className="text-[1.25rem] text-gray-500 dark:text-[var(--dmode-white)]">Are you sure you want to delete this chat? This action cannot be undone.</p>
-                    <Button variant='destructive' disabled={isLoading} onClick={handleDeleteChat} className='py-[1.75rem] text-[1.25rem]'>
+                    <Button variant='destructive' disabled={isLoading} onClick={func} className='py-[1.75rem] text-[1.25rem]'>
                         Delete
                     </Button>
                     <DialogClose asChild>
@@ -61,4 +42,4 @@ const ConfirmDeleteChat: React.FC<PropType> = ({ chat }) => {
     )
 }
 
-export default ConfirmDeleteChat;
+export default ConfirmAccountDelete;

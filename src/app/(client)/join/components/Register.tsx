@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -12,21 +12,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 
-// import type
-import { AvatarType } from '@/db/drizzle/schema/avatar.schema';
+// import avatar urls
+import { AvatarType, avatars } from '@/utils/avatars';
 
-// define prop type
-type PropType = {
-    avatars: AvatarType[]
-}
 
-const Register = ({ avatars }: PropType) => {
+const Register = () => {
     const router = useRouter();
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>();
-    const [selectedAvatar, setSelectedAvatar] = useState<AvatarType | null>(null);
+    const [selectedAvatar, setSelectedAvatar] = useState<AvatarType | null>(avatars[0]);
 
 
     const handleRegister = async () => {

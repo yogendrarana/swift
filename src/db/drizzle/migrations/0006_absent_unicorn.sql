@@ -1,1 +1,0 @@
-ALTER TABLE `chat` ADD `last_message` text;

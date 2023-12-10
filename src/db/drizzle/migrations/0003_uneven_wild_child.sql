@@ -1,1 +1,0 @@
-ALTER TABLE `chat` RENAME COLUMN `is_group` TO `is_group_chat`;

@@ -34,7 +34,7 @@ const ProfileDialog: React.FC<ProfileDialogPropsType> = ({ user }) => {
                 <span>Profile</span>
             </DialogTrigger>
 
-            <DialogContent className="min-w-[40rem] p-[3rem] dark:bg-[var(--dmode-black-primary)] dark:border-[var(--dmode-black-primary)]">
+            <DialogContent className="min-w-[45rem] p-[3rem] dark:bg-[var(--dmode-black-primary)] dark:border-[var(--dmode-black-primary)]">
                 <Tabs defaultValue="account detail" className="w-full">
                     <TabsList className="h-auto w-full p-[0.5rem] grid grid-cols-2 rounded-[0.5rem]">
                         <TabsTrigger value="account detail" className="text-[1.25rem] rounded-[0.5rem]">Account Detail</TabsTrigger>
@@ -46,7 +46,7 @@ const ProfileDialog: React.FC<ProfileDialogPropsType> = ({ user }) => {
                     </TabsContent>
 
                     <TabsContent value="change detail">
-                        <UpdateUserDetail />
+                        <UpdateUserDetail user={user} />
                     </TabsContent>
                 </Tabs>
             </DialogContent>

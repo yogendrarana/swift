@@ -1,11 +1,12 @@
 import { db } from "@/db/db"
 import { eq } from "drizzle-orm"
-import { NextResponse } from "next/server"
+import { NextResponse, NextRequest } from "next/server"
 import { UserType, userSchema } from "@/db/drizzle/schema/user.schema"
+import { userToChat } from "@/db/drizzle/schema/userToChat.join"
 
 
-// Path: /api/profile/route.ts
-export async function GET(req: Request, res: Response) {
+// GET: /api/profile/route.ts
+export async function GET(req: NextRequest) {
     const url = new URL(req.url)
     const email = url.searchParams.get("email")
 
@@ -28,8 +29,8 @@ export async function GET(req: Request, res: Response) {
 }
 
 
-// Path: /api/profile/route.ts
-export async function PATCH(req: Request, res: Response) {
+// PATCH: /api/profile/route.ts
+export async function PATCH(req: NextRequest) {
     const url = new URL(req.url)
     const email = url.searchParams.get("email")
 
@@ -56,6 +57,27 @@ export async function PATCH(req: Request, res: Response) {
 
         // return success message
         return NextResponse.json({ success: true, message: 'Date updated successfully.' }, { status: 200 });
+
+    } catch (err: any){
+        return NextResponse.json({ success: false, message: err.message }, { status: err.status || 500 });
+    }  
+}
+
+
+// DELETE: /api/profile/route.ts
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+
+    try {
+        const userId = parseInt(params.id);
+
+        // delete from userToChat
+        await db.delete(userToChat).where(eq(userToChat.userId, userId));
+
+        // delete user
+        await db.delete(userSchema).where(eq(userSchema.id, userId));
+
+        // return success message
+        return NextResponse.json({ success: true, message: 'User deleted successfully.' }, { status: 200 });
 
     } catch (err: any){
         return NextResponse.json({ success: false, message: err.message }, { status: err.status || 500 });

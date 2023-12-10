@@ -1,1 +1,0 @@
-ALTER TABLE `user_to_chat` DROP COLUMN `is_group_chat`;

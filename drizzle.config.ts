@@ -5,10 +5,11 @@ export default {
     out: "./src/db/drizzle/migrations",
     driver: "mysql2",
     dbCredentials: {
-        host: "localhost",
-        port: 3306,
-        user: "root",
-        password: "password",
-        database: "nextjschatapp",
+        host: "hobby-mysql-hobby.a.aivencloud.com",
+        port: 20842,
+        user: "avnadmin",
+        password: "AVNS_R9y_Rat7UKljgJ-iSQA",
+        database: "defaultdb",
     }
+
 } satisfies Config;

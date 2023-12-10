@@ -3,7 +3,6 @@
 
 import axios from 'axios';
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
 
 // import components
@@ -15,21 +14,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const Join = () => {
     const router = useRouter();
-    const [avatars, setAvatars] = useState([])
-
-    useEffect(() => {
-        const getAvatars = async () => {
-            try {
-                const { data, status } = await axios.get('/api/avatars');
-                if (status >= 300) throw Error(data);
-                setAvatars(data?.avatars);
-            } catch (err: any) {
-                console.log("err", err)
-            }
-        }
-
-        getAvatars()
-    }, []);
 
     return (
         <section className='h-[100vh] grid place-items-center relative'>
@@ -52,7 +36,7 @@ const Join = () => {
                 </TabsContent>
 
                 <TabsContent value="REGISTER">
-                    <Register avatars={avatars} />
+                    <Register />
                 </TabsContent>
             </Tabs>
         </section>

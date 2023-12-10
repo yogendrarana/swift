@@ -5,16 +5,17 @@ import { migrate } from "drizzle-orm/mysql2/migrator"
 
 const doMigrate = async () => {
     try {
-        const connection = await mysql2.createConnection({
-            user: "root",
-            password: "password",
-            host: "localhost",
-            database: "nextjschatapp",
-        })
+        const connection = mysql2.createPool({
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            host: process.env.DB_HOST,
+            database: process.env.DB_NAME,
+            port: Number(process.env.DB_PORT)
+        });
 
         const db = drizzle(connection);
 
-        await migrate(db, { migrationsFolder: path.resolve("drizzle", "migrations") });
+        await migrate(db, { migrationsFolder: path.resolve("src", "db", "drizzle", "migrations") });
 
         console.log("Migration Successful");
         process.exit(0);

@@ -5,7 +5,7 @@ import moment from 'moment'
 
 // import components
 import Avatar from '@/components/avatar/Avatar'
-import ConfirmDeleteChat from '../dialog/ConfirmDeleteChat'
+import ConfirmChatDelete from '../dialog/ConfirmChatDelete'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 // import hooks
@@ -72,7 +72,7 @@ const ChatDetailSheet: React.FC<PropType> = ({ statusText, chat }) => {
                     <h2 className="text-[1.5rem] font-bold dark:text-[var(--dmode-white)]">Delete Chat</h2>
 
                     {/* confirm delete chat */}
-                    <ConfirmDeleteChat chat={chat} />
+                    <ConfirmChatDelete chat={chat} />
                 </div>
             </SheetContent>
         </Sheet>
