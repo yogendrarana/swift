@@ -1,39 +1,9 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "fc86bb5f-7a02-4b51-aaea-8b72b5a7611c",
+  "id": "1f0bfdcd-8ce9-4442-8cac-8c6004fbffd5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "avatar": {
-      "name": "avatar",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "int",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "url": {
-          "name": "url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "avatar_id": {
-          "name": "avatar_id",
-          "columns": [
-            "id"
-          ]
-        }
-      },
-      "uniqueConstraints": {}
-    },
     "chat": {
       "name": "chat",
       "columns": {

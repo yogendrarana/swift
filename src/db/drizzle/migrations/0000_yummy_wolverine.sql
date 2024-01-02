@@ -1,9 +1,3 @@
-CREATE TABLE `avatar` (
-	`id` int AUTO_INCREMENT NOT NULL,
-	`url` text NOT NULL,
-	CONSTRAINT `avatar_id` PRIMARY KEY(`id`)
-);
---> statement-breakpoint
 CREATE TABLE `chat` (
 	`id` int AUTO_INCREMENT NOT NULL,
 	`is_group_chat` boolean NOT NULL,

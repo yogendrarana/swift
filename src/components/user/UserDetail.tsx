@@ -29,7 +29,7 @@ const UserDetail: React.FC<UserDetailPropsType> = ({ user }) => {
                     <label className="text-[1.25rem] block text-gray-700 font-bold dark:text-[var(--dmode-white)]">Role</label>
                     <p className="w-full p-[0.75rem] bg-gray-100 rounded-[0.5rem] text-gray-700 text-[1.25rem]">{user?.role}</p>
                 </div>
-                <div className="flex flex-col gap-[0.5rem]">
+                {/* <div className="flex flex-col gap-[0.5rem]">
                     <label className="text-[1.25rem] block text-gray-700 font-bold dark:text-[var(--dmode-white)]">Account Status</label>
                     <div className="flex gap-[1rem]">
                         <p className="w-2/3 p-[0.75rem] bg-gray-100 rounded-[0.5rem] text-gray-700 text-[1.25rem]">{user?.isVerified ? "Verified" : "Not Verified"}</p>
@@ -38,7 +38,7 @@ const UserDetail: React.FC<UserDetailPropsType> = ({ user }) => {
                             className="w-1/3 p-[0.75rem] text-[1.25rem] bg-black text-white rounded-[0.5rem] dark:bg-[var(--dmode-black-secondary)] dark:text-[var(--dmode-white)]"
                         >Verify</button>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

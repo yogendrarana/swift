@@ -20,7 +20,7 @@ const doMigrate = async () => {
         console.log("Migration Successful");
         process.exit(0);
     } catch (err: any) {
-        console.log("Migration Error: ", err.message);
+        console.log("Migration Error Message: ", err.message);
         process.exit(0);
     }
 }

@@ -118,7 +118,7 @@ const Register = () => {
             <Label htmlFor="password" className='w-full text-[1.45rem]'>
                 <p>Password</p>
                 <Input
-                    type="text"
+                    type="password"
                     id="password"
                     placeholder="Enter password"
                     value={password}

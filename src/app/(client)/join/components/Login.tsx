@@ -13,8 +13,8 @@ import { Button } from '@/components/ui/button';
 const Login = () => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-    const [email, setEmail] = useState('yogendrarana@gmail.com');
-    const [password, setPassword] = useState('password');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
 
     const handleLogin = async (e: any) => {
@@ -63,7 +63,7 @@ const Login = () => {
             <Label htmlFor="password" className='w-full text-[1.45rem]'>
                 <p>Password</p>
                 <Input
-                    type="text"
+                    type="password"
                     id="password"
                     placeholder="Enter password"
                     value={password}
