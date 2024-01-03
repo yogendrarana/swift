@@ -16,11 +16,11 @@ export async function GET(req: NextRequest) {
     const currentUser = await getCurrentUser();
 
     if (!currentUser?.id || !currentUser?.email) {
-        return null;
+        return new NextResponse(null, {status: 400});
     }
 
     if (!chatId) {
-        return null;
+        return new NextResponse(null, {status: 400});
     }
 
     const result = await db.select()
@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     const user = await db.select().from(userSchema).where(eq(userSchema.id, userId))
     
     if (!user[0]) {
-        return null;
+        return new NextResponse(null, {status: 400});
     }
 
     return NextResponse.json({ user: user[0] }, { status: 200 });

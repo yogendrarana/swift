@@ -8,12 +8,14 @@ import React, { useCallback, useState } from "react"
 
 
 // import components
+import Avatar from "@/components/avatar/Avatar"
 import DotWave from "@/components/loading/DotWave"
 
 
 // import types
 import { UserType } from "@/db/drizzle/schema/user.schema"
-import Avatar from "@/components/avatar/Avatar"
+
+
 
 
 // user box props

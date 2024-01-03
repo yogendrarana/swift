@@ -9,18 +9,22 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const chatId = url.searchParams.get("chatId");
     
-
     if (!chatId) {
-        return null;
+        return new NextResponse(null, { status: 400 });
     }
 
-    const result = await db.select()
-        .from(messageSchema)
-        .where(eq(messageSchema.chatId, parseInt(chatId)))
-        .orderBy(desc(messageSchema.createdAt))
-        .limit(1);
+    try {
+        const result = await db.select()
+            .from(messageSchema)
+            .where(eq(messageSchema.chatId, parseInt(chatId)))
+            .orderBy(desc(messageSchema.createdAt))
+            .limit(1);
+        
+        const message = result[0];
+        
+        return new NextResponse(JSON.stringify(message), { status: 200 });
 
-    const message = result[0];
-
-    return NextResponse.json({ message }, { status: 200 });
+    } catch (err: any) {
+        return new NextResponse("Error fetching message", { status: 500 });
+    }
 }
