@@ -54,13 +54,15 @@ export async function POST(req: NextRequest) {
         await pusherServer.trigger(chatId, "message:create", newMessage);
     
         const members: { email: string }[] = await db.select({ email: userSchema.email }).from(userSchema).innerJoin(userToChat, eq(userToChat.userId, userSchema.id)).where(eq(userToChat.chatId, chatId));
-        members.forEach(async (member: { email: string }) => {
+
+        await Promise.all(members.map(async (member: { email: string }) => {
             // for last message
             await pusherServer.trigger(member.email, "message:create", { newMessage });
-
+        
             // for update chat list order
             await pusherServer.trigger(member.email, "chat-list:update", { chatId });
-        })
+        }));
+        
 
         return NextResponse.json({ success: true, message: "Message sent successfully." }, { status: 201 });
     } catch (error: any) {

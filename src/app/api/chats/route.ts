@@ -67,9 +67,11 @@ export async function POST(req: NextRequest) {
             });
 
             // pusher server
-            members.forEach(async (member: MemberType) => {
+            await Promise.all(members.map(async (member: MemberType) => {
                 await pusherServer.trigger(member.email, "chat:create", { newChat });
-            });
+            }));
+
+
 
             return NextResponse.json({ success: true, message: "Chat created successfully.", chatId: insertedChatId }, { status: 201 });
         }

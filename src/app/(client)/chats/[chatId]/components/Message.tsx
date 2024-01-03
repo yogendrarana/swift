@@ -14,6 +14,7 @@ type PropType = {
 }
 
 const Message: React.FC<PropType> = ({ message }) => {
+    console.log(message);
     const session = useSession();
     const isMyMessage = message.sender.email === session?.data?.user?.email;
 
