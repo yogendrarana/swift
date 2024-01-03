@@ -51,15 +51,15 @@ export async function POST(req: NextRequest) {
         await db.update(chatSchema).set({ lastMessageAt: new Date() }).where(eq(chatSchema.id, chatId));
 
         // pusher triggers
-        pusherServer.trigger(chatId, "message:create", newMessage);
+        await pusherServer.trigger(chatId, "message:create", newMessage);
     
         const members: { email: string }[] = await db.select({ email: userSchema.email }).from(userSchema).innerJoin(userToChat, eq(userToChat.userId, userSchema.id)).where(eq(userToChat.chatId, chatId));
-        members.forEach((member: { email: string }) => {
+        members.forEach(async (member: { email: string }) => {
             // for last message
-            pusherServer.trigger(member.email, "message:create", { newMessage });
+            await pusherServer.trigger(member.email, "message:create", { newMessage });
 
             // for update chat list order
-            pusherServer.trigger(member.email, "chat-list:update", { chatId });
+            await pusherServer.trigger(member.email, "chat-list:update", { chatId });
         })
 
         return NextResponse.json({ success: true, message: "Message sent successfully." }, { status: 201 });

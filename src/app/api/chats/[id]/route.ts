@@ -24,8 +24,8 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
         await db.delete(chatSchema).where(eq(chatSchema.id, chatId));
 
         // for pusher
-        members.forEach((member: { email: string }) => {
-            pusherServer.trigger(member.email, 'chat:delete', { chatId });
+        members.forEach(async (member: { email: string }) => {
+           await pusherServer.trigger(member.email, 'chat:delete', { chatId });
         });
 
         return NextResponse.json({ success: true, message: "Chat deleted successfully" }, { status: 200 })

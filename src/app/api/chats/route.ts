@@ -67,8 +67,8 @@ export async function POST(req: NextRequest) {
             });
 
             // pusher server
-            members.forEach((member: MemberType) => {
-                pusherServer.trigger(member.email, "chat:create", { newChat });
+            members.forEach(async (member: MemberType) => {
+                await pusherServer.trigger(member.email, "chat:create", { newChat });
             });
 
             return NextResponse.json({ success: true, message: "Chat created successfully.", chatId: insertedChatId }, { status: 201 });
@@ -106,8 +106,8 @@ export async function POST(req: NextRequest) {
             const otherUser = await db.query.userSchema.findFirst({ where: eq(userSchema.id, otherUserId) });
             const newChat = await db.query.chatSchema.findFirst({ where: eq(chatSchema.id, insertedChatId), });
 
-            pusherServer.trigger(currentUser.email, "chat:create", { newChat });
-            pusherServer.trigger(otherUser!.email!, "chat:create", { newChat });
+            await pusherServer.trigger(currentUser.email, "chat:create", { newChat });
+            await pusherServer.trigger(otherUser!.email!, "chat:create", { newChat });
 
             return NextResponse.json({ success: true, message: "Chat created successfully.", chatId: insertedChatId }, { status: 201 });
         } else {
