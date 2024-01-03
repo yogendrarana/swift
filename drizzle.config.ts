@@ -5,11 +5,11 @@ export default {
     out: "./src/db/drizzle/migrations",
     driver: "mysql2",
     dbCredentials: {
-        host: "hobby-mysql-hobby.a.aivencloud.com",
-        port: 20842,
-        user: "avnadmin",
-        password: "AVNS_R9y_Rat7UKljgJ-iSQA",
-        database: "defaultdb",
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        host: process.env.DB_HOST as string,
+        database: process.env.DB_NAME as string,
+        port: Number(process.env.DB_PORT)
     }
 
 } satisfies Config;
