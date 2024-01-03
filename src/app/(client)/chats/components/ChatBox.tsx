@@ -1,7 +1,7 @@
 "use client"
 
 import axios from 'axios'
-import { format } from 'date-fns'
+import moment from 'moment'
 import { useSession } from 'next-auth/react'
 import { pusherClient } from '@/pusher/pusher'
 import React, { useEffect, useState } from 'react'
@@ -33,24 +33,24 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
 
     useEffect(() => {
         async function getOtherUserOfChat() {
-            const res = await axios.get(`/api/chats/other-user?chatId=${chat?.id}`);
-            setOtherUser(res.data.user);
+            const { data } = await axios.get(`/api/chats/other-user?chatId=${chat?.id}`);
+            setOtherUser(data?.user);
         }
 
         async function getLastMessageOfChat() {
-            const res = await axios.get(`/api/chats/last-message?chatId=${chat?.id}`);
-            setLastMessage(res.data.message);
+            const { data } = await axios.get(`/api/chats/last-message?chatId=${chat?.id}`);
+            setLastMessage(data?.message);
         }
 
-        getLastMessageOfChat()
+        getLastMessageOfChat();
         getOtherUserOfChat();
     }, [chat?.id])
-    
+
 
     // for pusher subscription
     useEffect(() => {
         const newMessageHandler = (data: any) => {
-            if (chat?.id === data?.newMessage?.chatId){
+            if (chat?.id === data?.newMessage?.chatId) {
                 setLastMessage(data.newMessage);
             }
         }
@@ -58,7 +58,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
         if (email) {
             pusherClient.subscribe(email)
         }
-        
+
         pusherClient.bind("message:create", newMessageHandler)
 
         // clean up
@@ -70,12 +70,12 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
 
     // for last message text
     useEffect(() => {
-        const getLastMessage = () => {
-            if (lastMessage?.text !== null && lastMessage?.image === null) {
+        const getLastMessageText = () => {
+            if (lastMessage && lastMessage?.text !== null && lastMessage?.image === null) {
                 if (lastMessage?.senderId === currentUser?.id) {
-                    return lastMessage.text.length < 15 ? `You: ${lastMessage.text}`  : `You: ${lastMessage.text.slice(0, 15)}` + '...'; 
+                    return lastMessage.text.length < 15 ? `You: ${lastMessage.text}` : `You: ${lastMessage.text.slice(0, 15)}` + '...';
                 } else {
-                    return lastMessage.text.length < 15 ? lastMessage.text : lastMessage.text.slice(0, 15) + '...'; 
+                    return lastMessage.text.length < 15 ? lastMessage.text : lastMessage.text.slice(0, 15) + '...';
                 }
             } else if (lastMessage?.image !== null && lastMessage?.text === null) {
                 if (lastMessage?.senderId === currentUser?.id) {
@@ -88,12 +88,12 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
             }
         }
 
-        setLastMessageText(getLastMessage());
+        setLastMessageText(getLastMessageText());
     }, [lastMessage, currentUser?.id])
 
 
     return (
-        <div 
+        <div
             className='
                 group 
                 duration-200 
@@ -115,7 +115,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat, currentUser }) => {
                         </p>
                         <div className='text-gray-400 text-[1.25rem]'>
                             {
-                                lastMessage?.createdAt && format(new Date(lastMessage.createdAt), 'h:mm a')
+                                lastMessage?.createdAt && moment(new Date(lastMessage.createdAt)).format('h:mm A')
                             }
                         </div>
                     </div>

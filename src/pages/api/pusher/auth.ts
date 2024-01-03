@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { pusherServer } from "@/pusher/pusher";
-import { NextApiRequest, NextApiResponse } from "next";
 import { authOptions } from "@/utils/authOptions";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const session = await getServerSession(req, res, authOptions);
