@@ -42,13 +42,17 @@ export const authOptions: NextAuthOptions = {
 
     callbacks: {
         // Using the `...rest` parameter to be able to narrow down the type based on `trigger`
-        jwt({ token, trigger, session }) {
+        async jwt({ token, trigger, session }) {
             if (trigger === "update" && session?.email) {
                 // Note, that `session` can be any arbitrary object, remember to validate it!
                 token.email = session.email;
             }
 
             return token
+        },
+
+        async redirect({ url, baseUrl }) {
+            return url.startsWith(baseUrl) ? url : baseUrl
         }
     },
 
